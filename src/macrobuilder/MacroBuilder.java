@@ -16,6 +16,7 @@ public class MacroBuilder {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Hello, class!");
+        System.out.println("Meanwhile...");
     }
     
 }
