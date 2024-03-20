@@ -26,6 +26,7 @@ public class User {
         Female
     }
     
+    private String name;
     private Gender gender;
     private int age;
     //height in inches
