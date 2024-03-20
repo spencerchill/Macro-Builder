@@ -14,9 +14,22 @@ public class MacroBuilder {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("Hello, class!");
-        System.out.println("Meanwhile...");
+        // Java Fx and Helper Methods in this class
+        User user = new User(User.Gender.Male, 19, (float) 90.7185, (float) 177.8, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
+        
+        System.out.println("Calorie Goal - " + user.getDay().getCalorieGoal());
+        System.out.println("Protein Goal - " + user.getDay().getProteinGoal());
+        System.out.println("Cals - " + user.getDay().getCalories() + " Fat - " + user.getDay().getFat() + 
+                " Carbs - " + user.getDay().getCarbs() + " Protrein - " + user.getDay().getProtein());
+        
+        //Eating some kit kats
+        user.getDay().intake(140, 7, 19, 1);
+        
+        System.out.println("Calorie Goal - " + user.getDay().getCalorieGoal());
+        System.out.println("Protein Goal - " + user.getDay().getProteinGoal());
+        System.out.println("Cals - " + user.getDay().getCalories() + " Fat - " + user.getDay().getFat() + 
+                " Carbs - " + user.getDay().getCarbs() + " Protrein - " + user.getDay().getProtein());
+                 
     }
     
 }
