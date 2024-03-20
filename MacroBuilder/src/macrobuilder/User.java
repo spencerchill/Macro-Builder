@@ -42,7 +42,6 @@ public class User {
         Female
     }
     
-    private String firstName;
     private String username;
     private String password;
     private Gender gender;
@@ -58,9 +57,8 @@ public class User {
     private Day day;
 
     /**
-     * 9-parameter constructor that initializes a user
+     * 8-parameter constructor that initializes a user
      * and initializes an instance of a Day object
-     * @param firstName
      * @param username
      * @param password
      * @param gender
@@ -70,8 +68,7 @@ public class User {
      * @param activityLevel
      * @param curMode 
      */
-    public User(String firstName, String username, String password, Gender gender, int age, float height, float weight, ActivityLevel activityLevel, CurrentMode curMode) {
-        this.firstName = firstName;
+    public User(String username, String password, Gender gender, int age, float height, float weight, ActivityLevel activityLevel, CurrentMode curMode) {
         this.username = username;
         this.password = password;
         this.age = age;
@@ -81,15 +78,6 @@ public class User {
         this.activityLevel = activityLevel;
         this.curMode = curMode;
         day = new Day(gender, age, height, weight, activityLevel, curMode);
-    }
-
-    /**
-     * Method that returns a String representing
-     * the first name of the user
-     * @return 
-     */
-    public String getFirstName(){
-        return firstName;
     }
       
     /**
@@ -171,16 +159,6 @@ public class User {
      */
     public Day getDay() {
         return day;
-    }
-
-  
-    /**
-     * Method that sets the firstName of the user
-     * to a given String 
-     * @param firstName 
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     /**
