@@ -73,10 +73,10 @@ public class Day {
     
     private void calcProtein() {
         if (gender.equals(User.Gender.Male)) {
-            proteinGoal = (float) ((weight * .73) * .8);
+            proteinGoal = (float) (((weight * 2.205) * .73));
         }
         if (gender.equals(User.Gender.Female)) {
-            proteinGoal = (float) ((weight * .62) * .8);
+            proteinGoal = (float) (((weight * 2.205) * .62));
         }
     }
     
