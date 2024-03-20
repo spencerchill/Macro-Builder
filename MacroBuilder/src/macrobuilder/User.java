@@ -26,7 +26,7 @@ public class User {
         Female
     }
     
-    private String name;
+    private String firstName;
     private Gender gender;
     private int age;
     //height in inches
@@ -37,7 +37,8 @@ public class User {
     private CurrentMode curMode;
     private Day day;
 
-    public User(Gender gender, int age, float weight, float height, ActivityLevel activityLevel, CurrentMode curMode) {
+    public User(String firstName, Gender gender, int age, float weight, float height, ActivityLevel activityLevel, CurrentMode curMode) {
+        this.firstName = firstName;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
@@ -48,6 +49,10 @@ public class User {
     }
 
     //Getters for each variable
+      public String getFirstName(){
+        return firstName;
+    }
+    
     public Gender getGender() {
         return gender;
     }
@@ -77,6 +82,11 @@ public class User {
     }
 
     //Setters for each variable
+    
+        public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public void setGender(Gender gender) {
         this.gender = gender;
     }
