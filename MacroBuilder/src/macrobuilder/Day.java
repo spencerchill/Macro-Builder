@@ -5,11 +5,12 @@
 package macrobuilder;
 
 /**
- *
+ * This class represents a day with
+ * respective calories goals, protein goals
+ * and consumed, calories, fat, carbs, and protein
  * @author spencerhill
  */
 public class Day {
-    
     
     private User.Gender gender;
     private int age;
@@ -24,7 +25,18 @@ public class Day {
     private float carbs;
     private float protein;
     
-    public Day (User.Gender gender, int age, float weight, float height, User.ActivityLevel activityLevel, User.CurrentMode mode){
+    /**
+     * 6-parameter constructor that sets up a day 
+     * with the current values of a user, calculates calorieGoal
+     * calculates proteinGoal, and initialized calories and macros to 0
+     * @param gender
+     * @param age
+     * @param height
+     * @param weight
+     * @param activityLevel
+     * @param mode 
+     */
+    public Day (User.Gender gender, int age, float height, float weight, User.ActivityLevel activityLevel, User.CurrentMode mode){
         this.gender = gender;
         this.age = age;
         this.height = height;
@@ -39,6 +51,11 @@ public class Day {
         protein = 0;
     }
     
+    /**
+     * Method that calculated the days calories goal
+     * based off of the users gender, weight, height, age,
+     * mode, and activity level
+     */
     private void calcCalories() {
         if (gender.equals(User.Gender.Male)) {
             calorieGoal = (int) (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age));
@@ -71,6 +88,10 @@ public class Day {
             }
     }
     
+    /**
+     * Method that calculated the days protein goal
+     * based off of the users gender and weight
+     */
     private void calcProtein() {
         if (gender.equals(User.Gender.Male)) {
             proteinGoal = (float) (((weight * 2.205) * .73));
@@ -80,6 +101,15 @@ public class Day {
         }
     }
     
+    /**
+     * Method that adds to the days calories, fat, carbs, and protein
+     * from given values calories, fat, carbs, protein, and data types being
+     * int, float, float, float respectively 
+     * @param calories
+     * @param fat
+     * @param carbs
+     * @param protein 
+     */
     public void intake (int calories, float fat, float carbs, float protein) {
         this.calories += calories;
         this.fat += fat;
@@ -87,26 +117,56 @@ public class Day {
         this.protein += protein;
     }
     
+    /**
+     * Method that returns an int 
+     * representing the days calorie goal 
+     * @return 
+     */
     public int getCalorieGoal() {
         return this.calorieGoal;
     }
     
+    /**
+     * Method that returns a float
+     * representing the days protein goal
+     * @return 
+     */
     public float getProteinGoal() {
         return this.proteinGoal;
     }
     
+    /**
+     * Method that returns an int representing 
+     * the current amount of calories consumed
+     * @return 
+     */
     public int getCalories() {
         return this.calories;
     }
     
+    /**
+     * Method that returns a float representing 
+     * the current amount of fat consumed
+     * @return 
+     */
     public float getFat() {
         return this.fat;
     }
     
+    /**
+     * Method that returns a float representing 
+     * the current amount of carbs consumed
+     * @return 
+     */
     public float getCarbs() {
         return carbs;
     }
     
+    /**
+     * Method that returns a float representing 
+     * the current amount of protein consumed
+     * @return 
+     */
     public float getProtein() {
         return protein;
     }       
