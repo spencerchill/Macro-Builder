@@ -15,7 +15,7 @@ public class MacroBuilder {
      */
     public static void main(String[] args) {
         // Java Fx and Helper Methods in this class
-        User user = new User(User.Gender.Male, 19, (float) 90.7185, (float) 177.8, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
+        User user = new User("jayden", "jaydenpassword", User.Gender.Male, 19, (float) 90.7185, (float) 177.8, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
         
         System.out.println("Calorie Goal - " + user.getDay().getCalorieGoal());
         System.out.println("Protein Goal - " + user.getDay().getProteinGoal());
