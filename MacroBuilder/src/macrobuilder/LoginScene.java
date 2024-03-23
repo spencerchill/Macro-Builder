@@ -12,6 +12,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -28,11 +30,11 @@ public class LoginScene {
     // feel free to change these later on to 1, 1 so we can get in quick.
     private String CORRECT_USERNAME;
     private String CORRECT_PASSWORD;
-    
+
     public LoginScene() {
     }
-    
-    public LoginScene(String username, String password){
+
+    public LoginScene(String username, String password) {
         this.CORRECT_USERNAME = username;
         this.CORRECT_PASSWORD = password;
     }
@@ -41,7 +43,17 @@ public class LoginScene {
 
         Font labelFont = new Font("Helvetica", 26);
         Font fieldFont = new Font("Lato", 16);
+        Font titleFont = new Font("impact", 50);
+        //image for app
+        Image image = new Image("MacroIcon.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(50);
         //Create labels and fonts
+        Label titleLabel = new Label("Macro-Builder ");
+        titleLabel.setFont(titleFont);
+        titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
+
         Label usernameLabel = new Label("Username: ");
         Label passwordLabel = new Label("Password: ");
         usernameLabel.setFont(labelFont);
@@ -54,19 +66,21 @@ public class LoginScene {
 
         // Create empty result label if we get it wrong, set text and paints it red
         Label resultLabel = new Label("");
-        resultLabel.setFont(labelFont);
-        resultLabel.setTextFill(Color.RED);
+        resultLabel.setFont(fieldFont);
+        resultLabel.setStyle("-fx-text-fill: #D7504D;");
 
         //Creates a button with text "Login" and sets to same size as labels
         Button loginButton = new Button("Login");
-        
-        
+
         Hyperlink switchScene = new Hyperlink("Don't have an account? Create one here!");
-        switchScene.setStyle("-fx-text-fill: #355E3B;");
+        switchScene.setStyle("-fx-text-fill: #588157;");
 
         // The idea is to stack both Horizontal Boxes verticaly inside of our vertical box
         VBox root = new VBox(20);
 
+        HBox titleBox = new HBox();
+        titleBox.getChildren().addAll(titleLabel, imageView);
+        titleBox.setAlignment(Pos.CENTER);
         HBox usernameBox = new HBox();
         usernameBox.getChildren().addAll(usernameLabel, usernameField);
         usernameBox.setAlignment(Pos.CENTER);
@@ -74,15 +88,15 @@ public class LoginScene {
         HBox passwordBox = new HBox();
         passwordBox.getChildren().addAll(passwordLabel, passwordField);
         passwordBox.setAlignment(Pos.CENTER);
-        
+
         HBox buttonsBox = new HBox();
         buttonsBox.getChildren().addAll(loginButton, switchScene);
         buttonsBox.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll(resultLabel, usernameBox, passwordBox, buttonsBox);
+        root.getChildren().addAll(titleBox, resultLabel, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #C2A887;");
-        
+
         Scene loginScene = new Scene(root);
 
         // Transitions to detail scene if correct. sets text in result if not.
@@ -97,13 +111,13 @@ public class LoginScene {
                 resultLabel.setText("Incorrect Username and/or Password");
             }
         });
-        
+
         switchScene.setOnAction((ActionEvent event) -> {
             sceneController.switchToRegisterScene();
         });
 
         loginRegistrationKeyHandlers(usernameField, passwordField, loginButton);
-        
+
         return loginScene;
     }
 
