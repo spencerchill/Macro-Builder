@@ -54,7 +54,7 @@ public class MacroBuilder extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
-    
+
     private void loginUI(Stage primaryStage) {
         Font labelFont = new Font("Helvetica", 26);
         Font fieldFont = new Font("Arial", 16);
@@ -63,17 +63,17 @@ public class MacroBuilder extends Application {
         usernameLabel.setFont(labelFont);
         Label passwordLabel = new Label("Password: ");
         passwordLabel.setFont(labelFont);
-          // Text fields for our username and password and sets font
+        // Text fields for our username and password and sets font
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
         usernameField.setFont(fieldFont);
         passwordField.setFont(fieldFont);
-        
+
         // Create empty result label if we get it wrong, set text and paints it red
         Label resultLabel = new Label("");
         resultLabel.setFont(labelFont);
         resultLabel.setTextFill(Color.RED);
-        
+
         //Creates a button with text "Login" and sets to same size as labels
         Button loginButton = new Button("Login");
         loginButton.setFont(labelFont);
@@ -92,22 +92,10 @@ public class MacroBuilder extends Application {
                 resultLabel.setText("Incorrect Username and/or Password");
             }
         });
-        
-        // Event handlers that allow the user to press enter inside of form
-        // Pressing enter on usernameField switches focus to the passwordField
-        usernameField.setOnKeyPressed(e -> {
-            if(e.getCode() == KeyCode.ENTER) {
-                passwordField.requestFocus();
-            }
-        });
-        // Pressing enter on passwordField presses the loginButton
-        passwordField.setOnKeyPressed(e -> {
-                    if(e.getCode() == KeyCode.ENTER) {
-                        loginButton.fire();
-                    }
-                });
-        
-       // The idea is to stack both Horizontal Boxes verticaly inside of our vertical box
+
+        loginRegistrationKeyHandlers(usernameField, passwordField, loginButton);
+
+        // The idea is to stack both Horizontal Boxes verticaly inside of our vertical box
         VBox root = new VBox(20);
         HBox usernameBox = new HBox();
         usernameBox.getChildren().addAll(usernameLabel, usernameField);
@@ -121,11 +109,25 @@ public class MacroBuilder extends Application {
         // then the horizontal boxes in the middle with the login button at the bottom
         root.getChildren().addAll(resultLabel, usernameBox, passwordBox, loginButton);
         root.setAlignment(Pos.CENTER);
-        
+
         primaryStage.setScene(new Scene(root));
     }
     
-//    private void loginRegistrationKeyHandlers(TextField usernameField,  PasswordField)
+    private void loginRegistrationKeyHandlers(TextField usernameField, PasswordField passwordField, Button loginButton) {
+        // Event handlers that allow the user to press enter inside of form
+        // Pressing enter on usernameField switches focus to the passwordField
+        usernameField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                passwordField.requestFocus();
+            }
+        });
+        // Pressing enter on passwordField presses the loginButton
+        passwordField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                loginButton.fire();
+            }
+        });
+    }
 
     // Transition to detail scene after login
     private void showDetailScene(Stage primaryStage) {
