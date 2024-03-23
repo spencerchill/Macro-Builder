@@ -30,7 +30,8 @@ public class DetailScene {
         Label dumbLabel = new Label("I am in Detail Scene! Hello " + username + "!");
         StackPane root = new StackPane();
         root.getChildren().setAll(dumbLabel);
-
+        //Simple background color we will create style sheets later can remove
+        root.setStyle("-fx-background-color: #C2A887;");
         //Sets new scene to stage keep this.
         Scene detailScene = new Scene(root);
         primaryStage.setScene(detailScene);

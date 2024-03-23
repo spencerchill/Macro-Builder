@@ -6,6 +6,7 @@ package macrobuilder;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -30,8 +31,9 @@ public class MacroBuilder extends Application {
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
         //First scene is loginUI
-        LoginScene loginScene = new LoginScene();
-        primaryStage.setScene(loginScene.createLoginScene(primaryStage));
+        SceneController sceneController = new SceneController(primaryStage);
+        // Start with registerScene
+        primaryStage.setScene(sceneController.getRegisterScene());
         primaryStage.setTitle("Macro Builder");
         primaryStage.setMaximized(true);
         primaryStage.show();
