@@ -21,14 +21,13 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        user = new User("Melvin", "156", User.Gender.Female, 73, (float) 64, (float) 400, User.ActivityLevel.ACTIVE, User.CurrentMode.BULK);
+        user = new User("Melvin", User.Gender.Female, 73, (float) 64, (float) 400, User.ActivityLevel.ACTIVE, User.CurrentMode.BULK);
 
     }
 
     @Test
     public void testConstructor() {
         assertEquals("Melvin", user.getUsername());
-        assertEquals("156", user.getPassword());
         assertEquals(User.Gender.Female, user.getGender());
         assertEquals(73, user.getAge());
         assertEquals(64.0f, user.getHeight(), 0.001f);
