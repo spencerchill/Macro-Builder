@@ -59,7 +59,7 @@ public class LoginScene {
 
         //Creates a button with text "Login" and sets to same size as labels
         Button loginButton = new Button("Login");
-        loginButton.setFont(labelFont);
+        
         
         Hyperlink switchScene = new Hyperlink("Don't have an account? Create one here!");
         switchScene.setStyle("-fx-text-fill: #355E3B;");
