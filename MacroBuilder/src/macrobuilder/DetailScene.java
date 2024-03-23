@@ -15,13 +15,22 @@ import javafx.stage.Stage;
  * @author rimmycara
  */
 public class DetailScene {
-    public void showDetailScene(Stage primaryStage){
-        
+
+    private final String username;
+
+    // Transfers username from login scene to detail scene
+    public DetailScene(String username) {
+        this.username = username;
+    }
+
+    public void showDetailScene(Stage primaryStage) {
+
         // DUMMY CODE TO SHOW WE ARE IN DETAIL SCENE CAN DELETE
-        Label dumbLabel = new Label("I am in Detail Scene!");
+        // Now we can save username from login scene and when we get all details, create user object!
+        Label dumbLabel = new Label("I am in Detail Scene! Hello " + username + "!");
         StackPane root = new StackPane();
         root.getChildren().setAll(dumbLabel);
-        
+
         //Sets new scene to stage keep this.
         Scene detailScene = new Scene(root);
         primaryStage.setScene(detailScene);
