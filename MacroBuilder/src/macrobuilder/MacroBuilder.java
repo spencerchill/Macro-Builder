@@ -4,32 +4,52 @@
  */
 package macrobuilder;
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 /**
  *
  * @author spencerhill
+ * @author KingJ
+ * @author rimmycara (idk your author name change this)
  */
-public class MacroBuilder {
-
-    /**
-     * @param args the command line arguments
-     */
+public class MacroBuilder  extends Application {
     public static void main(String[] args) {
-        // Java Fx and Helper Methods in this class
-        User user = new User("jayden", "jaydenpassword", User.Gender.Male, 19, (float) 90.7185, (float) 177.8, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
-        
-        System.out.println("Calorie Goal - " + user.getDay().getCalorieGoal());
-        System.out.println("Protein Goal - " + user.getDay().getProteinGoal());
-        System.out.println("Cals - " + user.getDay().getCalories() + " Fat - " + user.getDay().getFat() + 
-                " Carbs - " + user.getDay().getCarbs() + " Protrein - " + user.getDay().getProtein());
-        
-        //Eating some kit kats
-        user.getDay().intake(140, 7, 19, 1);
-        
-        System.out.println("Calorie Goal - " + user.getDay().getCalorieGoal());
-        System.out.println("Protein Goal - " + user.getDay().getProteinGoal());
-        System.out.println("Cals - " + user.getDay().getCalories() + " Fat - " + user.getDay().getFat() + 
-                " Carbs - " + user.getDay().getCarbs() + " Protrein - " + user.getDay().getProtein());
-                 
+        launch(args);
     }
     
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Macro Builder");
+        Button btn = new Button();
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+        
+        // Makes the transition to Maximize window seamless.
+        // Not neccessary but comment it out and run main to see difference
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        primaryStage.setX(bounds.getMinX());
+        primaryStage.setY(bounds.getMinY());
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
+//        
+        // Creates window with hello world button
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setMaximized(true);
+        primaryStage.show();
+    }
 }
