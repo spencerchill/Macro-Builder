@@ -7,6 +7,7 @@ package macrobuilder;
 /**
  * This class represents a User
  * @author spencerhill
+ * @author KingJ
  */
 public class User {
 
@@ -43,7 +44,6 @@ public class User {
     }
     
     private String username;
-    private String password;
     private Gender gender;
     private int age;
     
@@ -57,10 +57,9 @@ public class User {
     private Day day;
 
     /**
-     * 8-parameter constructor that initializes a user
+     * 7-parameter constructor that initializes a user
      * and initializes an instance of a Day object
      * @param username
-     * @param password
      * @param gender
      * @param age
      * @param height
@@ -68,9 +67,8 @@ public class User {
      * @param activityLevel
      * @param curMode 
      */
-    public User(String username, String password, Gender gender, int age, float height, float weight, ActivityLevel activityLevel, CurrentMode curMode) {
+    public User(String username, Gender gender, int age, float height, float weight, ActivityLevel activityLevel, CurrentMode curMode) {
         this.username = username;
-        this.password = password;
         this.age = age;
         this.gender = gender;
         this.height = height;
@@ -88,16 +86,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-    
-    /**
-     * Method that returns a String representing
-     * the password of the user
-     * @return 
-     */
-    public String getPassword() {
-        return password;
-    }
-    
     /**
      * Method that returns a User.Gender enum value
      * representing the gender of the user
