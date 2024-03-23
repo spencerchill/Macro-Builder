@@ -68,14 +68,15 @@ public class LoginScene {
 
         Scene loginScene = new Scene(root);
 
+        // Transitions to detail scene if correct. sets text in result if not.
         loginButton.setOnAction((ActionEvent event) -> {
+
             String username = usernameField.getText();
             String password = passwordField.getText();
-            // if it equals our correct variables we transition to Detail Scene
+
             if (username.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
-                new DetailScene().showDetailScene(primaryStage);
+                new DetailScene(username).showDetailScene(primaryStage);
             } else {
-                //Set text in result label
                 resultLabel.setText("Incorrect Username and/or Password");
             }
         });
