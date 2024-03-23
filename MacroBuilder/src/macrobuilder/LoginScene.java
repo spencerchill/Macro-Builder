@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author sweet
+ * @author KingJ
  */
 public class LoginScene {
 
@@ -73,15 +73,15 @@ public class LoginScene {
             String password = passwordField.getText();
             // if it equals our correct variables we transition to Detail Scene
             if (username.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
-//                showDetailScene(primaryStage);
-            } //Set text in result label
-            else {
+                new DetailScene().showDetailScene(primaryStage);
+            } else {
+                //Set text in result label
                 resultLabel.setText("Incorrect Username and/or Password");
             }
         });
-        
+
         loginRegistrationKeyHandlers(usernameField, passwordField, loginButton);
-        
+
         return loginScene;
     }
 

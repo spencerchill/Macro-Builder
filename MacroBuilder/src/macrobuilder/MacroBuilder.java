@@ -6,9 +6,6 @@ package macrobuilder;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -38,15 +35,5 @@ public class MacroBuilder extends Application {
         primaryStage.setTitle("Macro Builder");
         primaryStage.setMaximized(true);
         primaryStage.show();
-    }
-    private void showDetailScene(Stage primaryStage) {
-
-        // DUMMY CODE TO SHOW WE ARE IN DETAIL SCENE CAN DELETE
-        Label dumbLabel = new Label("I am in Detail Scene!");
-        StackPane root = new StackPane();
-        root.getChildren().setAll(dumbLabel);
-        //Sets new scene to stage keep this to make it easier for you
-        Scene detailScene = new Scene(root);
-        primaryStage.setScene(detailScene);
     }
 }
