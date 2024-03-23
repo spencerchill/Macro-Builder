@@ -21,50 +21,38 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author KingJ
+ * @author sweet
  */
-public class LoginScene {
+public class RegisterUserScene {
 
-    // feel free to change these later on to 1, 1 so we can get in quick.
-    private String CORRECT_USERNAME;
-    private String CORRECT_PASSWORD;
-    
-    public LoginScene() {
-    }
-    
-    public LoginScene(String username, String password){
-        this.CORRECT_USERNAME = username;
-        this.CORRECT_PASSWORD = password;
-    }
-
-    public Scene createLoginScene(Stage primaryStage, SceneController sceneController) {
-
+    public Scene createRegisterScene(Stage primaryStage, SceneController sceneController) {
         Font labelFont = new Font("Helvetica", 26);
         Font fieldFont = new Font("Lato", 16);
+
+        Label welcomeLabel = new Label("We're happy you're here. Create an account.");
+        welcomeLabel.setFont(fieldFont);
+        welcomeLabel.setStyle("-fx-text-fill: #355E3B;");
         //Create labels and fonts
         Label usernameLabel = new Label("Username: ");
-        Label passwordLabel = new Label("Password: ");
+        Label passwordLabel = new Label(" Password: ");
+        Label emailLabel = new Label("        Email: ");
+
         usernameLabel.setFont(labelFont);
         passwordLabel.setFont(labelFont);
+        emailLabel.setFont(labelFont);
         // Text fields for our username and password and sets font
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
+        TextField emailField = new TextField();
+
         usernameField.setFont(fieldFont);
         passwordField.setFont(fieldFont);
+        emailField.setFont(fieldFont);
 
-        // Create empty result label if we get it wrong, set text and paints it red
-        Label resultLabel = new Label("");
-        resultLabel.setFont(labelFont);
-        resultLabel.setTextFill(Color.RED);
-
-        //Creates a button with text "Login" and sets to same size as labels
-        Button loginButton = new Button("Login");
-        loginButton.setFont(labelFont);
-        
-        Hyperlink switchScene = new Hyperlink("Don't have an account? Create one here!");
+        Button registerButton = new Button("Register");
+        Hyperlink switchScene = new Hyperlink("Already have an account? Sign-in here!");
         switchScene.setStyle("-fx-text-fill: #355E3B;");
 
-        // The idea is to stack both Horizontal Boxes verticaly inside of our vertical box
         VBox root = new VBox(20);
 
         HBox usernameBox = new HBox();
@@ -74,40 +62,33 @@ public class LoginScene {
         HBox passwordBox = new HBox();
         passwordBox.getChildren().addAll(passwordLabel, passwordField);
         passwordBox.setAlignment(Pos.CENTER);
-        
+
+        HBox emailBox = new HBox();
+        emailBox.getChildren().addAll(emailLabel, emailField);
+        emailBox.setAlignment(Pos.CENTER);
+
         HBox buttonsBox = new HBox();
-        buttonsBox.getChildren().addAll(loginButton, switchScene);
+        buttonsBox.getChildren().addAll(registerButton, switchScene);
         buttonsBox.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll(resultLabel, usernameBox, passwordBox, buttonsBox);
+        root.getChildren().addAll(welcomeLabel, emailBox, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #C2A887;");
-        
-        Scene loginScene = new Scene(root);
+        Scene registerScene = new Scene(root);
 
-        // Transitions to detail scene if correct. sets text in result if not.
-        loginButton.setOnAction((ActionEvent event) -> {
-
+        registerButton.setOnAction((ActionEvent event) -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
-
-            if (username.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
-                sceneController.switchToDetailScene(username);
-            } else {
-                resultLabel.setText("Incorrect Username and/or Password");
-            }
-        });
-        
-        switchScene.setOnAction((ActionEvent event) -> {
-            sceneController.switchToRegisterScene();
+            sceneController.switchToLoginScene(username, password);
         });
 
-        loginRegistrationKeyHandlers(usernameField, passwordField, loginButton);
-        
-        return loginScene;
+        switchScene.setOnAction(e -> sceneController.switchToLoginScene("", ""));
+        registrationKeyHandlers(usernameField, passwordField, emailField, registerButton);
+
+        return registerScene;
     }
 
-    private void loginRegistrationKeyHandlers(TextField usernameField, PasswordField passwordField, Button loginButton) {
+    private void registrationKeyHandlers(TextField usernameField, PasswordField passwordField, TextField emailField, Button registerButton) {
         // Event handlers that allow the user to press enter inside of form
         // Pressing enter on usernameField switches focus to the passwordField
         usernameField.setOnKeyPressed(e -> {
@@ -118,7 +99,12 @@ public class LoginScene {
         // Pressing enter on passwordField presses the loginButton
         passwordField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {
-                loginButton.fire();
+                registerButton.fire();
+            }
+        });
+        emailField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                usernameField.requestFocus();
             }
         });
     }
