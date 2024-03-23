@@ -44,6 +44,8 @@ public class SceneController {
     }
     
     public void switchToDetailScene(String username){
+        DetailScene detailScene = new DetailScene(username);
+        this.detailScene = detailScene;
        detailScene.showDetailScene(primaryStage);
     }
     
