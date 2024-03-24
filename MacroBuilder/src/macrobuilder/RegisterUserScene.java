@@ -29,10 +29,10 @@ public class RegisterUserScene {
 
     public Scene createRegisterScene(Stage primaryStage, SceneController sceneController) {
         Font labelFont = new Font("Helvetica", 26);
-        Font fieldFont = new Font("Helvetica", 20);
+        Font fieldFont = new Font("Lato", 20);
         Font titleFont = new Font("impact", 50);
 
-        Image image = new Image("MacroIcon.png");
+        Image image = new Image("orange.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
@@ -43,15 +43,18 @@ public class RegisterUserScene {
 
         Label welcomeLabel = new Label("We're happy you're here. Create an account.");
         welcomeLabel.setFont(fieldFont);
-        welcomeLabel.setStyle("-fx-text-fill: #588157;");
+        welcomeLabel.setStyle("-fx-text-fill: #F6EEE3;");
         //Create labels and fonts
         Label usernameLabel = new Label("Username: ");
         Label passwordLabel = new Label(" Password: ");
         Label emailLabel = new Label("        Email: ");
 
         usernameLabel.setFont(labelFont);
+        usernameLabel.setStyle("-fx-text-fill: #FDAE44;");
         passwordLabel.setFont(labelFont);
+        passwordLabel.setStyle("-fx-text-fill: #FDAE44;");
         emailLabel.setFont(labelFont);
+        emailLabel.setStyle("-fx-text-fill: #FDAE44;");
         // Text fields for our username and password and sets font
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
@@ -63,7 +66,8 @@ public class RegisterUserScene {
 
         Button registerButton = new Button("Register");
         Hyperlink switchScene = new Hyperlink("Already have an account? Sign-in here!");
-        switchScene.setStyle("-fx-text-fill: #588157;");
+        switchScene.setStyle("-fx-text-fill: #FDAE44;");
+        switchScene.setFont(fieldFont);
 
         VBox root = new VBox(20);
 
@@ -89,7 +93,7 @@ public class RegisterUserScene {
 
         root.getChildren().addAll(titleBox, welcomeLabel, emailBox, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #C2A887;");
+        root.setStyle("-fx-background-color: #000000;");
         Scene registerScene = new Scene(root);
 
         registerButton.setOnAction((ActionEvent event) -> {
