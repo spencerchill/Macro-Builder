@@ -28,10 +28,11 @@ public class DetailScene {
         // DUMMY CODE TO SHOW WE ARE IN DETAIL SCENE CAN DELETE
         // Now we can save username from login scene and when we get all details, create user object!
         Label dumbLabel = new Label("I am in Detail Scene! Hello " + username + "!");
+        dumbLabel.setStyle("-fx-text-fill: #FDAE44;");
         StackPane root = new StackPane();
         root.getChildren().setAll(dumbLabel);
         //Simple background color we will create style sheets later can remove
-        root.setStyle("-fx-background-color: #C2A887;");
+        root.setStyle("-fx-background-color: #333333;");
         //Sets new scene to stage keep this.
         Scene detailScene = new Scene(root);
         primaryStage.setScene(detailScene);

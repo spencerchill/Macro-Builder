@@ -93,7 +93,7 @@ public class RegisterUserScene {
 
         root.getChildren().addAll(titleBox, welcomeLabel, emailBox, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #000000;");
+        root.setStyle("-fx-background-color: #333333;");
         Scene registerScene = new Scene(root);
 
         registerButton.setOnAction((ActionEvent event) -> {

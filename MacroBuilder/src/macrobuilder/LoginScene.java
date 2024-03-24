@@ -98,7 +98,7 @@ public class LoginScene {
 
         root.getChildren().addAll(titleBox, resultLabel, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #000000;");
+        root.setStyle("-fx-background-color: #333333;");
 
         Scene loginScene = new Scene(root);
 
