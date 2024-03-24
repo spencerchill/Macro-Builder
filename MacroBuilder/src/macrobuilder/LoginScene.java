@@ -45,7 +45,7 @@ public class LoginScene {
         Font fieldFont = new Font("Lato", 16);
         Font titleFont = new Font("impact", 50);
         //image for app
-        Image image = new Image("MacroIcon.png");
+        Image image = new Image("orange.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
@@ -57,7 +57,9 @@ public class LoginScene {
         Label usernameLabel = new Label("Username: ");
         Label passwordLabel = new Label("Password: ");
         usernameLabel.setFont(labelFont);
+        usernameLabel.setStyle("-fx-text-fill: #FDAE44;");
         passwordLabel.setFont(labelFont);
+        passwordLabel.setStyle("-fx-text-fill: #FDAE44;");
         // Text fields for our username and password and sets font
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
@@ -71,10 +73,11 @@ public class LoginScene {
 
         //Creates a button with text "Login" and sets to same size as labels
         Button loginButton = new Button("Login");
+        loginButton.setFont(fieldFont);
 
         Hyperlink switchScene = new Hyperlink("Don't have an account? Create one here!");
-        switchScene.setStyle("-fx-text-fill: #588157;");
-
+        switchScene.setStyle("-fx-text-fill: #FDAE44;");
+        switchScene.setFont(fieldFont);
         // The idea is to stack both Horizontal Boxes verticaly inside of our vertical box
         VBox root = new VBox(20);
 
@@ -95,7 +98,7 @@ public class LoginScene {
 
         root.getChildren().addAll(titleBox, resultLabel, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #C2A887;");
+        root.setStyle("-fx-background-color: #000000;");
 
         Scene loginScene = new Scene(root);
 
