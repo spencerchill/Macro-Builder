@@ -4,6 +4,8 @@
  */
 package macrobuilder;
 
+import objects.User;
+import objects.Day;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
