@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 /**
  *
  * @author KingJ
- * @author rimmycara
+ * @author ibrah
  */
 public class DetailScene {
 

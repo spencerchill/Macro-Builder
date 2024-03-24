@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author spencerhill
  * @author KingJ
- * @author rimmycara (idk your author name change this)
+ * @author ibrah
  */
 public class MacroBuilder extends Application {
 
