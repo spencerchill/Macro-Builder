@@ -53,7 +53,11 @@ public class LoginScene {
         Label titleLabel = new Label("Macro-Builder ");
         titleLabel.setFont(titleFont);
         titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
-
+        
+        Label loginLabel = new Label("User Login");
+        loginLabel.setFont(labelFont);
+        loginLabel.setStyle("-fx-text-fill: #F6EEE3;");
+        
         Label usernameLabel = new Label("Username: ");
         Label passwordLabel = new Label("Password: ");
         usernameLabel.setFont(labelFont);
@@ -96,7 +100,7 @@ public class LoginScene {
         buttonsBox.getChildren().addAll(loginButton, switchScene);
         buttonsBox.setAlignment(Pos.CENTER);
 
-        root.getChildren().addAll(titleBox, resultLabel, usernameBox, passwordBox, buttonsBox);
+        root.getChildren().addAll(titleBox, loginLabel, resultLabel, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #333333;");
 
