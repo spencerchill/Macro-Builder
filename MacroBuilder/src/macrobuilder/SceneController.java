@@ -9,55 +9,80 @@ import javafx.stage.Stage;
 
 /**
  * Allows switching between scenes.
+ *
  * @author KingJ
  */
 public class SceneController {
-    private final Stage primaryStage;
-    private Scene registerScene ;
-    private Scene loginScene;
-    private DetailScene detailScene;
-    
-    // initializes all scenes
-    public SceneController(Stage primaryStage) {
-       this. primaryStage = primaryStage;
-       createScenes();
-    }
-    public void createScenes() {
-        RegisterUserScene registerUserScene = new RegisterUserScene();
-        LoginScene loginScene = new LoginScene();
-        DetailScene detailScene = new DetailScene("");
 
-        this.registerScene = registerUserScene.createRegisterScene(primaryStage, this);
-        this.loginScene = loginScene.createLoginScene(primaryStage, this);
-        this.detailScene = detailScene;
+    private final Stage primaryStage;
+    private Scene registerScene;
+    private Scene loginScene;
+    private Scene detailScene;
+    private Scene mainMenuScene;
+
+    public SceneController(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
-    
+
+    // Switches to change stages
+    // Implemented lazy initialization
+    // We check if scene doesnt exist and we create one at that moment.
     public void switchToRegisterScene() {
+        RegisterUserScene registerUserScene = new RegisterUserScene();
+        registerScene = registerUserScene.createRegisterScene(primaryStage, this);
         primaryStage.setScene(registerScene);
     }
-    
+
     //For now we pass the entered username and password for fun, but we wont pass this later.
     public void switchToLoginScene(String username, String password) {
-        LoginScene loginScene = new LoginScene (username, password);
-       this.loginScene = loginScene.createLoginScene(primaryStage, this);
-        primaryStage.setScene(this.loginScene);
+        LoginScene loginUserScene = new LoginScene(username, password);
+        loginScene = loginUserScene.createLoginScene(primaryStage, this);
+        primaryStage.setScene(loginScene);
     }
-    
-    public void switchToDetailScene(String username){
-        DetailScene detailScene = new DetailScene(username);
-        this.detailScene = detailScene;
-       this.detailScene.showDetailScene(primaryStage);
+
+    public void switchToDetailScene(String username) {
+        if (detailScene == null) {
+            DetailScene userDetailScene = new DetailScene(username);
+            detailScene = userDetailScene.showDetailScene(primaryStage, this);
+        }
+        primaryStage.setScene(detailScene);
     }
-    
+
+    public void switchToMenuScene() {
+        if (mainMenuScene == null) {
+            MainMenuScene menuScene = new MainMenuScene();
+            mainMenuScene = menuScene.showMenuScene(primaryStage, this);
+        }
+        primaryStage.setScene(mainMenuScene);
+    }
+
+    // Getters for scenes
+    // Check if scene is null, if so we create one and return it
     public Scene getRegisterScene() {
+        if (registerScene == null) {
+            switchToRegisterScene();
+        }
         return this.registerScene;
     }
-    
-    public Scene getLoginScene(){
+
+    public Scene getLoginScene() {
+        if (loginScene == null) {
+            switchToLoginScene("", "");
+        }
         return this.loginScene;
     }
-    
-    public DetailScene getDetailScene() {
+
+    public Scene getDetailScene() {
+        if (detailScene == null) {
+            switchToDetailScene("");
+        }
         return this.detailScene;
+    }
+
+    public Scene getMenuScene() {
+        if (mainMenuScene == null) {
+            switchToMenuScene();
+        }
+        return this.mainMenuScene;
     }
 }
