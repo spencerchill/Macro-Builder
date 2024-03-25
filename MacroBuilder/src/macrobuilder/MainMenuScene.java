@@ -15,51 +15,20 @@ import javafx.stage.Stage;
 Initial setup of the main menu scene.(Will be importing images, changing sizes of labels etc.)
 */
 public class MainMenuScene {
+    
+    private objects.User user;
 
+    public MainMenuScene (objects.User user) {
+        this.user = user;
+    }
+    
     public Scene showMenuScene(Stage primaryStage, SceneController sceneController) {
-        Label titleLabel = new Label("Macro Builder Tracker");
-        titleLabel.setTextFill(Color.WHITE);
+        VBox root = new VBox(10);
         
-        Label heightLabel = new Label("Height (cm):");
-        TextField heightField = new TextField();
-        
-        Label weightLabel = new Label("Weight (kg):");
-        TextField weightField = new TextField();
-        
-        Label ageLabel = new Label("Age:");
-        TextField ageField = new TextField();
-        
-        Button calculateButton = new Button("Calculate");
-        calculateButton.setOnAction(event -> {
-            // Handle calculation here, you can access values from fields
-            // For example:
-            String heightText = heightField.getText();
-            double height = Double.parseDouble(heightText);
-            
-            String weightText = weightField.getText();
-            double weight = Double.parseDouble(weightText);
-            
-            String ageText = ageField.getText();
-            int age = Integer.parseInt(ageText);
-            
-            // Perform calculations with height, weight, age
-            // You can update the UI or perform other operations based on these values
-        });
-        
-        VBox root = new VBox(10); // spacing between elements
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(
-            titleLabel, 
-            heightLabel, heightField, 
-            weightLabel, weightField, 
-            ageLabel, ageField, 
-            calculateButton
-        );
-        
-        // Set background color
-        root.setStyle("-fx-background-color: #000000;");
+        Label ageLabel = new Label(Integer.toString(user.getAge()));
 
-        Scene newScene = new Scene(root, 400, 300);
+        root.getChildren().addAll(ageLabel);
+        Scene newScene = new Scene(root);
         return newScene;
     }
 }

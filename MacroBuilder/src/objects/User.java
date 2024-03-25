@@ -5,6 +5,7 @@
 package objects;
 
 import objects.Day;
+import objects.Day;
 
 /**
  * This class represents a User
