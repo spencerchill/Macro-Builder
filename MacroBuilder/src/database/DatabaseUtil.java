@@ -50,8 +50,11 @@ public class DatabaseUtil {
             return null;
         }
     }
-
+    
     public static String generateSalt() {
-        return "";
+        byte[] salt = new byte[16];
+        SecureRandom random =  new SecureRandom();
+        random.nextBytes(salt);
+        return Base64.getEncoder().encodeToString(salt);
     }
 }
