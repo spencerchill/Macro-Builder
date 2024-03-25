@@ -4,9 +4,13 @@
  */
 package macrobuilder;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -95,10 +99,32 @@ public class RegisterUserScene {
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #333333;");
         Scene registerScene = new Scene(root);
+        
+        // lets user know username doesnt meet required length
+        usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (isValidUsername(newValue)) {
+                usernameField.setStyle("-fx-border-color: green;");
+            } else {
+                usernameField.setStyle("-fx-border-color: red;");
+            }
+        });
 
         registerButton.setOnAction((ActionEvent event) -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
+            if (!isValidUsername(username)) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Invalid Username");
+                alert.setHeaderText(null);
+                alert.setContentText("Username must be between 5 and 15 characters long and contain only letters, numbers, and underscores.");
+                alert.showAndWait();
+                return;
+            }
+            //username and password are valid
+            // query database and check if username is unique. 
+            // if unique hash password and generate salt store into database.
+            
+
             sceneController.switchToLoginScene(username, password);
         });
 
@@ -127,6 +153,18 @@ public class RegisterUserScene {
                 usernameField.requestFocus();
             }
         });
+    }
+    
+    // checks if username is between 5 adn 15 characters and no special characters.
+    public static boolean isValidUsername(String username) {
+        int length = username.length();
+        if (length < 5 || length > 15) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile("^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_]+$");
+        Matcher matcher = pattern.matcher(username);
+
+        return matcher.matches();
     }
 
 }
