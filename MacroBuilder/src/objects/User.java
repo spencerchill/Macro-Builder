@@ -205,4 +205,46 @@ public class User {
     public void setCurrentMode(CurrentMode curMode) {
         this.curMode = curMode;
     }
+    
+    /**
+     * Method that returns the gender of a user as a String
+     * @return 
+     */
+    public String getGenderAsString() {
+        if (this.gender == User.Gender.Male) {
+            return "Male";
+        } else {
+            return "Female";
+        }
+    }
+    
+    /**
+     * Method that returns the activity level of a user as a String
+     * @return 
+     */
+    public String getActivityLevelAsString() {
+        if (this.activityLevel == User.ActivityLevel.NOT_ACTIVE) {
+            return "Not Active";
+        } else if (this.activityLevel == User.ActivityLevel.MODERATLY_ACTIVE) {
+            return "Moderatly Active";
+        } else {
+            return "Active";
+        }
+    }
+    
+    /**
+     * Method that returns the mode of a user as a String
+     * @return 
+     */
+    public String getModeAsString() {
+        if (this.curMode == User.CurrentMode.CUT) {
+            return "Cut";
+        } else if (this.curMode == User.CurrentMode.MAINTAIN) {
+            return "Maintain";
+        } else {
+            return "Bulk";
+        }
+    }
+    
+    
 }
