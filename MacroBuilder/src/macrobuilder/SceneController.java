@@ -48,9 +48,9 @@ public class SceneController {
         primaryStage.setScene(detailScene);
     }
 
-    public void switchToMenuScene() {
+    public void switchToMenuScene(objects.User user) {
         if (mainMenuScene == null) {
-            MainMenuScene menuScene = new MainMenuScene();
+            MainMenuScene menuScene = new MainMenuScene(user);
             mainMenuScene = menuScene.showMenuScene(primaryStage, this);
         }
         primaryStage.setScene(mainMenuScene);
@@ -81,7 +81,7 @@ public class SceneController {
 
     public Scene getMenuScene() {
         if (mainMenuScene == null) {
-            switchToMenuScene();
+            switchToMenuScene(null);
         }
         return this.mainMenuScene;
     }

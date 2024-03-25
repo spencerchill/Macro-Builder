@@ -125,7 +125,7 @@ public class RegisterUserScene {
             // if unique hash password and generate salt store into database.
             
 
-            sceneController.switchToLoginScene(username, password);
+            sceneController.switchToDetailScene(username);
         });
 
         switchScene.setOnAction(e -> sceneController.switchToLoginScene("", ""));
