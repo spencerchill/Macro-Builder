@@ -18,12 +18,12 @@ import static org.junit.Assert.*;
  *
  * @author sweet
  */
-public class databaseConnectionTest {
+public class DatabaseUtilTest {
     private static final String URL = " ";
     private static final String USERNAME = " ";
     private static final String PASSWORD = " ";
     
-    public databaseConnectionTest() {
+    public DatabaseUtilTest() {
     }
     
     @Before
