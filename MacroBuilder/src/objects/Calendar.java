@@ -34,6 +34,16 @@ public class Calendar {
         }
     }
     
+    public void updateDate() {
+        now = new Date();
+        date = new SimpleDateFormat("MM/dd/yyyy").format(now);
+    }
+    
+    public String getDate() {
+        updateDate();
+        return date;
+    }
+    
     public Day getDay(String date) {
         if(!calendar.containsKey(date)) {
             createDay(date);

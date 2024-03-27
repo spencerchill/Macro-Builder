@@ -26,8 +26,10 @@ public class MainMenuScene {
         VBox root = new VBox(10);
         
         Label ageLabel = new Label(Integer.toString(user.getAge()));
+        Label calorieGoal = new Label(Integer.toString(user.getDay().getCalorieGoal()));
+        Label date = new Label(user.getCalendar().getDate());
 
-        root.getChildren().addAll(ageLabel);
+        root.getChildren().addAll(ageLabel, calorieGoal, date);
         Scene newScene = new Scene(root);
         return newScene;
     }
