@@ -145,6 +145,10 @@ public class User {
         return curMode;
     }
     
+    public Calendar getCalendar() {
+        return this.calendar;
+    }
+    
     /**
      * Method that returns a Day Object 
      * representing the day the user is on 
