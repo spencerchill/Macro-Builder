@@ -4,6 +4,8 @@
  */
 package objects;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import objects.Day;
 import objects.Day;
 
@@ -57,7 +59,7 @@ public class User {
     private float weight;
     private ActivityLevel activityLevel;
     private CurrentMode curMode;
-    private Day day;
+    private Calendar calendar;
 
     /**
      * 7-parameter constructor that initializes a user
@@ -78,7 +80,7 @@ public class User {
         this.weight = weight;
         this.activityLevel = activityLevel;
         this.curMode = curMode;
-        day = new Day(gender, age, height, weight, activityLevel, curMode);
+        calendar = new Calendar(User.this);
     }
       
     /**
@@ -149,7 +151,9 @@ public class User {
      * @return 
      */
     public Day getDay() {
-        return day;
+        Date now = new Date();
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(now);
+        return calendar.getDay(date);
     }
 
     /**
