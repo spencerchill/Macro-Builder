@@ -13,17 +13,34 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Represents a scene for entering user details.
+ * This scene allows the user to input their gender, age, height, weight, activity level, and current mode
+ * Upon submission, the entered details are used to create a new User object.
+ * @author ibrah
+ * @author spencerhill
+ */
 public class DetailScene {
-
+    //Fields
     private final String username;
     private objects.User.Gender gender;
     private objects.User.ActivityLevel activityLevel;
     private objects.User.CurrentMode mode;
-
+    
+    /**
+     * Constructor to create a DetailScene object with the specified username.
+     * @param username The username of the user whose details are being entered.
+     */
     public DetailScene(String username) {
         this.username = username;
     }
-
+    
+    /**
+     * Creates and displays the detail scene for entering user details.
+     * @param primaryStage The primary stage of the application.
+     * @param sceneController The scene controller for managing scene transitions.
+     * @return The detail scene for entering user details.
+     */
     public Scene showDetailScene(Stage primaryStage, SceneController sceneController) {
 
         VBox root = new VBox(20);
