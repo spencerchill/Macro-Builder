@@ -134,10 +134,10 @@ public class RegisterUserScene {
             } catch (IOException | SQLException ex) {
                 Logger.getLogger(RegisterUserScene.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sceneController.switchToDetailScene(username);
+            sceneController.switchToLoginScene();
         });
 
-        switchScene.setOnAction(e -> sceneController.switchToLoginScene("", ""));
+        switchScene.setOnAction(e -> sceneController.switchToLoginScene());
         registrationKeyHandlers(usernameField, passwordField, emailField, registerButton);
 
         return registerScene;

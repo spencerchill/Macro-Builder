@@ -34,8 +34,8 @@ public class SceneController {
     }
 
     //For now we pass the entered username and password for fun, but we wont pass this later.
-    public void switchToLoginScene(String username, String password) {
-        LoginScene loginUserScene = new LoginScene(username, password);
+    public void switchToLoginScene() {
+        LoginScene loginUserScene = new LoginScene();
         loginScene = loginUserScene.createLoginScene(primaryStage, this);
         primaryStage.setScene(loginScene);
     }
@@ -67,7 +67,7 @@ public class SceneController {
 
     public Scene getLoginScene() {
         if (loginScene == null) {
-            switchToLoginScene("", "");
+            switchToLoginScene();
         }
         return this.loginScene;
     }

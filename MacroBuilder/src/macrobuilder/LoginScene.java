@@ -4,6 +4,11 @@
  */
 package macrobuilder;
 
+import database.LoginController;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,16 +32,9 @@ import javafx.stage.Stage;
  */
 public class LoginScene {
 
-    // feel free to change these later on to 1, 1 so we can get in quick.
-    private String CORRECT_USERNAME;
-    private String CORRECT_PASSWORD;
+    private LoginController loginController;
 
     public LoginScene() {
-    }
-
-    public LoginScene(String username, String password) {
-        this.CORRECT_USERNAME = username;
-        this.CORRECT_PASSWORD = password;
     }
 
     public Scene createLoginScene(Stage primaryStage, SceneController sceneController) {
@@ -111,11 +109,19 @@ public class LoginScene {
 
             String username = usernameField.getText();
             String password = passwordField.getText();
-
-            if (username.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
-                sceneController.switchToDetailScene(username);
-            } else {
-                resultLabel.setText("Incorrect Username and/or Password");
+            
+            //Attempts login
+            try {
+                loginController = new LoginController();
+                
+                if(loginController.loginUser(username, password)){
+                    sceneController.switchToDetailScene(username);
+                }
+                else{
+                    resultLabel.setText("Incorrect Username and/or Password");
+                }
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(LoginScene.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
