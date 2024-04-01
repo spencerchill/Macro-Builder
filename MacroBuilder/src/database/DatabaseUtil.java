@@ -38,11 +38,11 @@ public class DatabaseUtil {
         password = configReader.getPassword();
     }
 
-    public static Connection getDatabaseConnection() throws SQLException {
+    public  Connection getDatabaseConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     }
 
-    public static String hashPassword(String password, String salt) {
+    public String hashPassword(String password, String salt) {
         // Expects array of characters and bytes
         char[] passwordChars = password.toCharArray();
         byte[] saltBytes = Base64.getDecoder().decode(salt);
@@ -60,7 +60,7 @@ public class DatabaseUtil {
         }
     }
 
-    public static String generateSalt() {
+    public String generateSalt() {
         byte[] salt = new byte[16];
         SecureRandom random = new SecureRandom();
         random.nextBytes(salt);

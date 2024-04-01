@@ -4,6 +4,11 @@
  */
 package macrobuilder;
 
+import java.sql.SQLException;
+import database.RegistrationController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
@@ -30,6 +35,8 @@ import javafx.stage.Stage;
  * @author sweet
  */
 public class RegisterUserScene {
+    
+    private RegistrationController registrationController;
 
     public Scene createRegisterScene(Stage primaryStage, SceneController sceneController) {
         Font labelFont = new Font("Helvetica", 26);
@@ -120,11 +127,13 @@ public class RegisterUserScene {
                 alert.showAndWait();
                 return;
             }
-            //username and password are valid
-            // query database and check if username is unique. 
-            // if unique hash password and generate salt store into database.
             
-
+            try {
+                registrationController = new RegistrationController();
+                registrationController.registerUser(username, password);
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(RegisterUserScene.class.getName()).log(Level.SEVERE, null, ex);
+            }
             sceneController.switchToDetailScene(username);
         });
 
@@ -155,7 +164,7 @@ public class RegisterUserScene {
         });
     }
     
-    // checks if username is between 5 adn 15 characters and no special characters.
+    // checks if username is between 5 ann 15 characters and no special characters.
     public static boolean isValidUsername(String username) {
         int length = username.length();
         if (length < 5 || length > 15) {
