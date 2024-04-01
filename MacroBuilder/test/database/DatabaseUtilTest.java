@@ -4,6 +4,7 @@
  */
 package database;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,16 +17,21 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author sweet
+ * @author KingJ
  */
 public class DatabaseUtilTest {
-    private static final String URL = " ";
-    private static final String USERNAME = " ";
-    private static final String PASSWORD = " ";
-    
-    public DatabaseUtilTest() {
+
+    private static String url;
+    private static String username;
+    private static String password;
+
+    public DatabaseUtilTest() throws IOException {
+        ConfigReader configReader = new ConfigReader("config.properties");
+        url = configReader.getUrl();
+        username = configReader.getUsername();
+        password = configReader.getPassword();
     }
-    
+
     @Before
     public void setUp() {
     }
@@ -35,20 +41,17 @@ public class DatabaseUtilTest {
      */
     @Test
     public void testGetDatabaseConnection() throws SQLException {
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try ( Connection connection = DriverManager.getConnection(url, username, password)) {
             String sql = "SELECT * FROM users";
-           try(Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql)) {
-               while(resultSet.next()) {
-                   //Should print out jayden isCool
-                   System.out.println(resultSet.getString("username") + " " + resultSet.getString("Password"));
-               }
-           }
-        }
-        catch (SQLException e) {
-            System.out.println( "connection  failed" + e.getMessage());
+            try ( Statement statement = connection.createStatement();  ResultSet resultSet = statement.executeQuery(sql)) {
+                while (resultSet.next()) {
+                    System.out.println(resultSet.getString("username") + " " + resultSet.getString("Password"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("connection  failed" + e.getMessage());
             e.printStackTrace();
         }
     }
-    
+
 }
