@@ -4,6 +4,7 @@
  */
 package database;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,16 +22,24 @@ import java.util.Base64;
  */
 public class DatabaseUtil {
 
-    private static final String URL = " ";
-    private static final String USERNAME = " ";
-    private static final String PASSWORD = " ";
+    private static String url;
+    private static String username;
+    private static String password;
 
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
 
+    public DatabaseUtil() throws IOException {
+         //secure database credentials.
+        ConfigReader configReader = new ConfigReader("config.properties");
+        url = configReader.getUrl();
+        username = configReader.getUsername();
+        password = configReader.getPassword();
+    }
+
     public static Connection getDatabaseConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        return DriverManager.getConnection(url, username, password);
     }
 
     public static String hashPassword(String password, String salt) {
@@ -50,10 +59,10 @@ public class DatabaseUtil {
             return null;
         }
     }
-    
+
     public static String generateSalt() {
         byte[] salt = new byte[16];
-        SecureRandom random =  new SecureRandom();
+        SecureRandom random = new SecureRandom();
         random.nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
