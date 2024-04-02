@@ -51,11 +51,11 @@ public class LoginScene {
         Label titleLabel = new Label("Macro-Builder ");
         titleLabel.setFont(titleFont);
         titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
-        
+
         Label loginLabel = new Label("User Login");
         loginLabel.setFont(labelFont);
         loginLabel.setStyle("-fx-text-fill: #F6EEE3;");
-        
+
         Label usernameLabel = new Label("Username: ");
         Label passwordLabel = new Label("Password: ");
         usernameLabel.setFont(labelFont);
@@ -109,15 +109,20 @@ public class LoginScene {
 
             String username = usernameField.getText();
             String password = passwordField.getText();
-            
+
             //Attempts login
             try {
                 loginController = new LoginController();
-                
-                if(loginController.loginUser(username, password)){
-                    sceneController.switchToDetailScene(username);
-                }
-                else{
+
+                if (loginController.loginUser(username, password)) {
+                    if (loginController.firstLogin(username)) {
+                        sceneController.switchToDetailScene(username);
+                    } else {
+                        // this will change to detail scene later
+                        sceneController.switchToRegisterScene();
+                    }
+
+                } else {
                     resultLabel.setText("Incorrect Username and/or Password");
                 }
             } catch (IOException | SQLException ex) {
