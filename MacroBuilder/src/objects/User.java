@@ -44,8 +44,8 @@ public class User {
      * Male, Female
      */
     public enum Gender {
-        Male,
-        Female
+        MALE,
+        FEMALE
     }
     
     private String username;
@@ -219,7 +219,7 @@ public class User {
      * @return 
      */
     public String getGenderAsString() {
-        if (this.gender == User.Gender.Male) {
+        if (this.gender == User.Gender.MALE) {
             return "Male";
         } else {
             return "Female";

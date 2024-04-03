@@ -35,8 +35,7 @@ import javafx.stage.Stage;
 public class DetailScene {
 
     //Fields
-    private DetailController detailController;
-    private final String username;
+   private DetailController detailController;
     private objects.User.Gender gender;
     private objects.User.ActivityLevel activityLevel;
     private objects.User.CurrentMode mode;
@@ -46,8 +45,8 @@ public class DetailScene {
      *
      * @param username The username of the user whose details are being entered.
      */
-    public DetailScene(String username) {
-        this.username = username;
+    public DetailScene() {
+    
     }
 
     /**
@@ -87,11 +86,11 @@ public class DetailScene {
         genderBox.setAlignment(Pos.CENTER);
         genderBox.setPadding(new Insets(20, 0, 20, 0));
         maleButton.setOnAction(e -> {
-            this.gender = objects.User.Gender.Male;
+            this.gender = objects.User.Gender.MALE;
         });
 
         femaleButton.setOnAction(e -> {
-            this.gender = objects.User.Gender.Female;
+            this.gender = objects.User.Gender.FEMALE;
         });
 
         // Age, Height, and Weight Section
@@ -213,15 +212,15 @@ public class DetailScene {
         submitButton.setOnAction(e -> {
             try {
                 detailController = new DetailController();
+                
                 detailController.storeUserDetails(this.gender, Integer.parseInt(ageText.getText()),
                         Float.parseFloat(heightText.getText()), Float.parseFloat(weightText.getText()), this.activityLevel, this.mode);
+                
+                sceneController.switchToMenuScene();
+                
             } catch (IOException | SQLException ex) {
                 Logger.getLogger(LoginScene.class.getName()).log(Level.SEVERE, null, ex);
             }
-            User newUser = new User(this.username, this.gender, Integer.parseInt(ageText.getText()),
-                    Float.parseFloat(heightText.getText()), Float.parseFloat(weightText.getText()), this.activityLevel, this.mode);
-
-            sceneController.switchToMenuScene(newUser);
         });
 
         root.getChildren().addAll(titleLabel, genderBox, ageHeightWeightBox, activityBox, modeBox, submitButton);

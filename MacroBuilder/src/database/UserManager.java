@@ -11,6 +11,7 @@ package database;
 public class UserManager {
     private static UserManager instance;
     private int userId;
+    private String username;
     
     private UserManager(){
         
@@ -29,6 +30,14 @@ public class UserManager {
     
     public int getUserId(){
         return userId;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
+    }
+    
+    public String getUsername(){
+        return username;
     }
     
     public void clearUser() {

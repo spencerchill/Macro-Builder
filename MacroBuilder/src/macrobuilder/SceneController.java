@@ -4,6 +4,8 @@
  */
 package macrobuilder;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -40,17 +42,17 @@ public class SceneController {
         primaryStage.setScene(loginScene);
     }
 
-    public void switchToDetailScene(String username) {
+    public void switchToDetailScene() {
         if (detailScene == null) {
-            DetailScene userDetailScene = new DetailScene(username);
+            DetailScene userDetailScene = new DetailScene();
             detailScene = userDetailScene.showDetailScene(primaryStage, this);
         }
         primaryStage.setScene(detailScene);
     }
 
-    public void switchToMenuScene(objects.User user) {
+    public void switchToMenuScene() throws SQLException, IOException {
         if (mainMenuScene == null) {
-            MainMenuScene menuScene = new MainMenuScene(user);
+            MainMenuScene menuScene = new MainMenuScene();
             mainMenuScene = menuScene.showMenuScene(primaryStage, this);
         }
         primaryStage.setScene(mainMenuScene);
@@ -74,14 +76,14 @@ public class SceneController {
 
     public Scene getDetailScene() {
         if (detailScene == null) {
-            switchToDetailScene("");
+            switchToDetailScene();
         }
         return this.detailScene;
     }
 
-    public Scene getMenuScene() {
+    public Scene getMenuScene() throws SQLException, IOException {
         if (mainMenuScene == null) {
-            switchToMenuScene(null);
+            switchToMenuScene();
         }
         return this.mainMenuScene;
     }
