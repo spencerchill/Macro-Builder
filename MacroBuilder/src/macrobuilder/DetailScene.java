@@ -157,7 +157,7 @@ public class DetailScene {
             this.activityLevel = objects.User.ActivityLevel.ACTIVE;
         });
 
-        // Mode Section
+        // Mode Section 
         Label modeLabel = new Label("Mode:");
         modeLabel.setTextFill(Color.WHITE);
         modeLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
@@ -197,7 +197,7 @@ public class DetailScene {
         maintainButton.setMinWidth(100);
         bulkButton.setMinWidth(100);
 
-        // Submit Button
+        // Submit Button passes into main menu scene
         Button submitButton = new Button("Submit");
         submitButton.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         submitButton.setTextFill(Color.WHITE);
