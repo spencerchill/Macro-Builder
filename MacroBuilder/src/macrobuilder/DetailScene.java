@@ -5,12 +5,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -44,24 +50,31 @@ public class DetailScene {
     public Scene showDetailScene(Stage primaryStage, SceneController sceneController) {
 
         VBox root = new VBox(20);
-        root.setPadding(new Insets(20));
+        root.setPadding(new Insets(40));
         root.setAlignment(Pos.CENTER);
+        root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         // Title Label
-        Label titleLabel = new Label("Details");
-        titleLabel.setStyle("-fx-font-size: 24px;");
+        Label titleLabel = new Label("Please input your information below");
+        titleLabel.setTextFill(Color.WHITE);
+        titleLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 24));
+        titleLabel.setPadding(new Insets(10,0,10,0));
 
         // Gender Section
         Label genderLabel = new Label("Gender: ");
+        genderLabel.setTextFill(Color.WHITE);
+        genderLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         RadioButton maleButton = new RadioButton("Male");
+        maleButton.setTextFill(Color.WHITE);
         RadioButton femaleButton = new RadioButton("Female");
+        femaleButton.setTextFill(Color.WHITE);
         ToggleGroup genderGroup = new ToggleGroup();
         maleButton.setToggleGroup(genderGroup);
         femaleButton.setToggleGroup(genderGroup);
 
         VBox genderBox = new VBox(5, genderLabel, maleButton, femaleButton);
         genderBox.setAlignment(Pos.CENTER);
-
+        genderBox.setPadding(new Insets(20,0,20,0));
         maleButton.setOnAction(e -> {
             this.gender = objects.User.Gender.Male;
         });
@@ -70,43 +83,63 @@ public class DetailScene {
             this.gender = objects.User.Gender.Female;
         });
 
-        // Age Section
+        // Age, Height, and Weight Section
         Label ageLabel = new Label("Age: ");
+        ageLabel.setTextFill(Color.WHITE);
+        ageLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         TextField ageText = new TextField();
+        ageText.setPrefWidth(100); // Set a fixed width for the text field
 
-        HBox ageBox = new HBox(10, ageLabel, ageText);
-        ageBox.setAlignment(Pos.CENTER);
-
-        // Height Section
         Label heightLabel = new Label("Height: ");
+        heightLabel.setTextFill(Color.WHITE);
+        heightLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         TextField heightText = new TextField();
+        heightText.setPrefWidth(100); // Set a fixed width for the text field
         Label inchLabel = new Label("inches");
+        inchLabel.setTextFill(Color.WHITE);
+        inchLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
 
-        HBox heightBox = new HBox(10, heightLabel, heightText, inchLabel);
-        heightBox.setAlignment(Pos.CENTER);
-
-        // Weight Section
         Label weightLabel = new Label("Weight: ");
+        weightLabel.setTextFill(Color.WHITE);
+        weightLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         TextField weightText = new TextField();
+        weightText.setPrefWidth(100); // Set a fixed width for the text field
         Label lbsLabel = new Label("lbs");
+        lbsLabel.setTextFill(Color.WHITE);
+        lbsLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
 
-        HBox weightBox = new HBox(10, weightLabel, weightText, lbsLabel);
-        weightBox.setAlignment(Pos.CENTER);
+        HBox ageHeightWeightBox = new HBox(20, 
+        new VBox(5, ageLabel, heightLabel, weightLabel),
+        new VBox(5, ageText, heightText, weightText),
+        new VBox(5, new Label(), inchLabel, lbsLabel));
+        ageHeightWeightBox.setAlignment(Pos.CENTER);
+        titleLabel.setPadding(new Insets(20,0,20,0));
 
         // Activity Level Section
         Label activityLabel = new Label("Activity Level: ");
+        activityLabel.setTextFill(Color.WHITE);
+        activityLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         RadioButton notActive = new RadioButton("Not Active");
+        notActive.setTextFill(Color.WHITE);
         RadioButton moderatelyActive = new RadioButton("Moderately Active");
+        moderatelyActive.setTextFill(Color.WHITE);
         RadioButton active = new RadioButton("Active");
+        active.setTextFill(Color.WHITE);
 
         ToggleGroup activityGroup = new ToggleGroup();
 
         notActive.setToggleGroup(activityGroup);
         moderatelyActive.setToggleGroup(activityGroup);
         active.setToggleGroup(activityGroup);
-
+        
+        // Set fixed width for radio buttons
+        notActive.setMinWidth(150);
+        moderatelyActive.setMinWidth(150);
+        active.setMinWidth(150);
+        
         VBox activityBox = new VBox(5, activityLabel, notActive, moderatelyActive, active);
         activityBox.setAlignment(Pos.CENTER);
+        activityBox.setPadding(new Insets(20,0,20,0));
 
         notActive.setOnAction(e -> {
             this.activityLevel = objects.User.ActivityLevel.NOT_ACTIVE;
@@ -122,9 +155,14 @@ public class DetailScene {
 
         // Mode Section
         Label modeLabel = new Label("Mode:");
+        modeLabel.setTextFill(Color.WHITE);
+        modeLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         RadioButton cutButton = new RadioButton("Cut");
+        cutButton.setTextFill(Color.WHITE);
         RadioButton maintainButton = new RadioButton("Maintain");
+        maintainButton.setTextFill(Color.WHITE);
         RadioButton bulkButton = new RadioButton("Bulk");
+        bulkButton.setTextFill(Color.WHITE);
 
         ToggleGroup modeGroup = new ToggleGroup();
 
@@ -134,6 +172,7 @@ public class DetailScene {
 
         VBox modeBox = new VBox(5, modeLabel, cutButton, maintainButton, bulkButton);
         modeBox.setAlignment(Pos.CENTER);
+        modeBox.setPadding(new Insets(20,0,20,0));
 
         cutButton.setOnAction(e -> {
             this.mode = objects.User.CurrentMode.CUT;
@@ -147,10 +186,19 @@ public class DetailScene {
             this.mode = objects.User.CurrentMode.BULK;
         });
 
+        // Set fixed width for radio buttons
+        maleButton.setMinWidth(100);
+        femaleButton.setMinWidth(100);
+        cutButton.setMinWidth(100);
+        maintainButton.setMinWidth(100);
+        bulkButton.setMinWidth(100);
+
         // Submit Button
         Button submitButton = new Button("Submit");
-        submitButton.setAlignment(Pos.CENTER);
-
+        submitButton.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
+        submitButton.setTextFill(Color.WHITE);
+        submitButton.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, new CornerRadii(5), Insets.EMPTY)));
+        submitButton.setPadding(new Insets(10));
         submitButton.setOnAction(e -> {
             User newUser = new User(this.username, this.gender, Integer.parseInt(ageText.getText()),
                     Float.parseFloat(heightText.getText()), Float.parseFloat(weightText.getText()), this.activityLevel, this.mode);
@@ -158,7 +206,7 @@ public class DetailScene {
             sceneController.switchToMenuScene(newUser);
         });
 
-        root.getChildren().addAll(titleLabel, genderBox, ageBox, heightBox, weightBox, activityBox, modeBox, submitButton);
+        root.getChildren().addAll(titleLabel, genderBox, ageHeightWeightBox, activityBox, modeBox, submitButton);
 
         Scene detailScene = new Scene(root);
         return detailScene;
