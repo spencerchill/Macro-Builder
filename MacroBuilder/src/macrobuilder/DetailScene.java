@@ -47,6 +47,7 @@ public class DetailScene {
      * @param sceneController The scene controller for managing scene transitions.
      * @return The detail scene for entering user details.
      */
+    //Not fully finished, will have to work on some css style eventually(if we do it)
     public Scene showDetailScene(Stage primaryStage, SceneController sceneController) {
 
         VBox root = new VBox(20);
@@ -113,6 +114,7 @@ public class DetailScene {
         new VBox(5, ageText, heightText, weightText),
         new VBox(5, new Label(), inchLabel, lbsLabel));
         ageHeightWeightBox.setAlignment(Pos.CENTER);
+        
         //Make sure everything is aligned 
         ageLabel.setPadding(new Insets(2,0,2,0));
         heightLabel.setPadding(new Insets(2,0,2,0));
