@@ -113,6 +113,7 @@ public class DetailScene {
         new VBox(5, ageText, heightText, weightText),
         new VBox(5, new Label(), inchLabel, lbsLabel));
         ageHeightWeightBox.setAlignment(Pos.CENTER);
+        //Make sure everything is aligned 
         ageLabel.setPadding(new Insets(2,0,2,0));
         heightLabel.setPadding(new Insets(2,0,2,0));
         heightText.setPadding(new Insets(2,0,2,0));
