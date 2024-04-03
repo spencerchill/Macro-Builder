@@ -53,4 +53,19 @@ public class LoginController {
             }
         }
     }
+
+    public int getUserId(String username) throws SQLException {
+        try ( Connection connection = databaseUtil.getDatabaseConnection()) {
+            String query = "SELECT id FROM users WHERE username = ?";
+            try ( PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, username);
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("id");
+                    }
+                }
+            }
+        }
+        return -1;
+    }
 }

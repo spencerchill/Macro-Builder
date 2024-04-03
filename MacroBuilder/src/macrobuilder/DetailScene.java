@@ -1,5 +1,10 @@
 package macrobuilder;
 
+import database.DetailController;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,31 +25,37 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * Represents a scene for entering user details.
- * This scene allows the user to input their gender, age, height, weight, activity level, and current mode
+ * Represents a scene for entering user details. This scene allows the user to
+ * input their gender, age, height, weight, activity level, and current mode
  * Upon submission, the entered details are used to create a new User object.
+ *
  * @author ibrah
  * @author spencerhill
  */
 public class DetailScene {
+
     //Fields
+    private DetailController detailController;
     private final String username;
     private objects.User.Gender gender;
     private objects.User.ActivityLevel activityLevel;
     private objects.User.CurrentMode mode;
-    
+
     /**
      * Constructor to create a DetailScene object with the specified username.
+     *
      * @param username The username of the user whose details are being entered.
      */
     public DetailScene(String username) {
         this.username = username;
     }
-    
+
     /**
      * Creates and displays the detail scene for entering user details.
+     *
      * @param primaryStage The primary stage of the application.
-     * @param sceneController The scene controller for managing scene transitions.
+     * @param sceneController The scene controller for managing scene
+     * transitions.
      * @return The detail scene for entering user details.
      */
     public Scene showDetailScene(Stage primaryStage, SceneController sceneController) {
@@ -58,7 +69,7 @@ public class DetailScene {
         Label titleLabel = new Label("Please input your information below");
         titleLabel.setTextFill(Color.WHITE);
         titleLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 24));
-        titleLabel.setPadding(new Insets(10,0,10,0));
+        titleLabel.setPadding(new Insets(10, 0, 10, 0));
 
         // Gender Section
         Label genderLabel = new Label("Gender: ");
@@ -74,7 +85,7 @@ public class DetailScene {
 
         VBox genderBox = new VBox(5, genderLabel, maleButton, femaleButton);
         genderBox.setAlignment(Pos.CENTER);
-        genderBox.setPadding(new Insets(20,0,20,0));
+        genderBox.setPadding(new Insets(20, 0, 20, 0));
         maleButton.setOnAction(e -> {
             this.gender = objects.User.Gender.Male;
         });
@@ -108,12 +119,12 @@ public class DetailScene {
         lbsLabel.setTextFill(Color.WHITE);
         lbsLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
 
-        HBox ageHeightWeightBox = new HBox(20, 
-        new VBox(5, ageLabel, heightLabel, weightLabel),
-        new VBox(5, ageText, heightText, weightText),
-        new VBox(5, new Label(), inchLabel, lbsLabel));
+        HBox ageHeightWeightBox = new HBox(20,
+                new VBox(5, ageLabel, heightLabel, weightLabel),
+                new VBox(5, ageText, heightText, weightText),
+                new VBox(5, new Label(), inchLabel, lbsLabel));
         ageHeightWeightBox.setAlignment(Pos.CENTER);
-        titleLabel.setPadding(new Insets(20,0,20,0));
+        titleLabel.setPadding(new Insets(20, 0, 20, 0));
 
         // Activity Level Section
         Label activityLabel = new Label("Activity Level: ");
@@ -131,22 +142,22 @@ public class DetailScene {
         notActive.setToggleGroup(activityGroup);
         moderatelyActive.setToggleGroup(activityGroup);
         active.setToggleGroup(activityGroup);
-        
+
         // Set fixed width for radio buttons
         notActive.setMinWidth(150);
         moderatelyActive.setMinWidth(150);
         active.setMinWidth(150);
-        
+
         VBox activityBox = new VBox(5, activityLabel, notActive, moderatelyActive, active);
         activityBox.setAlignment(Pos.CENTER);
-        activityBox.setPadding(new Insets(20,0,20,0));
+        activityBox.setPadding(new Insets(20, 0, 20, 0));
 
         notActive.setOnAction(e -> {
             this.activityLevel = objects.User.ActivityLevel.NOT_ACTIVE;
         });
 
         moderatelyActive.setOnAction(e -> {
-            this.activityLevel = objects.User.ActivityLevel.MODERATLY_ACTIVE;
+            this.activityLevel = objects.User.ActivityLevel.MODERATELY_ACTIVE;
         });
 
         active.setOnAction(e -> {
@@ -172,7 +183,7 @@ public class DetailScene {
 
         VBox modeBox = new VBox(5, modeLabel, cutButton, maintainButton, bulkButton);
         modeBox.setAlignment(Pos.CENTER);
-        modeBox.setPadding(new Insets(20,0,20,0));
+        modeBox.setPadding(new Insets(20, 0, 20, 0));
 
         cutButton.setOnAction(e -> {
             this.mode = objects.User.CurrentMode.CUT;
@@ -200,6 +211,13 @@ public class DetailScene {
         submitButton.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, new CornerRadii(5), Insets.EMPTY)));
         submitButton.setPadding(new Insets(10));
         submitButton.setOnAction(e -> {
+            try {
+                detailController = new DetailController();
+                detailController.storeUserDetails(this.gender, Integer.parseInt(ageText.getText()),
+                        Float.parseFloat(heightText.getText()), Float.parseFloat(weightText.getText()), this.activityLevel, this.mode);
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(LoginScene.class.getName()).log(Level.SEVERE, null, ex);
+            }
             User newUser = new User(this.username, this.gender, Integer.parseInt(ageText.getText()),
                     Float.parseFloat(heightText.getText()), Float.parseFloat(weightText.getText()), this.activityLevel, this.mode);
 

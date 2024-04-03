@@ -80,7 +80,7 @@ public class Day {
                 case ACTIVE -> {
                     calorieGoal += 600;
                 }
-                case MODERATLY_ACTIVE -> {
+                case MODERATELY_ACTIVE -> {
                     calorieGoal += 300;
                 }
                 default -> {

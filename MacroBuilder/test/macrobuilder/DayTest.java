@@ -76,7 +76,7 @@ public class DayTest {
     public void testCalorieGoalActivity() {
         int expectedActiveCalories = day.getCalorieGoal();
 
-        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.MODERATLY_ACTIVE, User.CurrentMode.CUT);
+        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.MODERATELY_ACTIVE, User.CurrentMode.CUT);
         int expectedModerateCalories = day.getCalorieGoal();
 
         day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.CUT);
