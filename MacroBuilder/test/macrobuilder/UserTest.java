@@ -22,14 +22,14 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        user = new User("Melvin", User.Gender.Female, 73, (float) 64, (float) 400, User.ActivityLevel.ACTIVE, User.CurrentMode.BULK);
+        user = new User("Melvin", User.Gender.FEMALE, 73, (float) 64, (float) 400, User.ActivityLevel.ACTIVE, User.CurrentMode.BULK);
 
     }
 
     @Test
     public void testConstructor() {
         assertEquals("Melvin", user.getUsername());
-        assertEquals(User.Gender.Female, user.getGender());
+        assertEquals(User.Gender.FEMALE, user.getGender());
         assertEquals(73, user.getAge());
         assertEquals(64.0f, user.getHeight(), 0.001f);
         assertEquals(400.0f, user.getWeight(), 0.001f);
@@ -40,7 +40,7 @@ public class UserTest {
     @Test
     public void testGettersAndSetters() {
         //Test setters
-        user.setGender(User.Gender.Female);
+        user.setGender(User.Gender.FEMALE);
         user.setAge(90);
         user.setHeight(40);
         user.setWeight(200);
@@ -48,7 +48,7 @@ public class UserTest {
         user.setCurrentMode(User.CurrentMode.CUT);
 
         //Test getters
-        assertEquals(User.Gender.Female, user.getGender());
+        assertEquals(User.Gender.FEMALE, user.getGender());
         assertEquals(90, user.getAge());
         assertEquals(40.0f, user.getHeight(), 0.001f);
         assertEquals(200.0f, user.getWeight(), 0.001f);
