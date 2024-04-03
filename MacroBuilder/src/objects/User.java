@@ -23,7 +23,7 @@ public class User {
      */
     public enum ActivityLevel {
         NOT_ACTIVE,
-        MODERATLY_ACTIVE,
+        MODERATELY_ACTIVE,
         ACTIVE
     }
 
@@ -44,8 +44,8 @@ public class User {
      * Male, Female
      */
     public enum Gender {
-        Male,
-        Female
+        MALE,
+        FEMALE
     }
     
     private String username;
@@ -219,7 +219,7 @@ public class User {
      * @return 
      */
     public String getGenderAsString() {
-        if (this.gender == User.Gender.Male) {
+        if (this.gender == User.Gender.MALE) {
             return "Male";
         } else {
             return "Female";
@@ -233,7 +233,7 @@ public class User {
     public String getActivityLevelAsString() {
         if (this.activityLevel == User.ActivityLevel.NOT_ACTIVE) {
             return "Not Active";
-        } else if (this.activityLevel == User.ActivityLevel.MODERATLY_ACTIVE) {
+        } else if (this.activityLevel == User.ActivityLevel.MODERATELY_ACTIVE) {
             return "Moderatly Active";
         } else {
             return "Active";

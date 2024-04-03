@@ -23,7 +23,7 @@ public class DayTest {
 
     @Before
     public void setUp() {
-        User.Gender gender = User.Gender.Male;
+        User.Gender gender = User.Gender.MALE;
         int age = 20;
         float height = 180;
         float weight = 100;
@@ -64,7 +64,7 @@ public class DayTest {
         int expectedCaloriesMale = day.getCalorieGoal();
 
         //Changed Gender to Female
-        day = new Day(User.Gender.Female, 20, 180, 100, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
+        day = new Day(User.Gender.FEMALE, 20, 180, 100, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
         int expectedCaloriesFemale = day.getCalorieGoal();
 
         // Female should have less calories
@@ -76,10 +76,10 @@ public class DayTest {
     public void testCalorieGoalActivity() {
         int expectedActiveCalories = day.getCalorieGoal();
 
-        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.MODERATLY_ACTIVE, User.CurrentMode.CUT);
+        day = new Day(User.Gender.MALE, 20, 180, 100, User.ActivityLevel.MODERATELY_ACTIVE, User.CurrentMode.CUT);
         int expectedModerateCalories = day.getCalorieGoal();
 
-        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.CUT);
+        day = new Day(User.Gender.MALE, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.CUT);
         int expectedNotActiveCalories = day.getCalorieGoal();
 
         //We add 300 if moderately active and 600 if active. Checking if true.
@@ -92,13 +92,13 @@ public class DayTest {
     public void testCalorieGoalMode() {
         //Set up starts with cut mode
         //Set activity level to Not Active so as to not interfere with calculations.
-        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.CUT);
+        day = new Day(User.Gender.MALE, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.CUT);
         int expectedCutCalories = day.getCalorieGoal();
 
-        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.MAINTAIN);
+        day = new Day(User.Gender.MALE, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.MAINTAIN);
         int expectedMaintainCalories = day.getCalorieGoal();
 
-        day = new Day(User.Gender.Male, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.BULK);
+        day = new Day(User.Gender.MALE, 20, 180, 100, User.ActivityLevel.NOT_ACTIVE, User.CurrentMode.BULK);
         int expectedBulkCalories = day.getCalorieGoal();
 
         assertEquals(expectedCutCalories, (int) (expectedMaintainCalories * .75));
@@ -112,7 +112,7 @@ public class DayTest {
         float expectedProteinMale = (float) (((100 * 2.205) * .73));
         assertEquals(expectedProteinMale, day.getProteinGoal(), 0.001f);
         // FEMALE
-        day = new Day(User.Gender.Female, 20, 180, 100, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
+        day = new Day(User.Gender.FEMALE, 20, 180, 100, User.ActivityLevel.ACTIVE, User.CurrentMode.CUT);
         float expectedProteinFemale = (float) (((100 * 2.205) * .62));
         assertEquals(expectedProteinFemale, day.getProteinGoal(), 0.001f);
     }

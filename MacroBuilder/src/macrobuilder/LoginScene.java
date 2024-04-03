@@ -5,6 +5,7 @@
 package macrobuilder;
 
 import database.LoginController;
+import database.UserManager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -115,11 +116,13 @@ public class LoginScene {
                 loginController = new LoginController();
 
                 if (loginController.loginUser(username, password)) {
+                   UserManager userManager = UserManager.getInstance();
+                   userManager.setUserIId(loginController.getUserId(username));
+                   userManager.setUsername(username);
                     if (loginController.firstLogin(username)) {
-                        sceneController.switchToDetailScene(username);
+                        sceneController.switchToDetailScene();
                     } else {
-                        // this will change to detail scene later
-                        sceneController.switchToRegisterScene();
+                        sceneController.switchToMenuScene();
                     }
 
                 } else {
