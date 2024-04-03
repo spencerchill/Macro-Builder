@@ -57,6 +57,7 @@ public class DetailScene {
      * transitions.
      * @return The detail scene for entering user details.
      */
+    //Not fully finished, will have to work on some css style eventually(if we do it)
     public Scene showDetailScene(Stage primaryStage, SceneController sceneController) {
 
         VBox root = new VBox(20);
@@ -123,7 +124,13 @@ public class DetailScene {
                 new VBox(5, ageText, heightText, weightText),
                 new VBox(5, new Label(), inchLabel, lbsLabel));
         ageHeightWeightBox.setAlignment(Pos.CENTER);
-        titleLabel.setPadding(new Insets(20, 0, 20, 0));
+        
+        //Make sure everything is aligned 
+        ageLabel.setPadding(new Insets(2,0,2,0));
+        heightLabel.setPadding(new Insets(2,0,2,0));
+        heightText.setPadding(new Insets(2,0,2,0));
+        inchLabel.setPadding(new Insets(5,0,2,0));
+        lbsLabel.setPadding(new Insets(5,0,2,0));
 
         // Activity Level Section
         Label activityLabel = new Label("Activity Level: ");
@@ -163,7 +170,7 @@ public class DetailScene {
             this.activityLevel = objects.User.ActivityLevel.ACTIVE;
         });
 
-        // Mode Section
+        // Mode Section 
         Label modeLabel = new Label("Mode:");
         modeLabel.setTextFill(Color.WHITE);
         modeLabel.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
@@ -203,7 +210,7 @@ public class DetailScene {
         maintainButton.setMinWidth(100);
         bulkButton.setMinWidth(100);
 
-        // Submit Button
+        // Submit Button passes into main menu scene
         Button submitButton = new Button("Submit");
         submitButton.setFont(Font.font("ROCKWELL", FontWeight.BOLD, 16));
         submitButton.setTextFill(Color.WHITE);
