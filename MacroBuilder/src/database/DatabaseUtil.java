@@ -17,7 +17,7 @@ import java.security.spec.KeySpec;
 import java.util.Base64;
 
 /**
- *
+ * Class that handles database connection and password hashing.
  * @author KingJ
  */
 public class DatabaseUtil {
@@ -30,6 +30,10 @@ public class DatabaseUtil {
     private static final int KEY_LENGTH = 256;
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
 
+    /**
+     * Reads database credentials from config file.
+     * @throws IOException if error reading file.
+     */
     public DatabaseUtil() throws IOException {
          //secure database credentials.
         ConfigReader configReader = new ConfigReader("config.properties");
@@ -37,11 +41,21 @@ public class DatabaseUtil {
         username = configReader.getUsername();
         password = configReader.getPassword();
     }
-
+    /**
+     * Gets connection to server.
+     * @return Connection object.
+     * @throws SQLException.
+     */
     public  Connection getDatabaseConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     }
 
+    /**
+     * Hashes password with salt using PBKDF2 algorithm with HMAC SHA-256.
+     * @param password
+     * @param salt
+     * @return hashed password
+     */
     public String hashPassword(String password, String salt) {
         // Expects array of characters and bytes
         char[] passwordChars = password.toCharArray();
@@ -60,6 +74,10 @@ public class DatabaseUtil {
         }
     }
 
+    /**
+     * Generates random salt.
+     * @return random salt.
+     */
     public String generateSalt() {
         byte[] salt = new byte[16];
         SecureRandom random = new SecureRandom();
