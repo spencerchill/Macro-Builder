@@ -48,7 +48,7 @@ public class Meal {
     }
     /**
      * Removes a food item from the meal and updates the total nutritional information.
-     * @param food The food item t o be removed from the meal.
+     * @param food The food item to be removed from the meal.
      */
     public void removeFood(Food food) {
         foods.remove(food); //Removes the food item from the list.

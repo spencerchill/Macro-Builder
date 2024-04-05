@@ -13,16 +13,26 @@ import java.sql.ResultSet;
 import objects.User;
 
 /**
- *
+ * Controller for Menu scene.
  * @author KingJ
  */
 public class MenuController {
     private DatabaseUtil databaseUtil;
     private UserManager userManager;
+    /**
+     *  Creates databaseUtil object and userManager to retrieve userID.
+     * @throws IOException 
+     */
     public MenuController() throws IOException {
         userManager = UserManager.getInstance();
         databaseUtil = new DatabaseUtil();
     }
+    
+    /**
+     * Creates User object from user details stored in database.
+     * @return User object.
+     * @throws SQLException 
+     */
     public User getUserDetails() throws SQLException {
         try(Connection connection = databaseUtil.getDatabaseConnection()) {
             String query = "SELECT * FROM user_details WHERE user_id = ?";
