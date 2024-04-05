@@ -12,16 +12,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import objects.User.*;
 /**
- *
+ * Controller for Detail scene.
  * @author KingJ
  */
 public class DetailController {
       private DatabaseUtil databaseUtil;
+      /**
+       * Creates databaseUtil object and userManager to retrieve userID.
+       * @throws IOException 
+       */
       public DetailController() throws IOException {
           UserManager userManager = UserManager.getInstance();
           databaseUtil = new DatabaseUtil();
       }
-      
+      /**
+       * Stores user details into database.
+       * @param gender
+       * @param age
+       * @param height
+       * @param weight
+       * @param activityLevel
+       * @param mode
+       * @throws SQLException if database error.
+       */
       public void storeUserDetails(Gender gender, int age, float height, float weight, ActivityLevel activityLevel, CurrentMode mode) throws SQLException {
           try(Connection connection = databaseUtil.getDatabaseConnection()) {
               UserManager userManager = UserManager.getInstance();

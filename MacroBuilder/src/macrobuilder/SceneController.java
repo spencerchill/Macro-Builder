@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Allows switching between scenes.
+ * Controls scene switching
  *
  * @author KingJ
  */
@@ -22,6 +22,10 @@ public class SceneController {
     private Scene detailScene;
     private Scene mainMenuScene;
 
+    /**
+     *  Sets primary stage for controller.
+     * @param primaryStage 
+     */
     public SceneController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -29,19 +33,28 @@ public class SceneController {
     // Switches to change stages
     // Implemented lazy initialization
     // We check if scene doesnt exist and we create one at that moment.
+    
+    /**
+     * Switches to registration scene.
+     */
     public void switchToRegisterScene() {
         RegisterUserScene registerUserScene = new RegisterUserScene();
         registerScene = registerUserScene.createRegisterScene(primaryStage, this);
         primaryStage.setScene(registerScene);
     }
 
-    //For now we pass the entered username and password for fun, but we wont pass this later.
+    /**
+     * Switches to login scene.
+     */
     public void switchToLoginScene() {
         LoginScene loginUserScene = new LoginScene();
         loginScene = loginUserScene.createLoginScene(primaryStage, this);
         primaryStage.setScene(loginScene);
     }
-
+    /**
+     * Switches to detail scene
+     * Creates one if it doesn't exist.
+     */
     public void switchToDetailScene() {
         if (detailScene == null) {
             DetailScene userDetailScene = new DetailScene();
@@ -49,7 +62,12 @@ public class SceneController {
         }
         primaryStage.setScene(detailScene);
     }
-
+    /**
+     * Switches to menu scene.
+     * Creates one if it doesn't exist.
+     * @throws SQLException
+     * @throws IOException 
+     */
     public void switchToMenuScene() throws SQLException, IOException {
         if (mainMenuScene == null) {
             MainMenuScene menuScene = new MainMenuScene();
@@ -60,27 +78,47 @@ public class SceneController {
 
     // Getters for scenes
     // Check if scene is null, if so we create one and return it
+    
+    /**
+     * Gets register scene.
+     * Creates one if it doesn't exist.
+     * @return registration scene.
+     */
     public Scene getRegisterScene() {
         if (registerScene == null) {
             switchToRegisterScene();
         }
         return this.registerScene;
     }
-
+    /**
+     * Gets login scene.
+     * Creates one if it doesn't exist.
+     * @return login scene.
+     */
     public Scene getLoginScene() {
         if (loginScene == null) {
             switchToLoginScene();
         }
         return this.loginScene;
     }
-
+    /**
+     * Gets detail scene.
+     * Creates one if it doesn't exist.
+     * @return detail scene.
+     */
     public Scene getDetailScene() {
         if (detailScene == null) {
             switchToDetailScene();
         }
         return this.detailScene;
     }
-
+    /**
+     * Gets menu scene.
+     * Creates one if it doesn't exist.
+     * @return menu scene.
+     * @throws SQLException
+     * @throws IOException 
+     */
     public Scene getMenuScene() throws SQLException, IOException {
         if (mainMenuScene == null) {
             switchToMenuScene();

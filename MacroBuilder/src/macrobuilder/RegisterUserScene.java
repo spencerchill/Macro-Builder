@@ -31,13 +31,19 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- *
- * @author sweet
+ * View for registration screen.
+ * @author KingJ
  */
 public class RegisterUserScene {
     
     private RegistrationController registrationController;
-
+    
+    /**
+     * Creates registration GUI.
+     * @param primaryStage
+     * @param sceneController
+     * @return register scene
+     */
     public Scene createRegisterScene(Stage primaryStage, SceneController sceneController) {
         Font labelFont = new Font("Helvetica", 26);
         Font fieldFont = new Font("Lato", 20);
@@ -142,7 +148,13 @@ public class RegisterUserScene {
 
         return registerScene;
     }
-
+    /**
+     * Handles enter key presses on text fields.
+     * @param usernameField
+     * @param passwordField
+     * @param emailField
+     * @param registerButton 
+     */
     private void registrationKeyHandlers(TextField usernameField, PasswordField passwordField, TextField emailField, Button registerButton) {
         // Event handlers that allow the user to press enter inside of form
         // Pressing enter on usernameField switches focus to the passwordField
@@ -164,7 +176,11 @@ public class RegisterUserScene {
         });
     }
     
-    // checks if username is between 5 ann 15 characters and no special characters.
+    /**
+     *  Checks if username is valid according to regex.
+     * @param username
+     * @return boolean checking if valid.
+     */
     public static boolean isValidUsername(String username) {
         int length = username.length();
         if (length < 5 || length > 15) {

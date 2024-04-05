@@ -28,16 +28,19 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- *
+ * View for the login scene.
  * @author KingJ
  */
 public class LoginScene {
 
     private LoginController loginController;
-
-    public LoginScene() {
-    }
-
+   
+    /**
+     * Creates login GUI.
+     * @param primaryStage
+     * @param sceneController
+     * @return login scene
+     */
     public Scene createLoginScene(Stage primaryStage, SceneController sceneController) {
 
         Font labelFont = new Font("Helvetica", 26);
