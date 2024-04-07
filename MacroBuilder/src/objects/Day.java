@@ -24,6 +24,7 @@ public class Day {
     private float fat;
     private float carbs;
     private float protein;
+    private int remainingCalories;
     
     /**
      * 6-parameter constructor that sets up a day 
@@ -86,6 +87,7 @@ public class Day {
                 default -> {
                 }
             }
+        remainingCalories = calorieGoal;
     }
     
     /**
@@ -115,6 +117,7 @@ public class Day {
         this.fat += fat;
         this.carbs += carbs;
         this.protein += protein;
+        remainingCalories  -= calories;
     }
     
     /**
@@ -144,6 +147,13 @@ public class Day {
         return this.calories;
     }
     
+    /**
+     * Returns remaining calories.
+     * @return 
+     */
+    public int getRemainingCalories() {
+        return this.remainingCalories;
+    }
     /**
      * Method that returns a float representing 
      * the current amount of fat consumed
