@@ -5,3 +5,7 @@
 .mainFxmlClass {
 
 }
+#titleLabel{
+    -fx-font-size: 50px;
+    -fx-text-fill: #333333; /* Text color */
+}

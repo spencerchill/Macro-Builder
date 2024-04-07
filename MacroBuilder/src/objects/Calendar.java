@@ -38,7 +38,7 @@ public class Calendar {
      * Creates a new daily activity entry for the specified date if it does not already exist.
      * @param date The date for which the daily activity entry is to be created
      */
-    public void createDay(String date) {
+    public  void createDay(String date) {
         if (!calendar.containsKey(date)) {
             //Create a new day entry with user attributes
         Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), 
