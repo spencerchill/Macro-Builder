@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
     <stylesheets>
         <URL value="@menu.css" />
     </stylesheets>
    <children>
-      <AnchorPane prefHeight="116.0" prefWidth="600.0">
+      <AnchorPane layoutX="303.0" prefHeight="116.0" prefWidth="467.0">
          <children>
-            <Label id="titleLabel" layoutX="32.0" layoutY="24.0" text="Macro-Builder" />
+            <Label id="titleLabel" layoutX="28.0" layoutY="22.0" text="Macro-Builder" />
+            <ImageView fitHeight="48.0" fitWidth="45.0" layoutX="353.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:///C:/Users/sweet/OneDrive/Documents/NetBeansProjects/Macro-Builder/MacroBuilder/src/orange.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="318.0" layoutY="97.0" prefHeight="200.0" prefWidth="213.0">
-         <children>
-            <TextField fx:id="caloriesField" layoutX="14.0" layoutY="68.0" />
-            <Label layoutX="14.0" layoutY="31.0" text="Quick add calories!" />
-            <Button fx:id="submitButton" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" onAction="#submitCalories" text="Submit" />
-         </children>
-      </AnchorPane>
-      <Label fx:id="caloriesLabel" layoutX="135.0" layoutY="116.0" text="Label" />
+      <TabPane id=".tab-pane" layoutX="333.0" layoutY="116.0" styleClass="floating" stylesheets="@menu.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <tabs>
+          <Tab id=".tab" styleClass="floating" text="Home">
+            <content>
+              <AnchorPane style="-fx-background-color: black;" minHeight="0.0" minWidth="0.0" prefHeight="811.0" prefWidth="1916.0" stylesheets="@menu.css">
+                     <children>
+                        <Label fx:id="caloriesLabel" layoutX="287.0" layoutY="86.0" text="Label" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab id=".tab" text="QuickAdd">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="917.0" prefWidth="1916.0" stylesheets="@menu.css">
+                     <children>
+                        <AnchorPane layoutX="328.0" layoutY="58.0" prefHeight="200.0" prefWidth="213.0">
+                           <children>
+                              <TextField fx:id="caloriesField" layoutX="15.0" layoutY="75.0" />
+                              <Label layoutX="14.0" layoutY="31.0" text="Quick add calories!" />
+                              <Button fx:id="submitButton" layoutX="62.0" layoutY="107.0" mnemonicParsing="false" onAction="#submitCalories" text="Submit" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+         <opaqueInsets>
+            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+         </opaqueInsets>
+      </TabPane>
    </children>
 </AnchorPane>

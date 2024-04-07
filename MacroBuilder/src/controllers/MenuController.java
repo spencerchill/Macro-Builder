@@ -40,7 +40,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private TextField caloriesField;
-
+    
     @FXML
     void submitCalories(ActionEvent event) {
         String caloriesText = caloriesField.getText();
