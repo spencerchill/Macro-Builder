@@ -21,7 +21,7 @@
       <AnchorPane layoutY="6.0" prefHeight="91.0" prefWidth="746.0">
          <children>
             <Label id="titleLabel" layoutX="28.0" layoutY="22.0" text="Macro-Builder" />
-            <ImageView fitHeight="48.0" fitWidth="45.0" layoutX="353.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="328.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="file:///C:/Users/sweet/OneDrive/Documents/NetBeansProjects/Macro-Builder/MacroBuilder/src/orange.png" />
                </image>
@@ -53,14 +53,14 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab id=".tab" text="QuickAdd">
+          <Tab id=".tab" text="Food">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="917.0" prefWidth="1916.0" style="-fx-background-color: grey;" stylesheets="@menu.css">
                      <children>
-                        <AnchorPane layoutX="331.0" layoutY="57.0" prefHeight="200.0" prefWidth="213.0">
+                        <AnchorPane layoutX="745.0" layoutY="75.0" prefHeight="200.0" prefWidth="213.0">
                            <children>
                               <TextField fx:id="caloriesField" layoutX="15.0" layoutY="75.0" />
-                              <Label layoutX="2.0" layoutY="35.0" text="Quick add calories!" textFill="WHITE">
+                              <Label layoutX="2.0" layoutY="36.0" text="Quick add calories!" textFill="WHITE">
                                  <font>
                                     <Font size="21.0" />
                                  </font></Label>
