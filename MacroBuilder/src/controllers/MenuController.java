@@ -34,10 +34,13 @@ public class MenuController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private Label userLabel;
+    
     private User user;
     @FXML
     private Label caloriesLabel;
-
+  
     @FXML
     private Button submitButton;
 
@@ -46,7 +49,7 @@ public class MenuController implements Initializable {
     
     @FXML
 private PieChart caloriesPieChart;
-
+    
 
 private void updatePieChart() {
            caloriesPieChart.setLegendVisible(false);
@@ -54,9 +57,7 @@ private void updatePieChart() {
             int remainingCalories = user.getDay().getRemainingCalories();
             int consumedCalories = user.getDay().getCalories();
     ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-            
-            
-            
+   
             new PieChart.Data(remainingCalories + " Calories Remaining", remainingCalories),
             new PieChart.Data(consumedCalories + " Calories Consumed", consumedCalories)
     );
@@ -77,7 +78,11 @@ private void updatePieChart() {
     }
     
     private void updateCalories() {
-        caloriesLabel.setText("Calories for Today: " + user.getDay().getRemainingCalories());
+        caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
+    }
+    
+    private void updateUser(){
+        userLabel.setText("Hey, " + user.getUsername() + "!");
     }
 
     @Override
@@ -86,8 +91,8 @@ private void updatePieChart() {
             databaseUtil = new DatabaseUtil();
             user = databaseUtil.getUserDetails();
             if (user != null) {
-                float calories = user.getDay().getRemainingCalories();
-                caloriesLabel.setText("Calories for Today: " + calories);
+                updateCalories();
+                updateUser();
             }
             updatePieChart(); 
         } catch (SQLException e) {
