@@ -1,9 +1,12 @@
 package macrobuilder;
 
+import controllers.MenuController;
 import database.DatabaseUtil;
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,14 +30,10 @@ public class MainMenuScene {
         this.user = databaseUtil.getUserDetails();
     }
     
-    public Scene showMenuScene(Stage primaryStage, SceneController sceneController) {
-        VBox root = new VBox(10);
-        
-        Label ageLabel = new Label(Integer.toString(user.getAge()));
-        Label calorieGoal = new Label(Integer.toString(user.getDay().getCalorieGoal()));
-        Label date = new Label(user.getCalendar().getDate());
-
-        root.getChildren().addAll(ageLabel, calorieGoal, date);
+    public Scene showMenuScene(Stage primaryStage, SceneController sceneController) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/controllers/Menu.fxml"));
+        Parent root = loader.load();
+        MenuController menuFXML = loader.getController();
         Scene newScene = new Scene(root);
         return newScene;
     }

@@ -4,8 +4,12 @@
  */
 package macrobuilder;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
@@ -24,7 +28,7 @@ public class MacroBuilder extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException, SQLException {
         Image favicon = new Image("favicon-16x16.png");
         
         Screen screen = Screen.getPrimary();

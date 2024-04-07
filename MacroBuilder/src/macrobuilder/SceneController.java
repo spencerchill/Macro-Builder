@@ -4,11 +4,13 @@
  */
 package macrobuilder;
 
+import controllers.MenuController;
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.Parent;
 /**
  * Controls scene switching
  *
@@ -70,8 +72,8 @@ public class SceneController {
      */
     public void switchToMenuScene() throws SQLException, IOException {
         if (mainMenuScene == null) {
-            MainMenuScene menuScene = new MainMenuScene();
-            mainMenuScene = menuScene.showMenuScene(primaryStage, this);
+         MainMenuScene mainScene = new MainMenuScene();
+         mainMenuScene = mainScene.showMenuScene(primaryStage, this);
         }
         primaryStage.setScene(mainMenuScene);
     }
