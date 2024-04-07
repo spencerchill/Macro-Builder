@@ -16,11 +16,19 @@
 }
 
 #caloriesLabel{
-     -fx-font-family: "impact";
-    -fx-font-size: 50px;
-    -fx-text-fill: #F6EEE3; /* Text color */
+     -fx-font-family: "Arial";
+    -fx-font-size: 24px;
+    
+    -fx-text-fill: black; /* i have the pi chart for now so i dont care about this*/
+}
+.chart-pie {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); /* Add drop shadow effect */
 }
 
+.chart-pie-label {
+    -fx-font-size: 20px; /* Set label font size */
+    -fx-fill: white; /* Set label text color */
+}
 .tab {
    
     -fx-text-fill: #333333; /* Set text color */
