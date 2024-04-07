@@ -1,6 +1,6 @@
 package macrobuilder;
 
-import database.MenuController;
+import database.DatabaseUtil;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.geometry.Pos;
@@ -18,12 +18,13 @@ import javafx.stage.Stage;
 Initial setup of the main menu scene.(Will be importing images, changing sizes of labels etc.)
 */
 public class MainMenuScene {
-    private MenuController menuController;
+    private DatabaseUtil databaseUtil;
+    
     private objects.User user;
 
     public MainMenuScene () throws SQLException, IOException {
-        menuController = new MenuController();
-        this.user = menuController.getUserDetails();
+        databaseUtil = new DatabaseUtil();
+        this.user = databaseUtil.getUserDetails();
     }
     
     public Scene showMenuScene(Stage primaryStage, SceneController sceneController) {

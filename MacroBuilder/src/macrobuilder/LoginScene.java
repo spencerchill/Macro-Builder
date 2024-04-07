@@ -4,7 +4,7 @@
  */
 package macrobuilder;
 
-import database.LoginController;
+import database.DatabaseUtil;
 import database.UserManager;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,8 +32,6 @@ import javafx.stage.Stage;
  * @author KingJ
  */
 public class LoginScene {
-
-    private LoginController loginController;
    
     /**
      * Creates login GUI.
@@ -116,8 +114,7 @@ public class LoginScene {
 
             //Attempts login
             try {
-                loginController = new LoginController();
-
+                DatabaseUtil loginController = new DatabaseUtil();
                 if (loginController.loginUser(username, password)) {
                    UserManager userManager = UserManager.getInstance();
                    userManager.setUserIId(loginController.getUserId(username));
