@@ -43,12 +43,12 @@ public class Day {
         this.weight = weight;
         this.activityLevel = activityLevel;
         this.mode = mode;
-        calcCalories();
-        calcProtein();
         calories = 0;
         fat = 0;
         carbs = 0;
         protein = 0;
+        calcCalories();
+        calcProtein();
     }
     
     /**
