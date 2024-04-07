@@ -47,3 +47,8 @@
 .tab-pane .tab-content .tab-pane .anchor-pane {
     -fx-background-color: blue;
 }
+
+.infoLabel {
+    -fx-font-size: 100px;
+    -fx-text-fill: #666666;
+}
