@@ -1,6 +1,7 @@
 package macrobuilder;
 
-import database.DetailController;
+import database.DatabaseUtil;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,7 +36,7 @@ import javafx.stage.Stage;
 public class DetailScene {
 
     //Fields
-   private DetailController detailController;
+    private DatabaseUtil databaseUtil;
     private objects.User.Gender gender;
     private objects.User.ActivityLevel activityLevel;
     private objects.User.CurrentMode mode;
@@ -218,9 +219,9 @@ public class DetailScene {
         submitButton.setPadding(new Insets(10));
         submitButton.setOnAction(e -> {
             try {
-                detailController = new DetailController();
+                databaseUtil = new DatabaseUtil();
                 
-                detailController.storeUserDetails(this.gender, Integer.parseInt(ageText.getText()),
+                databaseUtil.storeUserDetails(this.gender, Integer.parseInt(ageText.getText()),
                         Float.parseFloat(heightText.getText()), Float.parseFloat(weightText.getText()), this.activityLevel, this.mode);
                 
                 sceneController.switchToMenuScene();

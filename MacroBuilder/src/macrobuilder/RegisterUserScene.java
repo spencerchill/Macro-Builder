@@ -4,8 +4,8 @@
  */
 package macrobuilder;
 
+import database.DatabaseUtil;
 import java.sql.SQLException;
-import database.RegistrationController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +36,7 @@ import javafx.stage.Stage;
  */
 public class RegisterUserScene {
     
-    private RegistrationController registrationController;
+    private DatabaseUtil databaseUtil;
     
     /**
      * Creates registration GUI.
@@ -135,8 +135,8 @@ public class RegisterUserScene {
             }
             
             try {
-                registrationController = new RegistrationController();
-                registrationController.registerUser(username, password);
+                databaseUtil = new DatabaseUtil();
+                databaseUtil.registerUser(username, password);
             } catch (IOException | SQLException ex) {
                 Logger.getLogger(RegisterUserScene.class.getName()).log(Level.SEVERE, null, ex);
             }
