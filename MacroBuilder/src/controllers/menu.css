@@ -3,9 +3,39 @@
  */
 
 .mainFxmlClass {
-
+-fx-background-color: #333333;
 }
 #titleLabel{
+    -fx-font-family: "impact";
     -fx-font-size: 50px;
-    -fx-text-fill: #333333; /* Text color */
+    -fx-text-fill: #F6EEE3; /* Text color */
+}
+
+.tab-pane {
+    -fx-background-color: transparent;
+}
+
+#caloriesLabel{
+     -fx-font-family: "impact";
+    -fx-font-size: 50px;
+    -fx-text-fill: #F6EEE3; /* Text color */
+}
+
+.tab {
+   
+    -fx-text-fill: #333333; /* Set text color */
+    -fx-font-size: 16px; /* Set font size */
+    -fx-font-family: "Arial"; /* Set font family */
+    -fx-padding: 10px; 
+    -fx-border-width: 1px; /* Set border width */
+    /*-fx-border-color: #cccccc; /* Set border color */
+}
+
+.tab:selected {
+   
+    -fx-background-color: #FDA172;
+}
+
+.tab-pane .tab-content .tab-pane .anchor-pane {
+    -fx-background-color: blue;
 }
