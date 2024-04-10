@@ -59,10 +59,10 @@ public class Day {
      */
     private void calcCalories() {
         if (gender.equals(User.Gender.MALE)) {
-            calorieGoal = (int) (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age));
+            calorieGoal = (int) (88.362 + (13.397 * (weight/2.205)) + (4.799 * (2.54 * height)) - (5.677 * age));
         }
         if (gender.equals(User.Gender.FEMALE)) {
-            calorieGoal = (int) (447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age));
+            calorieGoal = (int) (447.593 + (9.247 * (weight/2.205)) + (3.098 * (2.54 * height)) - (4.330 * age));
         }
         
         switch (mode) {
@@ -79,10 +79,10 @@ public class Day {
         
         switch (activityLevel) {
                 case ACTIVE -> {
-                    calorieGoal += 600;
+                    calorieGoal += 300;
                 }
                 case MODERATELY_ACTIVE -> {
-                    calorieGoal += 300;
+                    calorieGoal += 150;
                 }
                 default -> {
                 }
@@ -96,10 +96,10 @@ public class Day {
      */
     private void calcProtein() {
         if (gender.equals(User.Gender.MALE)) {
-            proteinGoal = (float) (((weight * 2.205) * .73));
+            proteinGoal = (float) (((weight / 2.205) * .73));
         }
         if (gender.equals(User.Gender.FEMALE)) {
-            proteinGoal = (float) (((weight * 2.205) * .62));
+            proteinGoal = (float) (((weight / 2.205) * .62));
         }
     }
     
