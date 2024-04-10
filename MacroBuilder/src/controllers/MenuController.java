@@ -54,7 +54,17 @@ public class MenuController implements Initializable {
     
     private double progress;
     
-
+    @FXML 
+    public Label curModeLabel;
+    
+    @FXML
+    public Label fatLabel;
+    
+    @FXML
+    public Label carbLabel;
+    
+    @FXML
+    public Label proteinLabel;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -70,6 +80,8 @@ public class MenuController implements Initializable {
             if (user != null) {
                 updateCalories();
                 updateUser();
+                updateMode();
+                updateMacroLabels();
             }
             updatePieChart();
         } catch (SQLException e) {
@@ -127,7 +139,16 @@ public class MenuController implements Initializable {
     private void updateCalories() {
         caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
     }
+    
+    private void updateMode() {
+        curModeLabel.setText(user.getModeAsString());
+    }
 
+    private void updateMacroLabels() {
+        fatLabel.setText("Fat - " + Integer.toString( (int) user.getDay().getFatGoal()));
+        carbLabel.setText("Carbs - " + Integer.toString( (int) user.getDay().getCarbGoal()));
+        proteinLabel.setText("Protein - " + Integer.toString( (int) user.getDay().getProteinGoal()));
+    }
     /**
      * Updates greeting label after we retrieve user from database.
      */
