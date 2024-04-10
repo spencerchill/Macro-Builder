@@ -94,12 +94,14 @@ public class MenuController implements Initializable {
         caloriesPieChart.setData(pieChartData);
     }
     @FXML
+    /**
+     * Updates progress bar with current remaining and consumed calories.
+     */
     public void updateProgressBar(){
         double calorieGoal = user.getDay().getCalorieGoal();
         double consumedCalories = user.getDay().getCalories();
         progress = consumedCalories / calorieGoal;
         progressBar.setProgress(progress);
-        
     }
 
     /**
