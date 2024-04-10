@@ -19,6 +19,8 @@ public class Day {
     private User.ActivityLevel activityLevel;
     private User.CurrentMode mode;
     private int calorieGoal;
+    private float fatGoal;
+    private float carbGoal;
     private float proteinGoal;
     private int calories;
     private float fat;
@@ -50,6 +52,8 @@ public class Day {
         protein = 0;
         calcCalories();
         calcProtein();
+        calcFat();
+        calcCarbs();
     }
     
     /**
@@ -95,12 +99,21 @@ public class Day {
      * based off of the users gender and weight
      */
     private void calcProtein() {
-        if (gender.equals(User.Gender.MALE)) {
-            proteinGoal = (float) (((weight / 2.205) * .73));
-        }
-        if (gender.equals(User.Gender.FEMALE)) {
-            proteinGoal = (float) (((weight / 2.205) * .62));
-        }
+        proteinGoal = (float) ((weight / 2.205) * 1.8);
+    }
+    
+    /**
+     * Method that calculated the days fat goal
+     */
+    private void calcFat() {
+        fatGoal = (float) (getCalorieGoal() * .2) / 9;
+    }
+    
+    /**
+     * Method that calculated the days carb goal
+     */
+    private void calcCarbs() {
+        carbGoal = getProteinGoal() - getFatGoal();
     }
     
     /**
@@ -127,6 +140,24 @@ public class Day {
      */
     public int getCalorieGoal() {
         return this.calorieGoal;
+    }
+    
+    /**
+     * Method that returns a float
+     * representing the days Fat goal
+     * @return 
+     */
+    public float getFatGoal() {
+        return this.fatGoal;
+    }
+    
+    /**
+     * Method that returns a float
+     * representing the days carb goal
+     * @return 
+     */
+    public float getCarbGoal() {
+        return this.carbGoal;
     }
     
     /**
