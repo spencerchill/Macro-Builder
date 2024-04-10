@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 
 /**
@@ -47,6 +48,12 @@ public class MenuController implements Initializable {
 
     @FXML
     private PieChart caloriesPieChart;
+    
+    @FXML
+    private ProgressBar progressBar;
+    
+    private double progress;
+    
 
     /**
      * Initializes controller class. Retrieves user from database and updates
@@ -86,6 +93,14 @@ public class MenuController implements Initializable {
         );
         caloriesPieChart.setData(pieChartData);
     }
+    @FXML
+    public void updateProgressBar(){
+        double calorieGoal = user.getDay().getCalorieGoal();
+        double consumedCalories = user.getDay().getCalories();
+        progress = consumedCalories / calorieGoal;
+        progressBar.setProgress(progress);
+        
+    }
 
     /**
      * Handles quick add calories button. Updates displays.
@@ -99,6 +114,7 @@ public class MenuController implements Initializable {
             int calories = Integer.parseInt(caloriesText);
             user.getDay().intake(calories, 0, 0, 0);
             updatePieChart();
+            updateProgressBar();
             caloriesField.clear();
         }
     }
