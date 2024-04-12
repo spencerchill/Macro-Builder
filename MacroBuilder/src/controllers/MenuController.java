@@ -67,7 +67,7 @@ public class MenuController implements Initializable {
     private double fatProgress;
     private double carbsProgress;
     private double proteinProgress;
-    
+    //Need to seperate these better
     @FXML 
     public Label curModeLabel;
     
