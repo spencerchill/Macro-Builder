@@ -27,6 +27,8 @@ import javafx.scene.control.TextField;
  * FXML Controller class for Menu
  *
  * @author KingJ
+ * @author RimmyC
+ * @author SpencerH
  */
 public class MenuController implements Initializable {
 
@@ -161,7 +163,6 @@ public class MenuController implements Initializable {
         fatProgressBar.setProgress(fatProgress);
         
     }
-    
     /**
      * Updates the Carbs Progress bar with current remaining and consumed Carbs
      */
@@ -200,7 +201,6 @@ public class MenuController implements Initializable {
         }
     }
     
-
     /**
      * Updates users calories. Used in initialization to show goal.
      */
@@ -208,18 +208,24 @@ public class MenuController implements Initializable {
         caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
         progressBarLabel.setText("Progress: ");
     }
-    
+    /**
+     * Updates userMode
+     */
     private void updateMode() {
         curModeLabel.setText(user.getModeAsString());
     }
-    
+    /**
+     * Sets initialLabels for fat, carbs, protein, and calories.
+     */
     private void setInitialLabels() {
         fatLabelStart.setText("0");
         carbLabelStart.setText("0");
         proteinLabelStart.setText("0");
         calLabelStart.setText("0");
     }
-
+    /**
+     * Updates MacroLabels
+     */
     private void updateMacroLabels() {
         fatLabel.setText("Fat - " + Integer.toString( (int) user.getDay().getFatGoal()));
         carbLabel.setText("Carbs - " + Integer.toString( (int) user.getDay().getCarbGoal()));
