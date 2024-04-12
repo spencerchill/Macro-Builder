@@ -22,6 +22,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import objects.Food;
 
 /**
  * FXML Controller class for Menu
@@ -97,6 +100,43 @@ public class MenuController implements Initializable {
     
     @FXML
     public Label progressBarLabel;
+    
+    //Meals and Food Tab
+    @FXML
+    public Button addFoodButton;
+    
+    @FXML
+    public Button addMealButton;
+    
+    @FXML
+    public HBox mealFoodHBox;
+    
+    @FXML
+    public VBox mealVBox;
+    
+    @FXML 
+    public VBox foodVBox;
+    
+    @FXML
+    public VBox addFoodVBox;
+    
+    @FXML
+    public TextField foodNameText;
+    
+    @FXML
+    public TextField foodCalText;
+    
+    @FXML
+    public TextField foodFatText;
+    
+    @FXML
+    public TextField foodCarbText;
+    
+    @FXML
+    public TextField foodProteinText;
+    
+    @FXML
+    public Button submitFoodButton;
     
     
     /**
@@ -201,6 +241,40 @@ public class MenuController implements Initializable {
         }
     }
     
+    /**
+     * Handles add food button
+     * 
+     * @param event triggered by add food button
+     */
+    @FXML
+    void addFood(ActionEvent event) {
+        mealFoodHBox.setVisible(false);
+        addFoodVBox.setVisible(true);
+    }
+    
+    /**
+     * Handles the submit button for adding food
+     * @param event triggered by submit button
+     */
+    @FXML
+    void submitFood(ActionEvent event) {
+       Food food = new Food(foodNameText.getText(), Integer.parseInt(foodCalText.getText()), Float.parseFloat(foodFatText.getText()),
+               Float.parseFloat(foodFatText.getText()), Float.parseFloat(foodFatText.getText()));
+       updateFood(food);
+    }
+    
+    /**
+     * updates UI when the submit food button is pressed
+     * @param food 
+     */
+    @FXML
+    void updateFood(Food food) {
+        Label name = new Label(food.getName());
+        VBox vbox = new VBox(name);
+        foodVBox.getChildren().add(vbox);
+        mealFoodHBox.setVisible(true);
+        addFoodVBox.setVisible(false);
+    }
     /**
      * Updates users calories. Used in initialization to show goal.
      */

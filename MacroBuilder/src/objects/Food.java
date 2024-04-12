@@ -16,7 +16,6 @@ public class Food {
     private int calories; //Calories per serving
     private float fat; //Fat content per serving
     private float carbs; //Carbs content per serving
-    private float sugar; //Sugar content per serving
     private float protein; //Protein content per serving
     
     
@@ -29,12 +28,11 @@ public class Food {
      * @param sugar The sugar content per serving
      * @param protein The protein content per serving
      */
-    public Food(String name, int calories, float fat, float carbs, float sugar, float protein) {
+    public Food(String name, int calories, float fat, float carbs, float protein) {
         this.name = name;
         this.calories = calories;
         this.fat = fat;
         this.carbs = carbs;
-        this.sugar = sugar;
         this.protein = protein;
     }
     /**
@@ -72,13 +70,6 @@ public class Food {
      */
     public float getProtein(){
         return protein;
-    }
-    /**
-     * Retrieves the sugar content per serving
-     * @return sugar
-     */
-    public float getSugar() {
-        return sugar;
     }
 
 }
