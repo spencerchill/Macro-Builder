@@ -17,6 +17,8 @@ import java.security.spec.KeySpec;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Base64;
+import java.util.HashMap;
+import objects.Day;
 import objects.User;
 
 /**
@@ -198,6 +200,37 @@ public boolean loginUser(String username, String password) throws SQLException {
             }
         }
         return null;
+    }
+    
+    public HashMap <String, Day> loadDays(HashMap<String, Day> calendar, User user) throws SQLException {
+        try(Connection connection = DriverManager.getConnection(url, username, password)){
+            UserManager userManager = UserManager.getInstance();
+            String query = "SELECT * FROM day WHERE UserID = ? ";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userManager.getUserId());
+            ResultSet resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+            String date = resultSet.getString("Date");
+            float weight = resultSet.getFloat("weight");
+            User.ActivityLevel activityLevel = User.ActivityLevel.valueOf(resultSet.getString("activity_level"));
+            User.CurrentMode mode = User.CurrentMode.valueOf(resultSet.getString("mode"));
+            //im gonna copy paste this code later when we read from days :)))))))))
+//            int calorieGoal = resultSet.getInt("CalorieGoal");
+//            float fatGoal = resultSet.getFloat("FatGoal");
+//            float carbGoal = resultSet.getFloat("CarbGoal");
+//            float proteinGoal = resultSet.getFloat("ProteinGoal");
+//            int calories = resultSet.getInt("CaloriesConsumed");
+//            float fat = resultSet.getFloat("FatConsumed");
+//            float carbs = resultSet.getFloat("CarbsConsumed");
+//            float protein = resultSet.getFloat("ProteinConsumed");
+//            
+            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), weight, activityLevel, mode);
+            calendar.put(date, day);
+            }
+        }
+        System.out.println("IM returning");
+        return calendar;
     }
     
     /**

@@ -4,8 +4,11 @@
  */
 package objects;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.Day;
 import objects.Day;
 
@@ -80,7 +83,11 @@ public class User {
         this.weight = weight;
         this.activityLevel = activityLevel;
         this.curMode = curMode;
-        calendar = new Calendar(User.this);
+        try {
+            calendar = new Calendar(User.this);
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
       
     /**
