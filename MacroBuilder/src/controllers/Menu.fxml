@@ -42,20 +42,33 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="811.0" prefWidth="1916.0" style="-fx-background-color: grey;" stylesheets="@menu.css">
                      <children>
                         <PieChart fx:id="caloriesPieChart" layoutX="388.0" layoutY="126.0" prefHeight="455.0" prefWidth="651.0" />
-                        <Label fx:id="fatLabel" layoutX="94.0" layoutY="163.0" text="Label" />
+                        <Label fx:id="fatLabel" layoutX="306.0" layoutY="126.0" text="Label" />
                         <Label id=".infoLabel" fx:id="caloriesLabel" layoutX="503.0" layoutY="64.0" prefHeight="62.0" prefWidth="512.0" text="Label" textFill="#fff8ed">
                            <font>
                               <Font name="Impact" size="23.0" />
                            </font>
                         </Label>
-                        <ProgressBar fx:id="progressBar" layoutX="614.0" layoutY="643.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="calProgressBar" layoutX="74.0" layoutY="279.0" prefWidth="200.0" progress="0.0" />
                         <Label fx:id="curModeLabel" layoutX="1111.0" layoutY="52.0" text="Mode" textFill="#96e1ff">
                            <font>
                               <Font size="50.0" />
                            </font>
                         </Label>
-                        <Label fx:id="carbLabel" layoutX="94.0" layoutY="191.0" text="Label" />
-                        <Label fx:id="proteinLabel" layoutX="94.0" layoutY="219.0" text="Label" />
+                        <Label fx:id="carbLabel" layoutX="306.0" layoutY="175.0" text="Label" />
+                        <Label fx:id="proteinLabel" layoutX="306.0" layoutY="226.0" text="Label" />
+                        <Label fx:id="calLabel" layoutX="306.0" layoutY="280.0" text="Label" />
+                        <Label fx:id="fatLabelStart" layoutX="28.0" layoutY="126.0" text="Label" />
+                        <Label fx:id="carbLabelStart" layoutX="28.0" layoutY="175.0" text="Label" />
+                        <Label fx:id="proteinLabelStart" layoutX="28.0" layoutY="226.0" text="Label" />
+                        <Label fx:id="calLabelStart" layoutX="28.0" layoutY="280.0" text="Label" />
+                        <ProgressBar fx:id="proteinProgressBar" layoutX="74.0" layoutY="225.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="carbProgressBar" layoutX="74.0" layoutY="174.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="fatProgressBar" layoutX="74.0" layoutY="125.0" prefWidth="200.0" progress="0.0" />
+                        <Label id=".infoLabel" fx:id="progressBarLabel" layoutX="128.0" layoutY="52.0" prefHeight="62.0" prefWidth="92.0" text="Label" textFill="#fff8ed">
+                           <font>
+                              <Font name="Impact" size="23.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>

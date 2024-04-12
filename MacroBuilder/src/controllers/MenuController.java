@@ -50,9 +50,21 @@ public class MenuController implements Initializable {
     private PieChart caloriesPieChart;
     
     @FXML
-    private ProgressBar progressBar;
+    private ProgressBar calProgressBar;
     
-    private double progress;
+    @FXML
+    private ProgressBar fatProgressBar;
+    
+    @FXML
+    private ProgressBar carbsProgressBar;
+    
+    @FXML
+    private ProgressBar proteinProgressBar;
+    
+    private double calProgress;
+    private double fatProgress;
+    private double carbsProgress;
+    private double proteinProgress;
     
     @FXML 
     public Label curModeLabel;
@@ -65,6 +77,26 @@ public class MenuController implements Initializable {
     
     @FXML
     public Label proteinLabel;
+    
+    @FXML
+    public Label calLabel;
+    
+    @FXML
+    public Label calLabelStart;
+    
+    @FXML
+    public Label proteinLabelStart;
+    
+    @FXML
+    public Label fatLabelStart;
+    
+    @FXML
+    public Label carbLabelStart;
+    
+    @FXML
+    public Label progressBarLabel;
+    
+    
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -78,10 +110,12 @@ public class MenuController implements Initializable {
             databaseUtil = new DatabaseUtil();
             user = databaseUtil.getUserDetails();
             if (user != null) {
-                updateCalories();
+                updateMainLabels();
                 updateUser();
                 updateMode();
                 updateMacroLabels();
+                setInitialLabels();
+                
             }
             updatePieChart();
         } catch (SQLException e) {
@@ -109,11 +143,44 @@ public class MenuController implements Initializable {
     /**
      * Updates progress bar with current remaining and consumed calories.
      */
-    public void updateProgressBar(){
+    public void updateCalProgressBar(){
         double calorieGoal = user.getDay().getCalorieGoal();
         double consumedCalories = user.getDay().getCalories();
-        progress = consumedCalories / calorieGoal;
-        progressBar.setProgress(progress);
+        calProgress = consumedCalories / calorieGoal;
+        calProgressBar.setProgress(calProgress);
+    }
+    /**
+     * Updates the Fat Progress bar with current remaining and consumed fat
+     */
+    
+    @FXML
+    public void updateFatProgressBar() {
+        double fatGoal = user.getDay().getFatGoal();
+        double consumedFat = user.getDay().getFat();
+        fatProgress = consumedFat / fatGoal;
+        fatProgressBar.setProgress(fatProgress);
+        
+    }
+    
+    /**
+     * Updates the Carbs Progress bar with current remaining and consumed Carbs
+     */
+    @FXML
+    public void updateCarbsProgressBar() {
+        double carbsGoal = user.getDay().getCarbGoal();
+        double consumedCarbs = user.getDay().getCarbs();
+        carbsProgress = consumedCarbs / carbsGoal;
+        carbsProgressBar.setProgress(carbsProgress);
+    }
+    /**
+     * Updates the ProteinProgressBar with current remaining and consumed Protein
+     */
+    @FXML
+    public void updateProteinProgressBar() {
+        double proteinGoal = user.getDay().getProteinGoal();
+        double consumedProtein = user.getDay().getProtein();
+        proteinProgress = consumedProtein / proteinGoal;
+        proteinProgressBar.setProgress(fatProgress); 
     }
 
     /**
@@ -128,26 +195,36 @@ public class MenuController implements Initializable {
             int calories = Integer.parseInt(caloriesText);
             user.getDay().intake(calories, 0, 0, 0);
             updatePieChart();
-            updateProgressBar();
+            updateCalProgressBar();
             caloriesField.clear();
         }
     }
+    
 
     /**
      * Updates users calories. Used in initialization to show goal.
      */
-    private void updateCalories() {
+    private void updateMainLabels() {
         caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
+        progressBarLabel.setText("Progress: ");
     }
     
     private void updateMode() {
         curModeLabel.setText(user.getModeAsString());
+    }
+    
+    private void setInitialLabels() {
+        fatLabelStart.setText("0");
+        carbLabelStart.setText("0");
+        proteinLabelStart.setText("0");
+        calLabelStart.setText("0");
     }
 
     private void updateMacroLabels() {
         fatLabel.setText("Fat - " + Integer.toString( (int) user.getDay().getFatGoal()));
         carbLabel.setText("Carbs - " + Integer.toString( (int) user.getDay().getCarbGoal()));
         proteinLabel.setText("Protein - " + Integer.toString( (int) user.getDay().getProteinGoal()));
+        calLabel.setText("Calories - " + Integer.toString((int) user.getDay().getCalorieGoal()));
     }
     /**
      * Updates greeting label after we retrieve user from database.
