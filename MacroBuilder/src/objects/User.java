@@ -5,6 +5,7 @@
 package objects;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -83,13 +84,19 @@ public class User {
         this.weight = weight;
         this.activityLevel = activityLevel;
         this.curMode = curMode;
-        try {
-            calendar = new Calendar(User.this);
-        } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            calendar = new Calendar(User.this);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
       
+    
+    public void initializeCalendar() throws SQLException {
+        if (calendar == null) {
+            calendar = new Calendar(this);
+        }
+    }
     /**
      * Method that returns a String representing
      * the username of the user
@@ -163,8 +170,10 @@ public class User {
      */
     public Day getDay() {
         Date now = new Date();
-        String date = new SimpleDateFormat("MM/dd/yyyy").format(now);
-        return calendar.getDay(date);
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(now);
+        java.sql.Date sqlDate = java.sql.Date.valueOf(dateString);
+        return calendar.getDay(sqlDate);
     }
 
     /**
