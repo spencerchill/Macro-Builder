@@ -11,8 +11,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import objects.User;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -27,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import objects.Food;
+import objects.FoodCatalog;
 
 /**
  * FXML Controller class for Menu
@@ -40,6 +39,8 @@ public class MenuController implements Initializable {
     private DatabaseUtil databaseUtil;
 
     private User user;
+    
+    private FoodCatalog catalog;
 
     @FXML
     private Label userLabel;
@@ -184,6 +185,18 @@ public class MenuController implements Initializable {
                 
             }
             updatePieChart();
+            
+            if(!databaseUtil.getFoods().isEmpty()){
+            catalog = new FoodCatalog(databaseUtil.getFoods());
+            } else {
+                catalog = new FoodCatalog();
+            }
+            
+            for (int i = 0; i < catalog.size(); i++) {
+                updateFood(catalog.getFood(i), false);
+            }
+            
+            
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException ex) {
@@ -291,8 +304,8 @@ public class MenuController implements Initializable {
     @FXML
     void submitFood(ActionEvent event) throws SQLException {
        Food food = new Food(foodNameText.getText(), Integer.parseInt(foodCalText.getText()), Float.parseFloat(foodFatText.getText()),
-               Float.parseFloat(foodFatText.getText()), Float.parseFloat(foodFatText.getText()));
-       updateFood(food);
+               Float.parseFloat(foodCarbText.getText()), Float.parseFloat(foodProteinText.getText()));
+       updateFood(food, true);
     }
     
     /**
@@ -300,13 +313,15 @@ public class MenuController implements Initializable {
      * @param food 
      */
     @FXML
-    void updateFood(Food food) throws SQLException {
+    void updateFood(Food food, boolean store) throws SQLException {
         Label name = new Label(food.getName());
         VBox vbox = new VBox(name);
         foodVBox.getChildren().add(vbox);
         mealFoodHBox.setVisible(true);
         addFoodVBox.setVisible(false);
+        if(store) {
         databaseUtil.storeFood(food);
+        }
     }
     
     @FXML 
