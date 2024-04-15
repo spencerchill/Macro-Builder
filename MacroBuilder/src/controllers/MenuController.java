@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import objects.User;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -34,7 +36,7 @@ import objects.Food;
  * @author SpencerH
  */
 public class MenuController implements Initializable {
-
+  
     private DatabaseUtil databaseUtil;
 
     private User user;
@@ -138,6 +140,28 @@ public class MenuController implements Initializable {
     @FXML
     public Button submitFoodButton;
     
+    //Quick add 
+    @FXML
+    public Button quickAddButton;
+            
+    @FXML
+    public TextField quickAddTextCalories;
+    
+    @FXML
+    public TextField quickAddTextFat;
+    
+    @FXML
+    public TextField quickAddTextCarbs;
+    
+    @FXML
+    public TextField quickAddTextProtein;
+    
+    @FXML 
+    public VBox quickAddVBox;
+    
+    @FXML
+    public Button submitQuickAddButton;
+    
     
     /**
      * Initializes controller class. Retrieves user from database and updates
@@ -167,6 +191,14 @@ public class MenuController implements Initializable {
         }
     }
 
+    private void updateScene() {
+        updatePieChart();
+        updateCalProgressBar();
+        updateFatProgressBar();
+        updateCarbsProgressBar();
+        updateProteinProgressBar();
+        updateMacroLabels();
+    }
     /**
      * Updates pie chart with current remaining and consumed calories.
      */
@@ -257,7 +289,7 @@ public class MenuController implements Initializable {
      * @param event triggered by submit button
      */
     @FXML
-    void submitFood(ActionEvent event) {
+    void submitFood(ActionEvent event) throws SQLException {
        Food food = new Food(foodNameText.getText(), Integer.parseInt(foodCalText.getText()), Float.parseFloat(foodFatText.getText()),
                Float.parseFloat(foodFatText.getText()), Float.parseFloat(foodFatText.getText()));
        updateFood(food);
@@ -268,13 +300,29 @@ public class MenuController implements Initializable {
      * @param food 
      */
     @FXML
-    void updateFood(Food food) {
+    void updateFood(Food food) throws SQLException {
         Label name = new Label(food.getName());
         VBox vbox = new VBox(name);
         foodVBox.getChildren().add(vbox);
         mealFoodHBox.setVisible(true);
         addFoodVBox.setVisible(false);
+        databaseUtil.storeFood(food);
     }
+    
+    @FXML 
+    void quickAdd() {
+       quickAddVBox.setVisible(!quickAddVBox.isVisible());
+    }
+    
+    @FXML
+    void submitQuickAdd() {
+        user.getDay().intake(Integer.parseInt(quickAddTextCalories.getText()), 
+               Float.parseFloat(quickAddTextFat.getText()), Float.parseFloat(quickAddTextCarbs.getText()), 
+               Float.parseFloat(quickAddTextProtein.getText()));
+        quickAddVBox.setVisible(!quickAddVBox.isVisible());
+        updateScene();
+    }
+    
     /**
      * Updates users calories. Used in initialization to show goal.
      */
