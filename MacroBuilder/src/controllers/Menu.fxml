@@ -33,6 +33,11 @@
                <font>
                   <Font name="Roboto" size="18.0" />
                </font></Label>
+            <Label fx:id="curModeLabel" layoutX="333.0" layoutY="55.0" prefHeight="30.0" prefWidth="59.0" text="Mode" textFill="#96e1ff">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <TabPane id=".tab-pane" layoutY="91.0" styleClass="floating" stylesheets="@menu.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -43,17 +48,7 @@
                      <children>
                         <PieChart fx:id="caloriesPieChart" layoutX="388.0" layoutY="126.0" prefHeight="455.0" prefWidth="651.0" />
                         <Label fx:id="fatLabel" layoutX="306.0" layoutY="126.0" text="Label" />
-                        <Label id=".infoLabel" fx:id="caloriesLabel" layoutX="503.0" layoutY="64.0" prefHeight="62.0" prefWidth="512.0" text="Label" textFill="#fff8ed">
-                           <font>
-                              <Font name="Impact" size="23.0" />
-                           </font>
-                        </Label>
                         <ProgressBar fx:id="calProgressBar" layoutX="74.0" layoutY="279.0" prefWidth="200.0" progress="0.0" />
-                        <Label fx:id="curModeLabel" layoutX="1111.0" layoutY="52.0" text="Mode" textFill="#96e1ff">
-                           <font>
-                              <Font size="50.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="carbLabel" layoutX="306.0" layoutY="175.0" text="Label" />
                         <Label fx:id="proteinLabel" layoutX="306.0" layoutY="226.0" text="Label" />
                         <Label fx:id="calLabel" layoutX="306.0" layoutY="280.0" text="Label" />
@@ -64,7 +59,86 @@
                         <ProgressBar fx:id="proteinProgressBar" layoutX="74.0" layoutY="225.0" prefWidth="200.0" progress="0.0" />
                         <ProgressBar fx:id="carbProgressBar" layoutX="74.0" layoutY="174.0" prefWidth="200.0" progress="0.0" />
                         <ProgressBar fx:id="fatProgressBar" layoutX="74.0" layoutY="125.0" prefWidth="200.0" progress="0.0" />
+                        <VBox fx:id="quickAddVBox" alignment="TOP_CENTER" layoutX="980.0" layoutY="166.0" prefHeight="420.0" prefWidth="319.0" visible="false">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
+                                 <children>
+                                    <Label graphicTextGap="5.0" text="Calories" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="quickAddTextCalories" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="15.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
+                                 <children>
+                                    <Label graphicTextGap="5.0" text="Fat" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="quickAddTextFat" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
+                                 <children>
+                                    <Label graphicTextGap="5.0" text="Carbs" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="quickAddTextCarbs" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
+                                 <children>
+                                    <Label graphicTextGap="5.0" text="Protein" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="quickAddTextProtein" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="12.0" />
+                                 </padding>
+                              </HBox>
+                              <Button fx:id="submitQuickAddButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitQuickAdd" text="Submit">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Button>
+                           </children>
+                        </VBox>
                         <Label id=".infoLabel" fx:id="progressBarLabel" layoutX="128.0" layoutY="52.0" prefHeight="62.0" prefWidth="92.0" text="Label" textFill="#fff8ed">
+                           <font>
+                              <Font name="Impact" size="23.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="quickAddButton" layoutX="1118.0" layoutY="130.0" mnemonicParsing="false" onAction="#quickAdd" text="Quick Add" />
+                        <Label id=".infoLabel" fx:id="caloriesLabel" layoutX="577.0" layoutY="45.0" prefHeight="62.0" prefWidth="512.0" text="Label" textFill="#fff8ed">
                            <font>
                               <Font name="Impact" size="23.0" />
                            </font>
