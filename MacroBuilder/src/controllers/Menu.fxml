@@ -57,7 +57,7 @@
                         <Label fx:id="proteinLabelStart" layoutX="28.0" layoutY="226.0" text="Label" />
                         <Label fx:id="calLabelStart" layoutX="28.0" layoutY="280.0" text="Label" />
                         <ProgressBar fx:id="proteinProgressBar" layoutX="74.0" layoutY="225.0" prefWidth="200.0" progress="0.0" />
-                        <ProgressBar fx:id="carbProgressBar" layoutX="74.0" layoutY="174.0" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="carbsProgressBar" layoutX="74.0" layoutY="174.0" prefWidth="200.0" progress="0.0" />
                         <ProgressBar fx:id="fatProgressBar" layoutX="74.0" layoutY="125.0" prefWidth="200.0" progress="0.0" />
                         <VBox fx:id="quickAddVBox" alignment="TOP_CENTER" layoutX="980.0" layoutY="166.0" prefHeight="420.0" prefWidth="319.0" visible="false">
                            <children>

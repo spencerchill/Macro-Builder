@@ -266,7 +266,7 @@ public class MenuController implements Initializable {
         double proteinGoal = user.getDay().getProteinGoal();
         double consumedProtein = user.getDay().getProtein();
         proteinProgress = consumedProtein / proteinGoal;
-        proteinProgressBar.setProgress(fatProgress); 
+        proteinProgressBar.setProgress(proteinProgress); 
     }
 
     /**
