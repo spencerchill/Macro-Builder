@@ -28,6 +28,7 @@ public class Calendar {
     private String date; //Represents the current date in the format "MM//dd//yyyy"
     private DatabaseUtil databaseUtil;
     java.sql.Date sqlDate;
+    private DateFormat formatter;
     /**
      * Constructor to create a new Calendar object for the specified user
      * Initializes the calendar with the current date
@@ -38,7 +39,7 @@ public class Calendar {
         this.user = user;
         calendar = new HashMap<java.sql.Date, Day>();
         now = new Date();
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+         formatter = new SimpleDateFormat("yyyy-MM-dd");
         try{
         String dateString = formatter.format(now);
         sqlDate = java.sql.Date.valueOf(dateString);
@@ -78,7 +79,8 @@ public class Calendar {
      */
     public void updateDate() {
         now = new Date();
-        date = new SimpleDateFormat("MM/dd/yyyy").format(now);
+        String dateString = formatter.format(now);
+        this.sqlDate =  java.sql.Date.valueOf(dateString);
     }
     
     /**

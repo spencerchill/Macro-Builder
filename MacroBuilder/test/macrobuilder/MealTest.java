@@ -25,8 +25,8 @@ public class MealTest {
     @Before
     public void setUp() {
        meal = new Meal();
-       food1 = new Food("Watermelon", 1000, 50f, 10f, 20f, 13.2f);
-       food2 = new Food("Cheese", 60, 30.2f, 900f, 10f, 10.8f);
+       food1 = new Food("Watermelon", 1000, 50f, 10f, 13.2f);
+       food2 = new Food("Cheese", 60, 30.2f, 900f, 10.8f);
     }
     
     @Test
@@ -38,7 +38,6 @@ public class MealTest {
         assertEquals(1060, meal.getTotalCalories());
         assertEquals(80.2, meal.getTotalFat(), 0.01f);
         assertEquals(910, meal.getTotalCarbs(), 0.01f);
-        assertEquals(30, meal.getTotalSugar(), 0.01f);
         assertEquals(24, meal.getTotalProtein(), 0.01f);
     }
     
@@ -51,7 +50,6 @@ public class MealTest {
         assertEquals(1000, meal.getTotalCalories());
         assertEquals(50, meal.getTotalFat(), 0.01f);
         assertEquals(10, meal.getTotalCarbs(), 0.01f);
-        assertEquals(20, meal.getTotalSugar(), 0.01f);
         assertEquals(13.2, meal.getTotalProtein(), 0.01f);
     }
 

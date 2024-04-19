@@ -4,6 +4,7 @@
  */
 package macrobuilder;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import objects.Calendar;
@@ -35,15 +36,18 @@ public class CalendarTest {
     @Test
     public void testDate(){
         now = new Date();
-        date = new SimpleDateFormat("MM/dd/yyyy").format(now);
+         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+         String dateString = formatter.format(now);
+         java.sql.Date sqlDate = java.sql.Date.valueOf(dateString);
         //Calender should have day created that matches current date.
-        assertNotNull(calender.getDay(date));
+        assertNotNull(calender.getDay(sqlDate));
     }
     
     @Test
     public void testDayCreation(){
-        calender.createDay("05/05/2005");
-        assertNotNull(calender.getDay("05/05/2005"));
+        java.sql.Date sqlDate = java.sql.Date.valueOf("2005-05-05");
+        calender.createDay(sqlDate);
+        assertNotNull(calender.getDay(sqlDate));
     }
     
     }

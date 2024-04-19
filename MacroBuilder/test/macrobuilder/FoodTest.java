@@ -22,12 +22,11 @@ public class FoodTest {
 
     @Test
     public void testGetters() {
-        Food food = new Food("Watermelon", 1000, 5f, 20f, 10f, 1f);
+        Food food = new Food("Watermelon", 1000, 5f, 20f,1f);
         assertEquals("Watermelon", food.getName());
         assertEquals(1000, food.getCalories());
         assertEquals(5f, food.getFat(), 0.01f);
         assertEquals(20f, food.getCarbs(), 0.01f);
-        assertEquals(10f, food.getSugar(), 0.01f);
         assertEquals(1f, food.getProtein(), 0.01f);
     }
 }
