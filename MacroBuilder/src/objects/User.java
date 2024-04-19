@@ -90,7 +90,6 @@ public class User {
 //            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
-      
     
     public void initializeCalendar() throws SQLException {
         if (calendar == null) {

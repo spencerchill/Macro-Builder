@@ -106,6 +106,7 @@ public boolean loginUser(String username, String password) throws SQLException {
                     String storedPassword = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
                     String inputPassword = hashPassword(password, salt);
+                    
                     return storedPassword.equals(inputPassword);
                 }
             } catch (SQLException e) {
@@ -211,13 +212,14 @@ public boolean loginUser(String username, String password) throws SQLException {
     public HashMap <Date, Day> loadDays(HashMap<Date, Day> calendar, User user) throws SQLException {
         try(Connection connection = DriverManager.getConnection(url, username, password)){
             UserManager userManager = UserManager.getInstance();
-            String query = "SELECT * FROM day WHERE UserID = ? ";
+            String query = "SELECT * FROM days WHERE user_id = ? ";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, userManager.getUserId());
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
-            java.sql.Date date = resultSet.getDate("Date");
+            java.sql.Date date = resultSet.getDate("date_day");
             float weight = resultSet.getFloat("weight");
+            
             User.ActivityLevel activityLevel = User.ActivityLevel.valueOf(resultSet.getString("activity_level"));
             User.CurrentMode mode = User.CurrentMode.valueOf(resultSet.getString("current_mode"));
             //im gonna copy paste this code later when we read from days :)))))))))
@@ -229,7 +231,7 @@ public boolean loginUser(String username, String password) throws SQLException {
 //            float fat = resultSet.getFloat("FatConsumed");
 //            float carbs = resultSet.getFloat("CarbsConsumed");
 //            float protein = resultSet.getFloat("ProteinConsumed");
-//            
+
             Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), weight, activityLevel, mode);
             calendar.put(date, day);
             }
@@ -249,7 +251,7 @@ public boolean loginUser(String username, String password) throws SQLException {
                  statement.executeUpdate();
              }
              // if you do calender.getDate you should have the date parameter for current day
-             String updateDay = "UPDATE day SET weight = ? WHERE date = ?";
+             String updateDay = "UPDATE days SET weight = ? WHERE date_day = ?";
              try(PreparedStatement statement = connection.prepareStatement(updateDay)){
              statement.setFloat(1, weight);
              statement.setDate(2, date);
@@ -263,7 +265,7 @@ public boolean loginUser(String username, String password) throws SQLException {
     public void addDay(User user, Date date) throws SQLException {
         try(Connection connection = DriverManager.getConnection(url, username, password)){
             System.out.println(date);
-          String query = "INSERT INTO day (UserID, Date, weight, activity_level, current_mode) VALUES (?, ?, ?, ?, ?)";
+          String query = "INSERT INTO days (user_id, date_day, weight, activity_level, current_mode) VALUES (?, ?, ?, ?, ?)";
           UserManager userManager = UserManager.getInstance();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, userManager.getUserId());
@@ -271,8 +273,7 @@ public boolean loginUser(String username, String password) throws SQLException {
             statement.setFloat(3,  user.getWeight());
             statement.setString(4, user.getActivityLevel().toString()); // Assuming ActivityLevel and Mode are enums
             statement.setString(5, user.getModeAsString());
-            
-             statement.executeUpdate();
+            statement.executeUpdate();
         }catch (SQLException ex) {
                 Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
             }
