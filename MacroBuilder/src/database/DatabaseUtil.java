@@ -18,7 +18,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.sql.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import objects.Calendar;
+import objects.Day;
 import objects.Food;
 import objects.User;
 
@@ -201,6 +206,54 @@ public boolean loginUser(String username, String password) throws SQLException {
             }
         }
         return null;
+    }
+    
+    public HashMap <Date, Day> loadDays(HashMap<Date, Day> calendar, User user) throws SQLException {
+        try(Connection connection = DriverManager.getConnection(url, username, password)){
+            UserManager userManager = UserManager.getInstance();
+            String query = "SELECT * FROM day WHERE UserID = ? ";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userManager.getUserId());
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+            java.sql.Date date = resultSet.getDate("Date");
+            float weight = resultSet.getFloat("weight");
+            User.ActivityLevel activityLevel = User.ActivityLevel.valueOf(resultSet.getString("activity_level"));
+            User.CurrentMode mode = User.CurrentMode.valueOf(resultSet.getString("current_mode"));
+            //im gonna copy paste this code later when we read from days :)))))))))
+//            int calorieGoal = resultSet.getInt("CalorieGoal");
+//            float fatGoal = resultSet.getFloat("FatGoal");
+//            float carbGoal = resultSet.getFloat("CarbGoal");
+//            float proteinGoal = resultSet.getFloat("ProteinGoal");
+//            int calories = resultSet.getInt("CaloriesConsumed");
+//            float fat = resultSet.getFloat("FatConsumed");
+//            float carbs = resultSet.getFloat("CarbsConsumed");
+//            float protein = resultSet.getFloat("ProteinConsumed");
+//            
+            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), weight, activityLevel, mode);
+            calendar.put(date, day);
+            }
+        }
+        System.out.println("IM returning");
+        return calendar;
+    }
+    
+    public void addDay(User user, Date date) throws SQLException {
+        try(Connection connection = DriverManager.getConnection(url, username, password)){
+            System.out.println(date);
+          String query = "INSERT INTO day (UserID, Date, weight, activity_level, current_mode) VALUES (?, ?, ?, ?, ?)";
+          UserManager userManager = UserManager.getInstance();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, userManager.getUserId());
+            statement.setDate(2, date);
+            statement.setFloat(3,  user.getWeight());
+            statement.setString(4, user.getActivityLevel().toString()); // Assuming ActivityLevel and Mode are enums
+            statement.setString(5, user.getModeAsString());
+            
+             statement.executeUpdate();
+        }catch (SQLException ex) {
+                Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
     /**

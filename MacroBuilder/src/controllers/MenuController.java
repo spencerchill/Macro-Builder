@@ -176,6 +176,7 @@ public class MenuController implements Initializable {
         try {
             databaseUtil = new DatabaseUtil();
             user = databaseUtil.getUserDetails();
+            user.initializeCalendar();
             if (user != null) {
                 updateMainLabels();
                 updateUser();

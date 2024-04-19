@@ -35,7 +35,8 @@ public class MainMenuScene {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/controllers/Menu.fxml"));
         Parent root = loader.load();
         MenuController menuFXML = loader.getController();
-        
+     
+
         Scene newScene = new Scene(root);
         newScene.getStylesheets().add(getClass().getResource("/controllers/menu.css").toExternalForm());
         return newScene;

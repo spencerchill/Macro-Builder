@@ -4,10 +4,16 @@
  */
 package objects;
 
+import database.DatabaseUtil;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+//import java.sql.Date;
 /**
  *
  * @author spencerhill
@@ -17,33 +23,53 @@ import java.util.HashMap;
 public class Calendar {
     //Fields
     private User user; //Represents the user associated with the calendar
-    private HashMap<String, Day> calendar; //Stores daily activity entries mappeed to their respective dates
+    private HashMap<java.sql.Date, Day> calendar; //Stores daily activity entries mappeed to their respective dates
     private Date now; // Represents the current date and time
     private String date; //Represents the current date in the format "MM//dd//yyyy"
-    
-    
+    private DatabaseUtil databaseUtil;
+    java.sql.Date sqlDate;
     /**
      * Constructor to create a new Calendar object for the specified user
      * Initializes the calendar with the current date
      * @param user The user for whom the calendar is created
+     * @throws java.sql.SQLException
      */
-    public Calendar(User user) {
+    public Calendar(User user) throws SQLException {
         this.user = user;
-        calendar = new HashMap<String, Day>();
+        calendar = new HashMap<java.sql.Date, Day>();
         now = new Date();
-        date = new SimpleDateFormat("MM/dd/yyyy").format(now);
-        createDay(date); //Create a day entry for the current date
-    }
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+        String dateString = formatter.format(now);
+        sqlDate = java.sql.Date.valueOf(dateString);
+       
+        databaseUtil = new DatabaseUtil();
+        // load days into hashmap so we know if we already have a day.
+        }catch (IllegalArgumentException e) {
+            System.out.println("Error converting date: " + e.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.calendar = databaseUtil.loadDays(calendar, this.user);
+        System.out.println("I LOADED");
+        createDay(sqlDate); //Create a day entry for the current date
+        }
     /**
      * Creates a new daily activity entry for the specified date if it does not already exist.
-     * @param date The date for which the daily activity entry is to be created
+     * @param sqlDate
      */
-    public  void createDay(String date) {
-        if (!calendar.containsKey(date)) {
+    public  void createDay(java.sql.Date sqlDate) {
+        if (!calendar.containsKey(sqlDate)) {
             //Create a new day entry with user attributes
-        Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), 
-                user.getWeight(), user.getActivityLevel(), user.getCurrentMode());
-        calendar.put(date, day); // Add the day entry to the calendar
+            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), user.getWeight(), user.getActivityLevel(), user.getCurrentMode());
+           
+            try {
+                databaseUtil.addDay(user, sqlDate);
+            } catch (SQLException ex) {
+                Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        calendar.put(sqlDate, day); // Add the day entry to the calendar
         }
     }
     
@@ -70,7 +96,7 @@ public class Calendar {
      * @param date The date for which the daily activity entry is to be retrieved.
      * @return The Day object representing the daily activity entry.
      */
-    public Day getDay(String date) {
+    public Day getDay(java.sql.Date date) {
         if(!calendar.containsKey(date)) {
             createDay(date); // Create a day entry if it doesn't exist
         }
