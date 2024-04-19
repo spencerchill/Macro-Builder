@@ -1,0 +1,72 @@
+sql script
+
+CREATE DATABASE IF NOT EXISTS macro_builder;
+USE macro_builder;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(16) UNIQUE,
+    password VARCHAR(50),
+    salt VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS user_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    age INT,
+    height FLOAT,
+    weight FLOAT,
+    gender ENUM('MALE', 'FEMALE'),
+    activity_level ENUM('NOT_ACTIVE', 'MODERATELY_ACTIVE', 'ACTIVE'),
+    current_mode ENUM('CUT', 'MAINTAIN', 'BULK'),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE days (
+    day_id INT PRIMARY KEY AUTO_INCREMENT,
+    date_day DATE NOT NULL,
+    user_id  INT NOT NULL,
+    weight FLOAT NOT NULL,
+    activity_level ENUM('NOT_ACTIVE', 'MODERATELY_ACTIVE', 'ACTIVE'),
+    current_mode ENUM('CUT', 'MAINTAIN', 'BULK'),
+    calorie_goal INT DEFAULT 0,
+    protein_goal FLOAT DEFAULT 0,
+    fat_goal FLOAT DEFAULT 0,
+    carb_goal FLOAT DEFAULT 0,
+    calories_consumed INT DEFAULT 0,
+    protein_consumed FLOAT DEFAULT 0,
+    fat_consumed FLOAT DEFAULT 0,
+    carbs_consumed FLOAT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+create table if not exists foods (
+    food_id int auto_increment primary key,
+    user_id int,
+    food_name varChar(50),
+    calories int,
+    fat float,
+    carbs float,
+    protein float,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+    
+create table if not exists meals (
+    meal_id int auto_increment primary key,
+    user_id int,
+    meal_name varChar(50),
+    calories int,
+    fat float,
+    carbs float,
+    protein float,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+    
+create table if not exists meal_foods (
+    meal_foods_id int auto_increment primary key,
+    meal_id int,
+    food_id int, 
+    foreign key(meal_id) references meals(meal_id),
+    foreign key(food_id) references foods(food_id)
+    );
+
