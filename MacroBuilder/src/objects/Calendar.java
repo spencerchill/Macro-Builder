@@ -43,7 +43,7 @@ public class Calendar {
         try{
         String dateString = formatter.format(now);
         sqlDate = java.sql.Date.valueOf(dateString);
-       
+      
         databaseUtil = new DatabaseUtil();
         // load days into hashmap so we know if we already have a day.
         }catch (IllegalArgumentException e) {
@@ -69,7 +69,6 @@ public class Calendar {
             } catch (SQLException ex) {
                 Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         calendar.put(sqlDate, day); // Add the day entry to the calendar
         }
     }

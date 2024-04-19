@@ -153,7 +153,7 @@ public class RegisterUserScene {
      * @param usernameField
      * @param passwordField
      * @param emailField
-     * @param registerButton 
+     * @param registerButton
      */
     private void registrationKeyHandlers(TextField usernameField, PasswordField passwordField, TextField emailField, Button registerButton) {
         // Event handlers that allow the user to press enter inside of form
@@ -180,7 +180,7 @@ public class RegisterUserScene {
      *  Checks if username is valid according to regex.
      * @param username
      * @return boolean checking if valid.
-     */
+     */    
     public static boolean isValidUsername(String username) {
         int length = username.length();
         if (length < 5 || length > 15) {
