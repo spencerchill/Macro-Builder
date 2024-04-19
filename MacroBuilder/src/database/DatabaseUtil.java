@@ -238,6 +238,28 @@ public boolean loginUser(String username, String password) throws SQLException {
         return calendar;
     }
     
+
+    public void checkIn(float weight, Date date) throws SQLException{
+         try(Connection connection = DriverManager.getConnection(url, username, password)) {
+             UserManager userManager = UserManager.getInstance();
+             String userUpdate = "UPDATE user_details SET weight = ? WHERE user_id = ?";
+             try (PreparedStatement statement = connection.prepareStatement(userUpdate)) {
+                 statement.setFloat(1, weight);
+                 statement.setInt(2, userManager.getUserId());
+                 statement.executeUpdate();
+             }
+             // if you do calender.getDate you should have the date parameter for current day
+             String updateDay = "UPDATE day SET weight = ? WHERE date = ?";
+             try(PreparedStatement statement = connection.prepareStatement(updateDay)){
+             statement.setFloat(1, weight);
+             statement.setDate(2, date);
+             statement.executeUpdate();
+         }
+         }catch (SQLException ex) {
+                Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
     public void addDay(User user, Date date) throws SQLException {
         try(Connection connection = DriverManager.getConnection(url, username, password)){
             System.out.println(date);
