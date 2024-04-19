@@ -16,6 +16,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.sql.Date;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import objects.Calendar;
 import objects.Day;
+import objects.Food;
 import objects.User;
 
 /**
@@ -273,5 +275,55 @@ public boolean loginUser(String username, String password) throws SQLException {
             }
         }
         return -1;
+    }
+    
+    public void storeFood(Food food) throws SQLException {
+        String name = food.getName();
+        int calories = food.getCalories();
+        float fat = food.getFat();
+        float carbs = food.getCarbs();
+        float protein = food.getProtein();
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "INSERT INTO foods (user_id, food_name, calories, fat, carbs, protein) VALUES (?, ?, ?, ?, ?, ?)";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setString(2, name);
+              statement.setInt(3, calories);
+              statement.setFloat(4, fat);
+              statement.setFloat(5, carbs);
+              statement.setFloat(6, protein);
+              statement.executeUpdate();
+          }
+    }
+    
+    public ArrayList<Food> getFoods() throws SQLException {
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "Select * from foods where user_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              ArrayList<Food> list = new ArrayList<Food>();
+              String name;
+              int calories;
+              float fat;
+              float carbs;
+              float protein;
+              
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    name = resultSet.getString("food_name");
+                    calories = resultSet.getInt("calories");
+                    fat = resultSet.getFloat("fat");
+                    carbs = resultSet.getFloat("carbs");
+                    protein = resultSet.getFloat("protein");
+                    Food food = new Food(name, calories, fat, carbs, protein);
+                    list.add(food);
+                }
+                return list;
+            }
+        }
     }
 }

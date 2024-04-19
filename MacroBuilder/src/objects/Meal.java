@@ -20,7 +20,6 @@ public class Meal {
     private float totalFat; //Total fat content in the meal
     private float totalCarbs; //Total carbs content in the meal
     private float totalProtein; //Total protein content in the meal
-    private float totalSugar; // Total sugar conttent in the meal
 
     /**
      * Construct a new Meal object with default values.
@@ -32,7 +31,6 @@ public class Meal {
         this.totalFat = 0.0f;
         this.totalCarbs = 0.0f;
         this.totalProtein = 0.0f;
-        this.totalSugar = 0.0f;
     }
     /**
      * Adds a food item to the meal and updates the total nutritional information
@@ -44,7 +42,6 @@ public class Meal {
         totalFat += food.getFat();
         totalCarbs += food.getCarbs();
         totalProtein += food.getProtein();
-        totalSugar += food.getSugar();
     }
     /**
      * Removes a food item from the meal and updates the total nutritional information.
@@ -57,7 +54,6 @@ public class Meal {
         totalFat -= food.getFat();
         totalCarbs -= food.getCarbs();
         totalProtein -= food.getProtein();
-        totalSugar -= food.getSugar();
     }
     /**
      * Retrieves the list of food items in the meal
@@ -94,12 +90,4 @@ public class Meal {
     public float getTotalProtein() {
         return totalProtein;
     }
-    /**
-     * Retrieves the total sugars content of the meal
-     * @return totalSugar
-     */
-    public float getTotalSugar() {
-        return totalSugar;
-    }
-
 }
