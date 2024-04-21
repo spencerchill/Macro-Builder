@@ -163,7 +163,7 @@ public class MenuController implements Initializable {
     @FXML
     public Button submitQuickAddButton;
     
-    
+  
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -360,7 +360,6 @@ public class MenuController implements Initializable {
      */
     private void updateMainLabels() {
         caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
-        progressBarLabel.setText("Progress: ");
     }
     /**
      * Updates userMode
@@ -382,10 +381,10 @@ public class MenuController implements Initializable {
      * Updates MacroLabels
      */
     private void updateMacroLabels() {
-        fatLabel.setText("Fat - " + Integer.toString( (int) user.getDay().getFatGoal()));
-        carbLabel.setText("Carbs - " + Integer.toString( (int) user.getDay().getCarbGoal()));
-        proteinLabel.setText("Protein - " + Integer.toString( (int) user.getDay().getProteinGoal()));
-        calLabel.setText("Calories - " + Integer.toString((int) user.getDay().getCalorieGoal()));
+        fatLabel.setText("Fat Goal:" + Integer.toString( (int) user.getDay().getFatGoal()));
+        carbLabel.setText("Carb Goal: " + Integer.toString( (int) user.getDay().getCarbGoal()));
+        proteinLabel.setText("Protein Goal: " + Integer.toString( (int) user.getDay().getProteinGoal()));
+        calLabel.setText("Calorie Goal: " + Integer.toString((int) user.getDay().getCalorieGoal()));
     }
     /**
      * Updates greeting label after we retrieve user from database.
