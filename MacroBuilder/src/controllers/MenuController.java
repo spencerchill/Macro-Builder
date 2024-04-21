@@ -162,8 +162,8 @@ public class MenuController implements Initializable {
     
     @FXML
     public Button submitQuickAddButton;
-    
-  
+    @FXML
+    public TextField weighInField;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -340,6 +340,22 @@ public class MenuController implements Initializable {
     }
     
     @FXML
+    void weighIn() {
+        try {
+            
+        float weight = Float.parseFloat(weighInField.getText());
+        
+        user.setWeight(weight);
+        user.getDay().setWeight(weight);
+        databaseUtil.checkIn(weight, user.getCalendar().getDate());
+        
+        weighInField.clear();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+    @FXML
     void submitQuickAdd() {
         user.getDay().intake(Integer.parseInt(quickAddTextCalories.getText()), 
                Float.parseFloat(quickAddTextFat.getText()), Float.parseFloat(quickAddTextCarbs.getText()), 
@@ -392,4 +408,6 @@ public class MenuController implements Initializable {
     private void updateUser() {
         userLabel.setText("Hey, " + user.getUsername() + "!");
     }
+    
+   
 }

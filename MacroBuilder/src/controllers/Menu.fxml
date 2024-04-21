@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
     <stylesheets>
         <URL value="@menu.css" />
     </stylesheets>
@@ -49,7 +49,7 @@
         <tabs>
           <Tab id=".tab" styleClass="floating" text="Home">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="807.0" prefWidth="1916.0" style="-fx-background-color: #333333;" stylesheets="@menu.css">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="807.0" prefWidth="1916.0" style="-fx-background-color: #000000;" stylesheets="@menu.css">
                      <children>
                         <AnchorPane layoutX="1335.0" layoutY="78.0" prefHeight="705.0" prefWidth="593.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, black);">
                            <children>
@@ -128,7 +128,7 @@
                               </VBox>
                            </children>
                         </AnchorPane>
-                        <Rectangle arcHeight="2.0" arcWidth="2.0" height="62.0" layoutX="8.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0">
+                        <Rectangle arcHeight="2.0" arcWidth="2.0" height="78.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1928.0">
                            <fill>
                               <LinearGradient endX="1.0" endY="1.0" startX="1.0">
                                  <stops>
@@ -145,7 +145,7 @@
                                  </stops>
                               </LinearGradient>
                            </fill></Rectangle>
-                        <AnchorPane layoutX="8.0" layoutY="77.0" prefHeight="706.0" prefWidth="622.0" style="-fx-border-width: 3px; -fx-border-color: black; -fx-border-radius: 3px;" styleClass="gradient-background">
+                        <AnchorPane layoutX="1.0" layoutY="77.0" prefHeight="706.0" prefWidth="660.0" style="-fx-border-width: 3px; -fx-border-color: black; -fx-border-radius: 3px;" styleClass="gradient-background">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" height="62.0" layoutX="14.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="622.0">
                                  <fill>
@@ -320,13 +320,31 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="917.0" prefWidth="1916.0" style="-fx-background-color: grey;" stylesheets="@menu.css">
                      <children>
-                        <HBox fx:id="mealFoodHBox" prefHeight="900.0" prefWidth="1916.0">
+                        <Rectangle arcHeight="2.0" arcWidth="2.0" height="918.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2560.0">
+                           <fill>
+                              <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.265899121761322" green="0.5757949352264404" blue="0.5921052694320679" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </fill>
+                        </Rectangle>
+                        <HBox fx:id="mealFoodHBox" prefHeight="900.0" prefWidth="1983.0">
                            <children>
                               <VBox fx:id="mealVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
                                  <children>
                                     <Label text="Meals" textFill="WHITE">
                                        <font>
-                                          <Font name="Avenir Light" size="40.0" />
+                                          <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
                                     <Button fx:id="addMealButton" mnemonicParsing="false" text="Add Meal">
@@ -340,7 +358,7 @@
                                  <children>
                                     <Label text="Food" textFill="WHITE">
                                        <font>
-                                          <Font name="Avenir Roman" size="40.0" />
+                                          <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
                                     <Button fx:id="addFoodButton" mnemonicParsing="false" onAction="#addFood" text="Add Food">
@@ -455,12 +473,40 @@
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="45.0" prefHeight="46.0" prefWidth="710.0" style="-fx-background-color: #333333;">
                            <children>
-                              <TextField layoutX="263.0" layoutY="25.0" prefHeight="40.0" prefWidth="70.0" />
-                              <Label layoutX="14.0" layoutY="-10.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="WHITE">
+                              <Rectangle arcHeight="2.0" arcWidth="2.0" height="917.0" layoutX="-66.0" layoutY="-44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2560.0">
+                                 <fill>
+                                    <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.4588235318660736" green="0.25882354378700256" blue="0.0313725508749485" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.006711409395973154">
+                                             <color>
+                                                <Color red="0.4588235318660736" green="0.25882354378700256" blue="0.0313725508749485" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.20189474545752165">
+                                             <color>
+                                                <Color />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="0.4588235318660736" green="0.25882354378700256" blue="0.0313725508749485" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </fill>
+                              </Rectangle>
+                              <TextField fx:id="weighInField" layoutX="260.0" layoutY="139.0" prefHeight="40.0" prefWidth="70.0" />
+                              <Label layoutY="104.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="WHITE">
                                  <font>
                                     <Font name="Impact" size="26.0" />
                                  </font></Label>
-                              <Button layoutX="394.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Save" textAlignment="CENTER" textFill="#00b6ff">
+                              <Button layoutX="367.0" layoutY="139.0" mnemonicParsing="false" onAction="#weighIn" prefHeight="30.0" prefWidth="123.0" text="Save" textAlignment="CENTER" textFill="#00b6ff">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
