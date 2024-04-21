@@ -254,7 +254,6 @@ public boolean loginUser(String username, String password) throws SQLException {
             calendar.put(date, day);
             }
         }
-        System.out.println("IM returning");
         return calendar;
     }
     

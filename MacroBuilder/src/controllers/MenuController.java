@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import objects.User;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -19,11 +21,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import objects.Day;
 import objects.Food;
 import objects.FoodCatalog;
 
@@ -44,7 +49,19 @@ public class MenuController implements Initializable {
 
     @FXML
     private Label userLabel;
-
+    
+    @FXML
+    private Label calendarMode;
+    @FXML
+    private Label calendarWeight;
+    @FXML
+    private Label calendarCalGoal;
+    @FXML
+    private Label calendarCalAte;
+    
+    @FXML
+    private AnchorPane calendarAnchor;
+    
     @FXML
     private Label caloriesLabel;
 
@@ -164,6 +181,12 @@ public class MenuController implements Initializable {
     public Button submitQuickAddButton;
     @FXML
     public TextField weighInField;
+    
+    @FXML
+    private DatePicker datePicker;
+    
+    @FXML
+    private Label nullDayLabel;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -278,23 +301,6 @@ public class MenuController implements Initializable {
         proteinProgressBar.setProgress(proteinProgress); 
     }
 
-    /**
-     * Handles quick add calories button. Updates displays.
-     *
-     * @param event Triggered by submit button.
-     */
-    //useless apparently
-//    @FXML
-//    void submitCalories(ActionEvent event) {
-//        String caloriesText = caloriesField.getText();
-//        if (!caloriesText.isEmpty()) {
-//            int calories = Integer.parseInt(caloriesText);
-//            user.getDay().intake(calories, 0, 0, 0);
-//            updatePieChart();
-//            updateCalProgressBar();
-//            caloriesField.clear();
-//        }
-//    }
     
     /**
      * Handles add food button
@@ -338,7 +344,8 @@ public class MenuController implements Initializable {
     void quickAdd() {
        quickAddVBox.setVisible(!quickAddVBox.isVisible());
     }
-    
+       
+
     @FXML
     void weighIn() {
         try {
@@ -356,7 +363,7 @@ public class MenuController implements Initializable {
     }
      
     @FXML
-    void submitQuickAdd() {
+    private void submitQuickAdd() {
         user.getDay().intake(Integer.parseInt(quickAddTextCalories.getText()), 
                Float.parseFloat(quickAddTextFat.getText()), Float.parseFloat(quickAddTextCarbs.getText()), 
                Float.parseFloat(quickAddTextProtein.getText()), user.getCalendar().getDate());
@@ -367,9 +374,33 @@ public class MenuController implements Initializable {
         quickAddTextFat.clear();
         quickAddTextCarbs.clear();
         quickAddTextProtein.clear();
-        
+        setInitialLabels();
         updateScene();
     }
+    
+    @FXML
+    private void handleDate(){
+       LocalDate selectedDate = datePicker.getValue();
+       if(selectedDate  != null){
+           Date sqlDate = Date.valueOf(selectedDate);
+           Day selectedDay = user.getCalendar().getDay(sqlDate);
+           if(selectedDay == null)
+           {
+           calendarAnchor.setVisible(false);
+           nullDayLabel.setVisible(true);
+           }
+           else
+           {
+           nullDayLabel.setVisible(false);
+           calendarAnchor.setVisible(true);
+           calendarMode.setText("Mode: " + selectedDay.getMode());
+           calendarWeight.setText("Weight: " + selectedDay.getWeight());
+           calendarCalGoal.setText("Calorie Goal: " + selectedDay.getCalorieGoal());
+           calendarCalAte.setText("Calories Ate: " + selectedDay.getCalories());
+           }
+       }
+    }
+    
     
     /**
      * Updates users calories. Used in initialization to show goal.
@@ -408,6 +439,4 @@ public class MenuController implements Initializable {
     private void updateUser() {
         userLabel.setText("Hey, " + user.getUsername() + "!");
     }
-    
-   
 }
