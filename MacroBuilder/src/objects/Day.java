@@ -240,6 +240,10 @@ public class Day {
         return protein;
     }       
     
+    public void setWeight(float weight){
+        this.weight = weight;
+    }
+            
     public void setRemainingCalories(int calories){
        this.remainingCalories -= calories;
     }
