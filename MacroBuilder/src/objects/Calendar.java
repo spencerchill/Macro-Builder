@@ -62,8 +62,7 @@ public class Calendar {
     public  void createDay(java.sql.Date sqlDate) {
         if (!calendar.containsKey(sqlDate)) {
             //Create a new day entry with user attributes
-            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), user.getWeight(), user.getActivityLevel(), user.getCurrentMode());
-           
+            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), user.getWeight(), user.getActivityLevel(), user.getCurrentMode(), 0, 0.0f, 0.0f, 0.0f);
             try {
                 databaseUtil.addDay(user, sqlDate);
             } catch (SQLException ex) {
@@ -86,9 +85,9 @@ public class Calendar {
      * Retrieves the current date in "MM/dd/yyyy" format.
      * @return The current date.
      */
-    public String getDate() {
+    public java.sql.Date getDate() {
         updateDate(); //Update the current date
-        return date; //Return the current date
+        return this.sqlDate; //Return the current date
     }
     
     /**
@@ -97,10 +96,10 @@ public class Calendar {
      * @param date The date for which the daily activity entry is to be retrieved.
      * @return The Day object representing the daily activity entry.
      */
-    public Day getDay(java.sql.Date date) {
-        if(!calendar.containsKey(date)) {
-            createDay(date); // Create a day entry if it doesn't exist
+    public Day getDay(java.sql.Date sqlDate) {
+        if(!calendar.containsKey(sqlDate)) {
+            createDay(sqlDate); // Create a day entry if it doesn't exist
         }
-        return calendar.get(date); // Retrieve and return day entry
+        return calendar.get(sqlDate); // Retrieve and return day entry
     }
 }

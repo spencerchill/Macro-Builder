@@ -268,6 +268,5 @@ public class User {
             return "Bulk";
         }
     }
-    
-    
+ 
 }

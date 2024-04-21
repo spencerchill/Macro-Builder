@@ -184,6 +184,10 @@ public class MenuController implements Initializable {
                 updateMacroLabels();
                 setInitialLabels();
                 
+                updateCalProgressBar();
+                updateFatProgressBar();
+                updateCarbsProgressBar();
+                updateProteinProgressBar();
             }
             updatePieChart();
             
@@ -219,8 +223,12 @@ public class MenuController implements Initializable {
     private void updatePieChart() {
         caloriesPieChart.setLegendVisible(false);
         caloriesPieChart.setLabelLineLength(15);
-        int remainingCalories = user.getDay().getRemainingCalories();
+        
+       
         int consumedCalories = user.getDay().getCalories();
+        user.getDay().setRemainingCalories(consumedCalories);
+        int remainingCalories = user.getDay().getRemainingCalories();
+        
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data(remainingCalories + " Calories Remaining", remainingCalories),
                 new PieChart.Data(consumedCalories + " Calories Consumed", consumedCalories)
@@ -275,17 +283,18 @@ public class MenuController implements Initializable {
      *
      * @param event Triggered by submit button.
      */
-    @FXML
-    void submitCalories(ActionEvent event) {
-        String caloriesText = caloriesField.getText();
-        if (!caloriesText.isEmpty()) {
-            int calories = Integer.parseInt(caloriesText);
-            user.getDay().intake(calories, 0, 0, 0);
-            updatePieChart();
-            updateCalProgressBar();
-            caloriesField.clear();
-        }
-    }
+    //useless apparently
+//    @FXML
+//    void submitCalories(ActionEvent event) {
+//        String caloriesText = caloriesField.getText();
+//        if (!caloriesText.isEmpty()) {
+//            int calories = Integer.parseInt(caloriesText);
+//            user.getDay().intake(calories, 0, 0, 0);
+//            updatePieChart();
+//            updateCalProgressBar();
+//            caloriesField.clear();
+//        }
+//    }
     
     /**
      * Handles add food button
@@ -334,8 +343,15 @@ public class MenuController implements Initializable {
     void submitQuickAdd() {
         user.getDay().intake(Integer.parseInt(quickAddTextCalories.getText()), 
                Float.parseFloat(quickAddTextFat.getText()), Float.parseFloat(quickAddTextCarbs.getText()), 
-               Float.parseFloat(quickAddTextProtein.getText()));
+               Float.parseFloat(quickAddTextProtein.getText()), user.getCalendar().getDate());
+        
         quickAddVBox.setVisible(!quickAddVBox.isVisible());
+        
+        quickAddTextCalories.clear();
+        quickAddTextFat.clear();
+        quickAddTextCarbs.clear();
+        quickAddTextProtein.clear();
+        
         updateScene();
     }
     
@@ -356,10 +372,11 @@ public class MenuController implements Initializable {
      * Sets initialLabels for fat, carbs, protein, and calories.
      */
     private void setInitialLabels() {
-        fatLabelStart.setText("0");
-        carbLabelStart.setText("0");
-        proteinLabelStart.setText("0");
-        calLabelStart.setText("0");
+        
+        fatLabelStart.setText(String.valueOf(user.getDay().getFat()));
+        carbLabelStart.setText(String.valueOf(user.getDay().getCarbs()));
+        proteinLabelStart.setText(String.valueOf(user.getDay().getProtein()));
+        calLabelStart.setText(String.valueOf(user.getDay().getCalories()));
     }
     /**
      * Updates MacroLabels

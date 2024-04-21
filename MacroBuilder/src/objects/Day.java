@@ -4,6 +4,12 @@
  */
 package objects;
 
+import database.DatabaseUtil;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This class represents a day with
  * respective calories goals, protein goals
@@ -27,7 +33,7 @@ public class Day {
     private float carbs;
     private float protein;
     private int remainingCalories;
-    
+    private DatabaseUtil databaseUtil;
     /**
      * 6-parameter constructor that sets up a day 
      * with the current values of a user, calculates calorieGoal
@@ -38,18 +44,29 @@ public class Day {
      * @param weight
      * @param activityLevel
      * @param mode 
+     * @param calories 
+     * @param fat 
+     * @param carbs 
+     * @param protein 
      */
-    public Day (User.Gender gender, int age, float height, float weight, User.ActivityLevel activityLevel, User.CurrentMode mode){
+    public Day (User.Gender gender, int age, float height, float weight, User.ActivityLevel activityLevel, User.CurrentMode mode, int calories, float fat, float carbs, float protein){
+        
+        try {
+            databaseUtil = new DatabaseUtil();
+        } catch (IOException ex) {
+            Logger.getLogger(Day.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         this.gender = gender;
         this.age = age;
         this.height = height;
         this.weight = weight;
         this.activityLevel = activityLevel;
         this.mode = mode;
-        calories = 0;
-        fat = 0;
-        carbs = 0;
-        protein = 0;
+        this.calories = calories;
+        this.fat = fat;
+        this.carbs = carbs;
+        this.protein = protein;
         calcCalories();
         calcProtein();
         calcFat();
@@ -124,13 +141,20 @@ public class Day {
      * @param fat
      * @param carbs
      * @param protein 
+     * @param currDate 
      */
-    public void intake (int calories, float fat, float carbs, float protein) {
+    public void intake (int calories, float fat, float carbs, float protein, java.sql.Date currDate) {
         this.calories += calories;
         this.fat += fat;
         this.carbs += carbs;
         this.protein += protein;
         remainingCalories  -= calories;
+        
+        try {
+            databaseUtil.storeIntake(this.calories, this.fat, this.carbs, this.protein, currDate);
+        } catch (SQLException ex) {
+            Logger.getLogger(Day.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -183,6 +207,10 @@ public class Day {
      * @return 
      */
     public int getRemainingCalories() {
+        if(remainingCalories < 0)
+        {
+            this.remainingCalories = 0;
+        }
         return this.remainingCalories;
     }
     /**
@@ -211,4 +239,8 @@ public class Day {
     public float getProtein() {
         return protein;
     }       
+    
+    public void setRemainingCalories(int calories){
+       this.remainingCalories -= calories;
+    }
 }

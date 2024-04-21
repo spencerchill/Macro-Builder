@@ -209,6 +209,24 @@ public boolean loginUser(String username, String password) throws SQLException {
         return null;
     }
     
+        public void storeIntake(int calories, float fat, float carbs, float protein, Date date) throws SQLException {
+        try(Connection connection = DriverManager.getConnection(url, username, password)){
+        String query = "UPDATE days SET calories_consumed = ?, fat_consumed = ?, carbs_consumed = ?, protein_consumed = ? WHERE user_id = ? AND date_day = ?";
+        UserManager userManager = UserManager.getInstance();
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, calories);
+            statement.setFloat(2, fat);
+            statement.setFloat(3, carbs);
+            statement.setFloat(4, protein);
+            statement.setInt(5, userManager.getUserId());
+            statement.setDate(6, date);
+            statement.executeUpdate();
+        }
+    }catch (SQLException ex) {
+                Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+  
     public HashMap <Date, Day> loadDays(HashMap<Date, Day> calendar, User user) throws SQLException {
         try(Connection connection = DriverManager.getConnection(url, username, password)){
             UserManager userManager = UserManager.getInstance();
@@ -227,12 +245,12 @@ public boolean loginUser(String username, String password) throws SQLException {
 //            float fatGoal = resultSet.getFloat("FatGoal");
 //            float carbGoal = resultSet.getFloat("CarbGoal");
 //            float proteinGoal = resultSet.getFloat("ProteinGoal");
-//            int calories = resultSet.getInt("CaloriesConsumed");
-//            float fat = resultSet.getFloat("FatConsumed");
-//            float carbs = resultSet.getFloat("CarbsConsumed");
-//            float protein = resultSet.getFloat("ProteinConsumed");
+            int calories = resultSet.getInt("calories_consumed");
+            float fat = resultSet.getFloat("fat_consumed");
+            float carbs = resultSet.getFloat("carbs_consumed");
+            float protein = resultSet.getFloat("protein_consumed");
 
-            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), weight, activityLevel, mode);
+            Day day = new Day(user.getGender(), user.getAge(), user.getHeight(), weight, activityLevel, mode, calories, fat, carbs, protein);
             calendar.put(date, day);
             }
         }
