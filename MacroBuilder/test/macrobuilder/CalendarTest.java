@@ -4,9 +4,12 @@
  */
 package macrobuilder;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.Calendar;
 import objects.Day;
 import objects.User;
@@ -30,7 +33,12 @@ public class CalendarTest {
     @Before
     public void setUp() {
         user = new User("JaydenTheKing", User.Gender.FEMALE, 20, 68f, 200f, User.ActivityLevel.ACTIVE, User.CurrentMode.BULK);
-        calender = user.getCalendar();
+        try {
+         user.initializeCalendar();
+         this.calender = user.getCalendar();
+        } catch (SQLException ex) {
+            Logger.getLogger(CalendarTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Test

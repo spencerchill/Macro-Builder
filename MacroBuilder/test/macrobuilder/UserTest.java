@@ -4,6 +4,7 @@
  */
 package macrobuilder;
 
+import java.sql.SQLException;
 import objects.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,9 +22,9 @@ public class UserTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         user = new User("Melvin", User.Gender.FEMALE, 73, (float) 64, (float) 400, User.ActivityLevel.ACTIVE, User.CurrentMode.BULK);
-
+         user.initializeCalendar();
     }
 
     @Test
