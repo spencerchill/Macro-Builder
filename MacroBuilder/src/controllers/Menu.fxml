@@ -133,15 +133,15 @@
                               </Button>
                            </children>
                         </VBox>
-                        <Label id=".infoLabel" fx:id="progressBarLabel" layoutX="114.0" layoutY="45.0" prefHeight="62.0" prefWidth="182.0" text="Label" textFill="#fff8ed">
+                        <Label id=".infoLabel" fx:id="progressBarLabel" layoutX="114.0" layoutY="36.0" prefHeight="71.0" prefWidth="206.0" text="Label" textFill="#fff8ed">
                            <font>
-                              <Font name="Impact" size="23.0" />
+                              <Font name="Impact" size="34.0" />
                            </font>
                         </Label>
                         <Button fx:id="quickAddButton" layoutX="1364.0" layoutY="64.0" mnemonicParsing="false" onAction="#quickAdd" text="Quick Add" />
-                        <Label id=".infoLabel" fx:id="caloriesLabel" layoutX="736.0" layoutY="45.0" prefHeight="62.0" prefWidth="512.0" text="Label" textFill="#fff8ed">
+                        <Label id=".infoLabel" fx:id="caloriesLabel" layoutX="735.0" layoutY="33.0" prefHeight="62.0" prefWidth="512.0" text="Label" textFill="#fff8ed">
                            <font>
-                              <Font name="Impact" size="23.0" />
+                              <Font name="Impact" size="33.0" />
                            </font>
                         </Label>
                      </children>
