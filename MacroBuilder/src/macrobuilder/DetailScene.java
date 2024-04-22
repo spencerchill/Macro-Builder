@@ -232,8 +232,9 @@ public class DetailScene {
         });
 
         root.getChildren().addAll(titleLabel, genderBox, ageHeightWeightBox, activityBox, modeBox, submitButton);
-
+        root.setId("root");
         Scene detailScene = new Scene(root);
+        detailScene.getStylesheets().addAll(this.getClass().getResource("/controllers/registration.css").toExternalForm());
         return detailScene;
     }
 }

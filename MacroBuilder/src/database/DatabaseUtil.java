@@ -140,7 +140,7 @@ public boolean loginUser(String username, String password) throws SQLException {
      * @param password
      * @throws SQLException 
      */
-    public void registerUser(String username, String password) throws SQLException{
+    public Boolean registerUser(String username, String password) throws SQLException{
         String salt = generateSalt();
         String hashedPassword = hashPassword(password, salt);
         
@@ -153,7 +153,9 @@ public boolean loginUser(String username, String password) throws SQLException {
                 statement.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+                return false;
             }
+            return true;
         }
     }
     

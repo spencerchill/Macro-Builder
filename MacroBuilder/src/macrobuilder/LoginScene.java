@@ -89,7 +89,7 @@ public class LoginScene {
 
         //Creates a button with text "Login" and sets to same size as labels
         Button loginButton = new Button("Login");
-        loginButton.setFont(fieldFont);
+        loginButton.getStyleClass().add("buttons");
 
         Hyperlink switchScene = new Hyperlink("Don't have an account? Create one here!");
         switchScene.setEffect(dropShadow);
