@@ -21,19 +21,18 @@ public class ChartData {
     private Day day;
     
     public ChartData(User user){
-        dates = new ArrayList();
-        weights = new ArrayList();
+        dates = new ArrayList<>();
+        weights = new ArrayList<>();
         this.user = user;
     }
-    
-    public void populateChartArray(){
+    public void populateChartArray(int num){
         LocalDate currentDate = LocalDate.now();
         // DateTimeFormatter for formatting dates
         DateTimeFormatter mysqlFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         // DateTimeFormatter for displaying dates in the chart
         DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("M/d");
         
-        for(int i = 6; i >= 0; i--){
+        for(int i = num; i >= 0; i--){
             LocalDate date = currentDate.minusDays(i);
             String chartDate = date.format(chartFormatter);
             String mysqlDate = date.format(mysqlFormatter);
@@ -46,7 +45,7 @@ public class ChartData {
                  weights.add(weight);
              }
              else {
-                 weights.add(0.0f);
+                 weights.add(weight);
              }
              dates.add(chartDate);
         }

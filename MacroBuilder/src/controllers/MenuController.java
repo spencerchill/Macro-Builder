@@ -219,7 +219,7 @@ public class MenuController implements Initializable {
                 updateCarbsProgressBar();
                 updateProteinProgressBar();
                 
-                chartData.populateChartArray();
+                chartData.populateChartArray(6);
                 createChart();
             }
             updatePieChart();
