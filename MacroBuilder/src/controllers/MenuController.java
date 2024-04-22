@@ -28,6 +28,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -89,7 +90,8 @@ public class MenuController implements Initializable {
 
     @FXML
     private ProgressBar proteinProgressBar;
-
+    
+    private User.CurrentMode newMode;
     private double calProgress;
     private double fatProgress;
     private double carbsProgress;
@@ -167,6 +169,16 @@ public class MenuController implements Initializable {
     private LineChart<String, Number> weightChart;
     @FXML
     private ToggleGroup chartToggleGroup;
+    @FXML
+    private ToggleGroup modeToggleGroup;
+    @FXML
+    private ToggleButton maintainButton;
+    @FXML
+    private ToggleButton cutButton;
+    @FXML
+    private ToggleButton bulkButton;
+    @FXML
+    private Button saveModeButton;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -183,8 +195,12 @@ public class MenuController implements Initializable {
             chartData = new ChartData(user);
             if (user != null) {
                 updateUser();
-                updateMode();
                 setMacroLabels();
+                
+                modeToggleGroup = new ToggleGroup();
+               maintainButton.setToggleGroup(modeToggleGroup);
+               cutButton.setToggleGroup(modeToggleGroup);
+               bulkButton.setToggleGroup(modeToggleGroup);
 
                 updateScene();
                 createChart(6);
@@ -207,6 +223,7 @@ public class MenuController implements Initializable {
     }
 
     private void updateScene() {
+        curModeLabel.setText(user.getModeAsString());
         updatePieChart();
         updateCalProgressBar();
         updateFatProgressBar();
@@ -380,6 +397,35 @@ public class MenuController implements Initializable {
             }
         }
     }
+    
+    @FXML
+    private void handleModeChange(){
+        ToggleButton selectedButton = (ToggleButton) modeToggleGroup.getSelectedToggle();
+        // check if they selected and they didnt select same one otherwise they be spamming.
+        if(newMode != null && newMode != user.getCurrentMode()) {
+            user.setCurrentMode(newMode);
+            user.getDay().setCurrentMode(newMode);
+            user.getDay().recalcMacros();
+            
+            databaseUtil.changeMode(newMode, user.getCalendar().getDate());
+            updateScene();
+        }
+        
+    }
+        @FXML
+    private void maintainButtonAction() {
+        newMode = objects.User.CurrentMode.MAINTAIN;
+    }
+
+    @FXML
+    private void cutButtonAction() {
+        newMode = objects.User.CurrentMode.CUT;
+    }
+
+    @FXML
+    private void bulkButtonAction() {
+        newMode = objects.User.CurrentMode.BULK;
+    }
 
     private void createChart(int numDays) {
         chartData.populateChartArray(numDays);
@@ -403,13 +449,6 @@ public class MenuController implements Initializable {
     @FXML
     private void switchTo30Days(ActionEvent event) {
         createChart(29);
-    }
-
-    /**
-     * Updates userMode
-     */
-    private void updateMode() {
-        curModeLabel.setText(user.getModeAsString());
     }
 
     /**

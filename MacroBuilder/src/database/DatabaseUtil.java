@@ -259,6 +259,26 @@ public boolean loginUser(String username, String password) throws SQLException {
         return calendar;
     }
     
+    public void changeMode(User.CurrentMode newMode, Date date){
+          try(Connection connection = DriverManager.getConnection(url, username, password)){
+              UserManager userManager = UserManager.getInstance();
+              //inserting into user details table
+              String updateMode = "UPDATE user_details SET current_mode = ? WHERE user_id = ?";
+              try(PreparedStatement statement = connection.prepareStatement(updateMode)){
+                  statement.setString(1, newMode.name());
+                  statement.setInt(2, userManager.getUserId());
+                  statement.executeUpdate();
+              }
+              String updateDayMode = "UPDATE days SET current_mode = ? WHERE date_day = ?";
+              try(PreparedStatement statement = connection.prepareStatement(updateDayMode)){
+                  statement.setString(1, newMode.name());
+                  statement.setDate(2, date);
+                  statement.executeUpdate();
+              }
+          }catch (SQLException ex) {
+                Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
 
     public void checkIn(float weight, Date date) throws SQLException{
          try(Connection connection = DriverManager.getConnection(url, username, password)) {

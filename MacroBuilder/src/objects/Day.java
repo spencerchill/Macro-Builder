@@ -254,6 +254,9 @@ public class Day {
         return weight;
     }
             
+    public void setCurrentMode(User.CurrentMode newMode){
+        this.mode = newMode;
+    }
     public void setWeight(float weight){
         this.weight = weight;
     }
