@@ -25,12 +25,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
     <stylesheets>
         <URL value="@menu.css" />
     </stylesheets>
    <children>
-      <AnchorPane layoutY="6.0" prefHeight="91.0" prefWidth="818.0">
+      <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <Label id="titleLabel" layoutX="28.0" layoutY="22.0" text="Macro-Builder" />
             <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="328.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
@@ -41,7 +41,8 @@
             <Label fx:id="userLabel" layoutX="521.0" layoutY="42.0" prefHeight="34.0" prefWidth="148.0" text="blahblagh" textFill="#fff8ed">
                <font>
                   <Font name="Roboto" size="18.0" />
-               </font></Label>
+               </font>
+            </Label>
             <Label fx:id="curModeLabel" layoutX="409.0" layoutY="44.0" prefHeight="30.0" prefWidth="175.0" text="Mode" textFill="#96e1ff">
                <font>
                   <Font size="20.0" />
@@ -53,7 +54,7 @@
         <tabs>
           <Tab id=".tab" styleClass="floating" text="Home">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="807.0" prefWidth="1916.0" style="-fx-background-color: #000000;" stylesheets="@menu.css">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="1916.0" style="-fx-background-color: #000000;" stylesheets="@menu.css">
                      <children>
                         <AnchorPane layoutX="1335.0" layoutY="78.0" prefHeight="705.0" prefWidth="593.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, black);">
                            <children>
@@ -564,7 +565,7 @@
                               <Font size="29.0" />
                            </font>
                         </Label>
-                        <LineChart layoutX="668.0" layoutY="65.0">
+                        <LineChart fx:id="weightChart" layoutX="605.0" layoutY="71.0" prefHeight="396.0" prefWidth="574.0">
                           <xAxis>
                             <CategoryAxis label="Day" side="BOTTOM" />
                           </xAxis>

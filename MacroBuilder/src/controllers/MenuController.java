@@ -13,13 +13,16 @@ import objects.User;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -28,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import objects.ChartData;
 import objects.Day;
 import objects.Food;
 import objects.FoodCatalog;
@@ -42,9 +46,8 @@ import objects.FoodCatalog;
 public class MenuController implements Initializable {
   
     private DatabaseUtil databaseUtil;
-
+    private ChartData chartData;
     private User user;
-    
     private FoodCatalog catalog;
 
     @FXML
@@ -187,6 +190,9 @@ public class MenuController implements Initializable {
     
     @FXML
     private Label nullDayLabel;
+    
+    @FXML
+    private LineChart<String, Number> weightChart;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -200,6 +206,7 @@ public class MenuController implements Initializable {
             databaseUtil = new DatabaseUtil();
             user = databaseUtil.getUserDetails();
             user.initializeCalendar();
+            chartData = new ChartData(user);
             if (user != null) {
                 updateMainLabels();
                 updateUser();
@@ -211,6 +218,9 @@ public class MenuController implements Initializable {
                 updateFatProgressBar();
                 updateCarbsProgressBar();
                 updateProteinProgressBar();
+                
+                chartData.populateChartArray();
+                createChart();
             }
             updatePieChart();
             
@@ -401,7 +411,16 @@ public class MenuController implements Initializable {
        }
     }
     
-    
+    private void createChart(){
+        ArrayList<String> dates = chartData.getDates();
+        ArrayList<Float> weights = chartData.getWeights();
+        
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        for(int i = 0; i < dates.size(); i++){
+            series.getData().add(new XYChart.Data<>(dates.get(i), weights.get(i)));
+        }
+        weightChart.getData().add(series);
+    }
     /**
      * Updates users calories. Used in initialization to show goal.
      */
