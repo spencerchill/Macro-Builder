@@ -52,7 +52,6 @@ public class Calendar {
             Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.calendar = databaseUtil.loadDays(calendar, this.user);
-        System.out.println("I LOADED");
         createDay(sqlDate); //Create a day entry for the current date
         }
     /**
@@ -91,14 +90,13 @@ public class Calendar {
     }
     
     /**
-     * Retrieves the daily activity entry for the specified date.
-     * If the entry does not exist, creates a new one.
-     * @param date The date for which the daily activity entry is to be retrieved.
+     * Retrieves the daily activity entry for the specified date.If the entry does not exist, creates a new one.
+     * @param sqlDate
      * @return The Day object representing the daily activity entry.
      */
     public Day getDay(java.sql.Date sqlDate) {
         if(!calendar.containsKey(sqlDate)) {
-            createDay(sqlDate); // Create a day entry if it doesn't exist
+            return null;
         }
         return calendar.get(sqlDate); // Retrieve and return day entry
     }

@@ -2,8 +2,12 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
@@ -21,12 +25,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
     <stylesheets>
         <URL value="@menu.css" />
     </stylesheets>
    <children>
-      <AnchorPane layoutY="6.0" prefHeight="91.0" prefWidth="818.0">
+      <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <Label id="titleLabel" layoutX="28.0" layoutY="22.0" text="Macro-Builder" />
             <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="328.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
@@ -34,10 +38,11 @@
                   <Image url="@orange.png" />
                </image>
             </ImageView>
-            <Label fx:id="userLabel" layoutX="521.0" layoutY="42.0" prefHeight="34.0" prefWidth="148.0" text="blahblagh" textFill="WHITE">
+            <Label fx:id="userLabel" layoutX="521.0" layoutY="42.0" prefHeight="34.0" prefWidth="148.0" text="blahblagh" textFill="#fff8ed">
                <font>
                   <Font name="Roboto" size="18.0" />
-               </font></Label>
+               </font>
+            </Label>
             <Label fx:id="curModeLabel" layoutX="409.0" layoutY="44.0" prefHeight="30.0" prefWidth="175.0" text="Mode" textFill="#96e1ff">
                <font>
                   <Font size="20.0" />
@@ -49,7 +54,7 @@
         <tabs>
           <Tab id=".tab" styleClass="floating" text="Home">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="807.0" prefWidth="1916.0" style="-fx-background-color: #000000;" stylesheets="@menu.css">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="1916.0" style="-fx-background-color: #000000;" stylesheets="@menu.css">
                      <children>
                         <AnchorPane layoutX="1335.0" layoutY="78.0" prefHeight="705.0" prefWidth="593.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, black);">
                            <children>
@@ -342,7 +347,7 @@
                            <children>
                               <VBox fx:id="mealVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
                                  <children>
-                                    <Label text="Meals" textFill="WHITE">
+                                    <Label text="Meals" textFill="#fff8ed">
                                        <font>
                                           <Font name="Impact" size="40.0" />
                                        </font>
@@ -356,7 +361,7 @@
                               </VBox>
                               <VBox fx:id="foodVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
                                  <children>
-                                    <Label text="Food" textFill="WHITE">
+                                    <Label text="Food" textFill="#fff8ed">
                                        <font>
                                           <Font name="Impact" size="40.0" />
                                        </font>
@@ -502,7 +507,7 @@
                                  </fill>
                               </Rectangle>
                               <TextField fx:id="weighInField" layoutX="260.0" layoutY="139.0" prefHeight="40.0" prefWidth="70.0" />
-                              <Label layoutY="104.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="WHITE">
+                              <Label layoutY="104.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="#fff8ed">
                                  <font>
                                     <Font name="Impact" size="26.0" />
                                  </font></Label>
@@ -518,7 +523,57 @@
             </Tab>
             <Tab id=".tab" text="Progress">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="811.0" prefWidth="1916.0" style="-fx-background-color: grey;" stylesheets="@menu.css" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="811.0" prefWidth="1916.0" style="-fx-background-color: grey;" stylesheets="@menu.css">
+                     <children>
+                        <DatePicker fx:id="datePicker" layoutX="62.0" layoutY="71.0" onAction="#handleDate" prefHeight="40.0" prefWidth="224.0" />
+                        <Label layoutX="63.0" layoutY="14.0" prefHeight="40.0" prefWidth="226.0" text="See Past Data" textFill="#fff8ed">
+                           <font>
+                              <Font name="Impact" size="35.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane fx:id="calendarAnchor" layoutX="377.0" layoutY="14.0" prefHeight="399.0" prefWidth="366.0" visible="false">
+                           <children>
+                              <Label fx:id="calendarWeight" layoutX="14.0" layoutY="106.0" prefHeight="35.0" prefWidth="363.0" text="Weight: " textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="calendarCalGoal" layoutX="11.0" layoutY="173.0" prefHeight="35.0" prefWidth="356.0" text="Calorie Goal: " textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="calendarCalAte" layoutX="10.0" layoutY="242.0" prefHeight="35.0" prefWidth="362.0" text="Calories Ate: " textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="-38.0" layoutY="224.0" prefHeight="35.0" prefWidth="136.0" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="calendarMode" layoutX="14.0" layoutY="49.0" prefHeight="35.0" prefWidth="354.0" text="Mode: " textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Label fx:id="nullDayLabel" layoutX="377.0" layoutY="54.0" prefHeight="75.0" prefWidth="425.0" text="No past Info for selected date" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <LineChart fx:id="weightChart" layoutX="605.0" layoutY="71.0" prefHeight="396.0" prefWidth="574.0">
+                          <xAxis>
+                            <CategoryAxis label="Day" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="Weight" side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>

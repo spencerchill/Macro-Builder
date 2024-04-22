@@ -240,6 +240,14 @@ public class Day {
         return protein;
     }       
     
+    public User.CurrentMode getMode(){
+        return mode;
+    }
+    
+    public float getWeight(){
+        return weight;
+    }
+            
     public void setWeight(float weight){
         this.weight = weight;
     }
