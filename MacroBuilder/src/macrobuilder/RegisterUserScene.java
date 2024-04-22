@@ -92,6 +92,7 @@ public class RegisterUserScene {
         emailField.setFont(fieldFont);
 
         Button registerButton = new Button("Register");
+        registerButton.getStyleClass().add("buttons");
         Hyperlink switchScene = new Hyperlink("Already have an account? Sign-in here!");
         switchScene.setEffect(dropShadow);
         switchScene.setStyle("-fx-text-fill: #FDAE44;");
@@ -148,11 +149,17 @@ public class RegisterUserScene {
             
             try {
                 databaseUtil = new DatabaseUtil();
-                databaseUtil.registerUser(username, password);
+                if(databaseUtil.registerUser(username, password)){
+                     sceneController.switchToLoginScene();
+                }
+                else{
+                    // proper use would be catching the sql exception and checking the error code. BUT WERE ON A TIME CRUNCH
+                    displayUsernameAlert();
+                }
             } catch (IOException | SQLException ex) {
                 Logger.getLogger(RegisterUserScene.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sceneController.switchToLoginScene();
+            
         });
 
         switchScene.setOnAction(e -> sceneController.switchToLoginScene());
@@ -202,6 +209,14 @@ public class RegisterUserScene {
         Matcher matcher = pattern.matcher(username);
 
         return matcher.matches();
+    }
+    
+    private void displayUsernameAlert() {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Username Already Taken");
+        alert.setContentText("The username you entered is already taken.");
+        alert.showAndWait();
     }
 
 }
