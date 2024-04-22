@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -10,9 +11,12 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -560,19 +564,39 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Label fx:id="nullDayLabel" layoutX="289.0" layoutY="54.0" prefHeight="75.0" prefWidth="425.0" text="No past Info for selected date" textFill="WHITE">
+                        <Label fx:id="nullDayLabel" layoutX="289.0" layoutY="54.0" prefHeight="75.0" prefWidth="425.0" text="No past Info for selected date" textFill="WHITE" visible="false">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <LineChart fx:id="weightChart" layoutX="608.0" layoutY="71.0" prefHeight="396.0" prefWidth="574.0">
+                        <LineChart fx:id="weightChart" createSymbols="false" horizontalZeroLineVisible="false" layoutX="608.0" layoutY="71.0" prefHeight="396.0" prefWidth="574.0">
                           <xAxis>
-                            <CategoryAxis label="Day" side="BOTTOM" />
+                            <CategoryAxis label="Day" side="BOTTOM" tickLabelFill="WHITE">
+                                 <effect>
+                                    <Bloom threshold="0.01" />
+                                 </effect></CategoryAxis>
                           </xAxis>
                           <yAxis>
-                            <NumberAxis label="Weight" side="LEFT" />
+                            <NumberAxis label="Weight" side="LEFT" tickLabelFill="WHITE" tickLabelGap="1.0">
+                                 <effect>
+                                    <Bloom threshold="0.01" />
+                                 </effect></NumberAxis>
                           </yAxis>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
                         </LineChart>
+                        <RadioButton layoutX="670.0" layoutY="47.0" mnemonicParsing="false" onAction="#switchTo7Days" prefHeight="30.0" prefWidth="231.0" selected="true" text="7 Day Summary" textFill="WHITE">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="chartToggleGroup" />
+                           </toggleGroup>
+                           <font>
+                              <Font size="19.0" />
+                           </font></RadioButton>
+                        <RadioButton layoutX="901.0" layoutY="47.0" mnemonicParsing="false" onAction="#switchTo30Days" prefHeight="30.0" prefWidth="257.0" text="Month Summary" textFill="WHITE" toggleGroup="$chartToggleGroup">
+                           <font>
+                              <Font size="17.0" />
+                           </font></RadioButton>
                      </children></AnchorPane>
                </content>
             </Tab>
