@@ -50,9 +50,6 @@ public class ChartData {
              }
              dates.add(chartDate);
         }
-        
-        System.out.println("Dates: " + dates);
-        System.out.println("Weights: " + weights);  
     }
     
     public ArrayList<String> getDates(){

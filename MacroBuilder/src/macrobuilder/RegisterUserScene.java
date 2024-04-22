@@ -21,6 +21,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -45,9 +46,15 @@ public class RegisterUserScene {
      * @return register scene
      */
     public Scene createRegisterScene(Stage primaryStage, SceneController sceneController) {
-        Font labelFont = new Font("Helvetica", 26);
-        Font fieldFont = new Font("Lato", 20);
-        Font titleFont = new Font("impact", 50);
+        
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(javafx.scene.paint.Color.BLACK);
+        dropShadow.setRadius(6);
+        dropShadow.setSpread(0.3);
+        
+        Font labelFont = new Font("Helvetica", 36);
+        Font fieldFont = new Font("Lato", 30);
+        Font titleFont = new Font("impact", 60);
 
         Image image = new Image("orange.png");
         ImageView imageView = new ImageView(image);
@@ -57,21 +64,24 @@ public class RegisterUserScene {
         Label titleLabel = new Label("Macro-Builder ");
         titleLabel.setFont(titleFont);
         titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
-
+        titleLabel.setEffect(dropShadow);
+        
         Label welcomeLabel = new Label("We're happy you're here. Create an account.");
         welcomeLabel.setFont(fieldFont);
-        welcomeLabel.setStyle("-fx-text-fill: #F6EEE3;");
+        welcomeLabel.getStyleClass().add("whiteLabels");
         //Create labels and fonts
         Label usernameLabel = new Label("Username: ");
         Label passwordLabel = new Label(" Password: ");
         Label emailLabel = new Label("        Email: ");
 
         usernameLabel.setFont(labelFont);
-        usernameLabel.setStyle("-fx-text-fill: #FDAE44;");
+        
         passwordLabel.setFont(labelFont);
-        passwordLabel.setStyle("-fx-text-fill: #FDAE44;");
+       
         emailLabel.setFont(labelFont);
-        emailLabel.setStyle("-fx-text-fill: #FDAE44;");
+        usernameLabel.getStyleClass().add("whiteLabels");
+        passwordLabel.getStyleClass().add("whiteLabels");
+        emailLabel.getStyleClass().add("whiteLabels");
         // Text fields for our username and password and sets font
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
@@ -83,9 +93,10 @@ public class RegisterUserScene {
 
         Button registerButton = new Button("Register");
         Hyperlink switchScene = new Hyperlink("Already have an account? Sign-in here!");
+        switchScene.setEffect(dropShadow);
         switchScene.setStyle("-fx-text-fill: #FDAE44;");
         switchScene.setFont(fieldFont);
-
+        
         VBox root = new VBox(20);
 
         HBox titleBox = new HBox();
@@ -110,9 +121,10 @@ public class RegisterUserScene {
 
         root.getChildren().addAll(titleBox, welcomeLabel, emailBox, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #333333;");
+        root.setStyle("-fx-background-color: #333333; ");
+        root.setId("pane");
         Scene registerScene = new Scene(root);
-        
+        registerScene.getStylesheets().addAll(this.getClass().getResource("/controllers/registration.css").toExternalForm());
         // lets user know username doesnt meet required length
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isValidUsername(newValue)) {

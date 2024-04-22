@@ -1,0 +1,19 @@
+
+#pane{
+    -fx-background-image: url("lightweightBaby2.jpg");
+    background:rgb(0,96,96);
+    -fx-background-size: cover;
+    
+}
+.text-field {
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+.whiteLabels {
+    -fx-text-fill: #F6EEE3; 
+    -fx-font-weight: bold; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5, 0, 0, 0); 
+}
