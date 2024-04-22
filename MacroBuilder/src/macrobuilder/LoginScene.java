@@ -18,6 +18,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -40,10 +41,16 @@ public class LoginScene {
      * @return login scene
      */
     public Scene createLoginScene(Stage primaryStage, SceneController sceneController) {
+        
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(javafx.scene.paint.Color.BLACK);
+        dropShadow.setRadius(6);
+        dropShadow.setSpread(0.3);
 
-        Font labelFont = new Font("Helvetica", 26);
-        Font fieldFont = new Font("Lato", 16);
-        Font titleFont = new Font("impact", 50);
+
+        Font labelFont = new Font("Helvetica", 36);
+        Font fieldFont = new Font("Lato", 26);
+        Font titleFont = new Font("impact", 60);
         //image for app
         Image image = new Image("orange.png");
         ImageView imageView = new ImageView(image);
@@ -51,19 +58,23 @@ public class LoginScene {
         imageView.setFitWidth(50);
         //Create labels and fonts
         Label titleLabel = new Label("Macro-Builder ");
+        titleLabel.setEffect(dropShadow);
         titleLabel.setFont(titleFont);
         titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
 
         Label loginLabel = new Label("User Login");
         loginLabel.setFont(labelFont);
-        loginLabel.setStyle("-fx-text-fill: #F6EEE3;");
+  //      loginLabel.setStyle("-fx-text-fill: #F6EEE3;");
+        loginLabel.getStyleClass().add("whiteLabels");
 
         Label usernameLabel = new Label("Username: ");
-        Label passwordLabel = new Label("Password: ");
+        Label passwordLabel = new Label(" Password: ");
         usernameLabel.setFont(labelFont);
-        usernameLabel.setStyle("-fx-text-fill: #FDAE44;");
+     //   usernameLabel.setStyle("-fx-text-fill: #FDAE44;");
         passwordLabel.setFont(labelFont);
-        passwordLabel.setStyle("-fx-text-fill: #FDAE44;");
+//        passwordLabel.setStyle("-fx-text-fill: #FDAE44;");
+         usernameLabel.getStyleClass().add("whiteLabels");
+         passwordLabel.getStyleClass().add("whiteLabels");
         // Text fields for our username and password and sets font
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
@@ -74,12 +85,14 @@ public class LoginScene {
         Label resultLabel = new Label("");
         resultLabel.setFont(fieldFont);
         resultLabel.setStyle("-fx-text-fill: #D7504D;");
+        resultLabel.getStyleClass().add("whiteLabels"); 
 
         //Creates a button with text "Login" and sets to same size as labels
         Button loginButton = new Button("Login");
         loginButton.setFont(fieldFont);
 
         Hyperlink switchScene = new Hyperlink("Don't have an account? Create one here!");
+        switchScene.setEffect(dropShadow);
         switchScene.setStyle("-fx-text-fill: #FDAE44;");
         switchScene.setFont(fieldFont);
         // The idea is to stack both Horizontal Boxes verticaly inside of our vertical box
@@ -103,9 +116,11 @@ public class LoginScene {
         root.getChildren().addAll(titleBox, loginLabel, resultLabel, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #333333;");
-
+        root.setId("pane");
+  
+        
         Scene loginScene = new Scene(root);
-
+        loginScene.getStylesheets().addAll(this.getClass().getResource("/controllers/registration.css").toExternalForm());
         // Transitions to detail scene if correct. sets text in result if not.
         loginButton.setOnAction((ActionEvent event) -> {
 
