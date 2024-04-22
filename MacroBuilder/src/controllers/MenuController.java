@@ -28,6 +28,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -164,7 +165,8 @@ public class MenuController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private LineChart<String, Number> weightChart;
-
+    @FXML
+    private ToggleGroup chartToggleGroup;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -185,7 +187,7 @@ public class MenuController implements Initializable {
                 setMacroLabels();
 
                 updateScene();
-                createChart();
+                createChart(6);
             }
             if (!databaseUtil.getFoods().isEmpty()) {
                 catalog = new FoodCatalog(databaseUtil.getFoods());
@@ -333,9 +335,7 @@ public class MenuController implements Initializable {
             user.setWeight(weight);
             user.getDay().setWeight(weight);
             databaseUtil.checkIn(weight, user.getCalendar().getDate());
-
-            weightChart.getData().clear();
-            createChart();
+            createChart(6);
             user.getDay().recalcMacros();
             updateScene();
 
@@ -381,8 +381,9 @@ public class MenuController implements Initializable {
         }
     }
 
-    private void createChart() {
-        chartData.populateChartArray(6);
+    private void createChart(int numDays) {
+        chartData.populateChartArray(numDays);
+        weightChart.getData().clear();
         ArrayList<String> dates = chartData.getDates();
         ArrayList<Float> weights = chartData.getWeights();
 
@@ -391,6 +392,17 @@ public class MenuController implements Initializable {
             series.getData().add(new XYChart.Data<>(dates.get(i), weights.get(i)));
         }
         weightChart.getData().add(series);
+    }
+    
+    // radio buttons for us to switch chart displays.
+    @FXML
+    private void switchTo7Days(ActionEvent event) {
+        createChart(6);
+    }
+
+    @FXML
+    private void switchTo30Days(ActionEvent event) {
+        createChart(29);
     }
 
     /**
