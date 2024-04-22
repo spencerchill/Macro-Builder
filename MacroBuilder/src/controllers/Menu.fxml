@@ -56,7 +56,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="799.0" prefWidth="1916.0" style="-fx-background-color: #000000;" stylesheets="@menu.css">
                      <children>
-                        <AnchorPane layoutX="1335.0" layoutY="78.0" prefHeight="705.0" prefWidth="593.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, black);">
+                        <AnchorPane layoutX="1332.0" layoutY="75.0" prefHeight="705.0" prefWidth="593.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, black);">
                            <children>
                               <VBox fx:id="quickAddVBox" alignment="TOP_CENTER" layoutX="14.0" layoutY="47.0" prefHeight="420.0" prefWidth="463.0" visible="false">
                                  <children>
@@ -300,7 +300,7 @@
                            </children></AnchorPane>
                         <AnchorPane layoutX="654.0" layoutY="77.0" prefHeight="706.0" prefWidth="671.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, black);">
                            <children>
-                              <PieChart fx:id="caloriesPieChart" prefHeight="518.0" prefWidth="672.0" />
+                              <PieChart fx:id="caloriesPieChart" layoutX="3.0" prefHeight="518.0" prefWidth="672.0" />
                            </children>
                         </AnchorPane>
                         <Button fx:id="quickAddButton" layoutX="1478.0" layoutY="21.0" mnemonicParsing="false" onAction="#quickAdd" prefHeight="54.0" prefWidth="272.0" style="-fx-background-color: #111111; -fx-background-radius: 10px; -fx-border-color: white;" stylesheets="@menu.css" text="Quick Add Macros" textFill="#96e1ff">
@@ -560,12 +560,12 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Label fx:id="nullDayLabel" layoutX="377.0" layoutY="54.0" prefHeight="75.0" prefWidth="425.0" text="No past Info for selected date" textFill="WHITE" visible="false">
+                        <Label fx:id="nullDayLabel" layoutX="289.0" layoutY="54.0" prefHeight="75.0" prefWidth="425.0" text="No past Info for selected date" textFill="WHITE">
                            <font>
-                              <Font size="29.0" />
+                              <Font size="26.0" />
                            </font>
                         </Label>
-                        <LineChart fx:id="weightChart" layoutX="605.0" layoutY="71.0" prefHeight="396.0" prefWidth="574.0">
+                        <LineChart fx:id="weightChart" layoutX="608.0" layoutY="71.0" prefHeight="396.0" prefWidth="574.0">
                           <xAxis>
                             <CategoryAxis label="Day" side="BOTTOM" />
                           </xAxis>

@@ -26,12 +26,13 @@ public class ChartData {
         this.user = user;
     }
     public void populateChartArray(int num){
+        
         LocalDate currentDate = LocalDate.now();
         // DateTimeFormatter for formatting dates
         DateTimeFormatter mysqlFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         // DateTimeFormatter for displaying dates in the chart
         DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("M/d");
-        
+        clearData();
         for(int i = num; i >= 0; i--){
             LocalDate date = currentDate.minusDays(i);
             String chartDate = date.format(chartFormatter);
@@ -60,5 +61,10 @@ public class ChartData {
     
     public ArrayList<Float> getWeights(){
         return this.weights;
+    }
+    
+    public void clearData() {
+        dates.clear();
+        weights.clear();
     }
 }

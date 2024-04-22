@@ -44,7 +44,7 @@ import objects.FoodCatalog;
  * @author SpencerH
  */
 public class MenuController implements Initializable {
-  
+
     private DatabaseUtil databaseUtil;
     private ChartData chartData;
     private User user;
@@ -52,7 +52,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private Label userLabel;
-    
+
     @FXML
     private Label calendarMode;
     @FXML
@@ -61,10 +61,10 @@ public class MenuController implements Initializable {
     private Label calendarCalGoal;
     @FXML
     private Label calendarCalAte;
-    
+
     @FXML
     private AnchorPane calendarAnchor;
-    
+
     @FXML
     private Label caloriesLabel;
 
@@ -76,123 +76,95 @@ public class MenuController implements Initializable {
 
     @FXML
     private PieChart caloriesPieChart;
-    
+
     @FXML
     private ProgressBar calProgressBar;
-    
+
     @FXML
     private ProgressBar fatProgressBar;
-    
+
     @FXML
     private ProgressBar carbsProgressBar;
-    
+
     @FXML
     private ProgressBar proteinProgressBar;
-    
+
     private double calProgress;
     private double fatProgress;
     private double carbsProgress;
     private double proteinProgress;
     //Need to seperate these better
-    @FXML 
+    @FXML
     public Label curModeLabel;
-    
     @FXML
     public Label fatLabel;
-    
     @FXML
     public Label carbLabel;
-    
     @FXML
     public Label proteinLabel;
-    
     @FXML
     public Label calLabel;
-    
     @FXML
     public Label calLabelStart;
-    
     @FXML
     public Label proteinLabelStart;
-    
     @FXML
     public Label fatLabelStart;
-    
     @FXML
     public Label carbLabelStart;
-    
     @FXML
     public Label progressBarLabel;
-    
+    @FXML
+    private Label nullDayLabel;
     //Meals and Food Tab
     @FXML
     public Button addFoodButton;
-    
     @FXML
     public Button addMealButton;
+     @FXML
+    public Button submitFoodButton;
+    @FXML
+    public Button quickAddButton;
+    @FXML
+    public Button submitQuickAddButton;
     
     @FXML
     public HBox mealFoodHBox;
-    
     @FXML
     public VBox mealVBox;
-    
-    @FXML 
+    @FXML
     public VBox foodVBox;
-    
     @FXML
     public VBox addFoodVBox;
-    
+    @FXML
+    public VBox quickAddVBox;
+
     @FXML
     public TextField foodNameText;
-    
     @FXML
     public TextField foodCalText;
-    
     @FXML
     public TextField foodFatText;
-    
     @FXML
     public TextField foodCarbText;
-    
     @FXML
     public TextField foodProteinText;
-    
-    @FXML
-    public Button submitFoodButton;
-    
-    //Quick add 
-    @FXML
-    public Button quickAddButton;
-            
     @FXML
     public TextField quickAddTextCalories;
-    
     @FXML
     public TextField quickAddTextFat;
-    
     @FXML
     public TextField quickAddTextCarbs;
-    
     @FXML
     public TextField quickAddTextProtein;
-    
-    @FXML 
-    public VBox quickAddVBox;
-    
-    @FXML
-    public Button submitQuickAddButton;
     @FXML
     public TextField weighInField;
-    
+
     @FXML
     private DatePicker datePicker;
-    
-    @FXML
-    private Label nullDayLabel;
-    
     @FXML
     private LineChart<String, Number> weightChart;
+
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -208,24 +180,15 @@ public class MenuController implements Initializable {
             user.initializeCalendar();
             chartData = new ChartData(user);
             if (user != null) {
-                updateMainLabels();
                 updateUser();
                 updateMode();
-                updateMacroLabels();
-                setInitialLabels();
-                
-                updateCalProgressBar();
-                updateFatProgressBar();
-                updateCarbsProgressBar();
-                updateProteinProgressBar();
-                
-                chartData.populateChartArray(6);
+                setMacroLabels();
+
+                updateScene();
                 createChart();
             }
-            updatePieChart();
-            
-            if(!databaseUtil.getFoods().isEmpty()){
-            catalog = new FoodCatalog(databaseUtil.getFoods());
+            if (!databaseUtil.getFoods().isEmpty()) {
+                catalog = new FoodCatalog(databaseUtil.getFoods());
             } else {
                 catalog = new FoodCatalog();
             }
@@ -233,8 +196,7 @@ public class MenuController implements Initializable {
             for (int i = 0; i < catalog.size(); i++) {
                 updateFood(catalog.getFood(i), false);
             }
-            
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException ex) {
@@ -250,46 +212,50 @@ public class MenuController implements Initializable {
         updateProteinProgressBar();
         updateMacroLabels();
     }
+
     /**
      * Updates pie chart with current remaining and consumed calories.
      */
     private void updatePieChart() {
         caloriesPieChart.setLegendVisible(false);
         caloriesPieChart.setLabelLineLength(15);
-        
-       
+
         int consumedCalories = user.getDay().getCalories();
         user.getDay().setRemainingCalories(consumedCalories);
         int remainingCalories = user.getDay().getRemainingCalories();
-        
+
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data(remainingCalories + " Calories Remaining", remainingCalories),
                 new PieChart.Data(consumedCalories + " Calories Consumed", consumedCalories)
         );
         caloriesPieChart.setData(pieChartData);
     }
-    @FXML
+
+   
     /**
      * Updates progress bar with current remaining and consumed calories.
      */
-    public void updateCalProgressBar(){
+    @FXML
+    public void updateCalProgressBar() {
         double calorieGoal = user.getDay().getCalorieGoal();
         double consumedCalories = user.getDay().getCalories();
         calProgress = consumedCalories / calorieGoal;
         calProgressBar.setProgress(calProgress);
     }
+
     /**
      * Updates the Fat Progress bar with current remaining and consumed fat
      */
-    
+
     @FXML
     public void updateFatProgressBar() {
         double fatGoal = user.getDay().getFatGoal();
         double consumedFat = user.getDay().getFat();
         fatProgress = consumedFat / fatGoal;
         fatProgressBar.setProgress(fatProgress);
-        
+
     }
+
     /**
      * Updates the Carbs Progress bar with current remaining and consumed Carbs
      */
@@ -300,21 +266,22 @@ public class MenuController implements Initializable {
         carbsProgress = consumedCarbs / carbsGoal;
         carbsProgressBar.setProgress(carbsProgress);
     }
+
     /**
-     * Updates the ProteinProgressBar with current remaining and consumed Protein
+     * Updates the ProteinProgressBar with current remaining and consumed
+     * Protein
      */
     @FXML
     public void updateProteinProgressBar() {
         double proteinGoal = user.getDay().getProteinGoal();
         double consumedProtein = user.getDay().getProtein();
         proteinProgress = consumedProtein / proteinGoal;
-        proteinProgressBar.setProgress(proteinProgress); 
+        proteinProgressBar.setProgress(proteinProgress);
     }
 
-    
     /**
      * Handles add food button
-     * 
+     *
      * @param event triggered by add food button
      */
     @FXML
@@ -322,21 +289,23 @@ public class MenuController implements Initializable {
         mealFoodHBox.setVisible(false);
         addFoodVBox.setVisible(true);
     }
-    
+
     /**
      * Handles the submit button for adding food
+     *
      * @param event triggered by submit button
      */
     @FXML
     void submitFood(ActionEvent event) throws SQLException {
-       Food food = new Food(foodNameText.getText(), Integer.parseInt(foodCalText.getText()), Float.parseFloat(foodFatText.getText()),
-               Float.parseFloat(foodCarbText.getText()), Float.parseFloat(foodProteinText.getText()));
-       updateFood(food, true);
+        Food food = new Food(foodNameText.getText(), Integer.parseInt(foodCalText.getText()), Float.parseFloat(foodFatText.getText()),
+                Float.parseFloat(foodCarbText.getText()), Float.parseFloat(foodProteinText.getText()));
+        updateFood(food, true);
     }
-    
+
     /**
      * updates UI when the submit food button is pressed
-     * @param food 
+     *
+     * @param food
      */
     @FXML
     void updateFood(Food food, boolean store) throws SQLException {
@@ -345,113 +314,113 @@ public class MenuController implements Initializable {
         foodVBox.getChildren().add(vbox);
         mealFoodHBox.setVisible(true);
         addFoodVBox.setVisible(false);
-        if(store) {
-        databaseUtil.storeFood(food);
+        if (store) {
+            databaseUtil.storeFood(food);
         }
     }
-    
-    @FXML 
+
+    @FXML
     void quickAdd() {
-       quickAddVBox.setVisible(!quickAddVBox.isVisible());
+        quickAddVBox.setVisible(!quickAddVBox.isVisible());
     }
-       
 
     @FXML
     void weighIn() {
         try {
-            
-        float weight = Float.parseFloat(weighInField.getText());
-        
-        user.setWeight(weight);
-        user.getDay().setWeight(weight);
-        databaseUtil.checkIn(weight, user.getCalendar().getDate());
-        
-        weighInField.clear();
+
+            float weight = Float.parseFloat(weighInField.getText());
+
+            user.setWeight(weight);
+            user.getDay().setWeight(weight);
+            databaseUtil.checkIn(weight, user.getCalendar().getDate());
+
+            weightChart.getData().clear();
+            createChart();
+            user.getDay().recalcMacros();
+            updateScene();
+
+            weighInField.clear();
         } catch (SQLException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
+
     @FXML
     private void submitQuickAdd() {
-        user.getDay().intake(Integer.parseInt(quickAddTextCalories.getText()), 
-               Float.parseFloat(quickAddTextFat.getText()), Float.parseFloat(quickAddTextCarbs.getText()), 
-               Float.parseFloat(quickAddTextProtein.getText()), user.getCalendar().getDate());
-        
+        user.getDay().intake(Integer.parseInt(quickAddTextCalories.getText()),
+                Float.parseFloat(quickAddTextFat.getText()), Float.parseFloat(quickAddTextCarbs.getText()),
+                Float.parseFloat(quickAddTextProtein.getText()), user.getCalendar().getDate());
+
         quickAddVBox.setVisible(!quickAddVBox.isVisible());
-        
+
         quickAddTextCalories.clear();
         quickAddTextFat.clear();
         quickAddTextCarbs.clear();
         quickAddTextProtein.clear();
-        setInitialLabels();
+        setMacroLabels();
         updateScene();
     }
-    
+
     @FXML
-    private void handleDate(){
-       LocalDate selectedDate = datePicker.getValue();
-       if(selectedDate  != null){
-           Date sqlDate = Date.valueOf(selectedDate);
-           Day selectedDay = user.getCalendar().getDay(sqlDate);
-           if(selectedDay == null)
-           {
-           calendarAnchor.setVisible(false);
-           nullDayLabel.setVisible(true);
-           }
-           else
-           {
-           nullDayLabel.setVisible(false);
-           calendarAnchor.setVisible(true);
-           calendarMode.setText("Mode: " + selectedDay.getMode());
-           calendarWeight.setText("Weight: " + selectedDay.getWeight());
-           calendarCalGoal.setText("Calorie Goal: " + selectedDay.getCalorieGoal());
-           calendarCalAte.setText("Calories Ate: " + selectedDay.getCalories());
-           }
-       }
+    private void handleDate() {
+        LocalDate selectedDate = datePicker.getValue();
+        if (selectedDate != null) {
+            Date sqlDate = Date.valueOf(selectedDate);
+            Day selectedDay = user.getCalendar().getDay(sqlDate);
+            if (selectedDay == null) {
+                calendarAnchor.setVisible(false);
+                nullDayLabel.setVisible(true);
+            } else {
+                nullDayLabel.setVisible(false);
+                calendarAnchor.setVisible(true);
+                calendarMode.setText("Mode: " + selectedDay.getMode());
+                calendarWeight.setText("Weight: " + selectedDay.getWeight());
+                calendarCalGoal.setText("Calorie Goal: " + selectedDay.getCalorieGoal());
+                calendarCalAte.setText("Calories Ate: " + selectedDay.getCalories());
+            }
+        }
     }
-    
-    private void createChart(){
+
+    private void createChart() {
+        chartData.populateChartArray(6);
         ArrayList<String> dates = chartData.getDates();
         ArrayList<Float> weights = chartData.getWeights();
-        
+
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for(int i = 0; i < dates.size(); i++){
+        for (int i = 0; i < dates.size(); i++) {
             series.getData().add(new XYChart.Data<>(dates.get(i), weights.get(i)));
         }
         weightChart.getData().add(series);
     }
-    /**
-     * Updates users calories. Used in initialization to show goal.
-     */
-    private void updateMainLabels() {
-        caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
-    }
+
     /**
      * Updates userMode
      */
     private void updateMode() {
         curModeLabel.setText(user.getModeAsString());
     }
+
     /**
-     * Sets initialLabels for fat, carbs, protein, and calories.
+     * Sets current macros consumed for user.
      */
-    private void setInitialLabels() {
-        
+    private void setMacroLabels() {
         fatLabelStart.setText(String.valueOf(user.getDay().getFat()));
         carbLabelStart.setText(String.valueOf(user.getDay().getCarbs()));
         proteinLabelStart.setText(String.valueOf(user.getDay().getProtein()));
         calLabelStart.setText(String.valueOf(user.getDay().getCalories()));
     }
+
     /**
      * Updates MacroLabels
      */
     private void updateMacroLabels() {
-        fatLabel.setText("Fat Goal:" + Integer.toString( (int) user.getDay().getFatGoal()));
-        carbLabel.setText("Carb Goal: " + Integer.toString( (int) user.getDay().getCarbGoal()));
-        proteinLabel.setText("Protein Goal: " + Integer.toString( (int) user.getDay().getProteinGoal()));
+        caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
+        fatLabel.setText("Fat Goal:" + Integer.toString((int) user.getDay().getFatGoal()));
+        carbLabel.setText("Carb Goal: " + Integer.toString((int) user.getDay().getCarbGoal()));
+        proteinLabel.setText("Protein Goal: " + Integer.toString((int) user.getDay().getProteinGoal()));
         calLabel.setText("Calorie Goal: " + Integer.toString((int) user.getDay().getCalorieGoal()));
     }
+
     /**
      * Updates greeting label after we retrieve user from database.
      */

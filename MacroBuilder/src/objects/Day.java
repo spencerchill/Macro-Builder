@@ -157,6 +157,12 @@ public class Day {
         }
     }
     
+    public void recalcMacros(){
+        calcCalories();
+        calcProtein();
+        calcFat();
+        calcCarbs();
+    }
     /**
      * Method that returns an int 
      * representing the days calorie goal 
