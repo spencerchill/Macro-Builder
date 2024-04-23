@@ -33,6 +33,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import objects.ChartData;
 import objects.Day;
 import objects.Food;
@@ -51,7 +52,16 @@ public class MenuController implements Initializable {
     private ChartData chartData;
     private User user;
     private FoodCatalog catalog;
-
+    
+    // litterally have to make 4 rectangles because they cant have same id smh.
+    @FXML
+    private Rectangle rectangle; 
+    @FXML
+    private Rectangle rectangle2;
+    @FXML
+    private Rectangle rectangle3;
+    @FXML
+    private Rectangle rectangle4;
     @FXML
     private Label userLabel;
 
@@ -225,16 +235,7 @@ public class MenuController implements Initializable {
     private void updateScene() {
         String mode = user.getModeAsString().toUpperCase();
         curModeLabel.setText(mode);
-        if(mode.equals("CUT")){
-            curModeLabel.setStyle("-fx-text-fill: #ffbf00; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
-        }
-        else if(mode.equals("MAINTAIN")){
-            curModeLabel.setStyle("-fx-text-fill: #19c6c6; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
-        }
-        else {
-            curModeLabel.setStyle("-fx-text-fill: #e80a0a; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
-        }
-        
+         updateColors(mode);
         
         
         updatePieChart();
@@ -490,5 +491,41 @@ public class MenuController implements Initializable {
      */
     private void updateUser() {
         userLabel.setText("Hey, " + user.getUsername() + "!");
+    }
+    
+    private void updateColors(String mode){
+         if(mode.equals("CUT")){
+            curModeLabel.setStyle("-fx-text-fill: #1dc41a; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)"); 
+            rectangle.getStyleClass().clear(); 
+            rectangle.getStyleClass().add("green-style");
+            rectangle2.getStyleClass().clear(); 
+            rectangle2.getStyleClass().add("green-style"); 
+            rectangle3.getStyleClass().clear(); 
+            rectangle3.getStyleClass().add("green-style"); 
+            rectangle4.getStyleClass().clear(); 
+            rectangle4.getStyleClass().add("green-style"); 
+        }
+        else if(mode.equals("MAINTAIN")){
+            curModeLabel.setStyle("-fx-text-fill: #19c6c6; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
+            rectangle.getStyleClass().clear(); 
+            rectangle.getStyleClass().add("rectangleMenu");
+            rectangle2.getStyleClass().clear(); 
+            rectangle2.getStyleClass().add("rectangleMenu"); 
+            rectangle3.getStyleClass().clear(); 
+            rectangle3.getStyleClass().add("rectangleMenu"); 
+            rectangle4.getStyleClass().clear(); 
+            rectangle4.getStyleClass().add("rectangleMenu"); 
+        }
+        else {
+            curModeLabel.setStyle("-fx-text-fill: #e80a0a; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
+            rectangle.getStyleClass().clear(); 
+            rectangle.getStyleClass().add("red-style");
+            rectangle2.getStyleClass().clear(); 
+            rectangle2.getStyleClass().add("red-style"); 
+            rectangle3.getStyleClass().clear(); 
+            rectangle3.getStyleClass().add("red-style"); 
+            rectangle4.getStyleClass().clear(); 
+            rectangle4.getStyleClass().add("red-style"); 
+        }
     }
 }

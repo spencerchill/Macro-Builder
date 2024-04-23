@@ -10,6 +10,11 @@
     -fx-font-size: 50px;
    /** -fx-text-fill: #F6EEE3; */
    -fx-text-fill: #EE9F27;
+   -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.5, 0, 0, 1);
+}
+
+#mainImage{
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0.0, 0.5), 0.5, 0, 0, 1);
 }
 
 .tab-pane {
@@ -146,4 +151,16 @@
 .toggle-button:selected {
     -fx-background-color: #000000; 
     -fx-border-color: #000000; 
+}
+
+.rectangleMenu {
+    -fx-fill: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #ffffff 0.0%, #19c6c6 100.0%);
+}
+
+.green-style{
+      -fx-fill: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #1dc41a 100.0%);
+}
+
+.red-style{
+     -fx-fill: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #f21414 100.0%);
 }
