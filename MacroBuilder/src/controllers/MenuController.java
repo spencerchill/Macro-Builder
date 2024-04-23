@@ -223,7 +223,20 @@ public class MenuController implements Initializable {
     }
 
     private void updateScene() {
-        curModeLabel.setText(user.getModeAsString());
+        String mode = user.getModeAsString().toUpperCase();
+        curModeLabel.setText(mode);
+        if(mode.equals("CUT")){
+            curModeLabel.setStyle("-fx-text-fill: #ffbf00; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
+        }
+        else if(mode.equals("MAINTAIN")){
+            curModeLabel.setStyle("-fx-text-fill: #19c6c6; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
+        }
+        else {
+            curModeLabel.setStyle("-fx-text-fill: #e80a0a; " + "-fx-font-weight: bold; " + "-fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.2, 0, 0, 1)");
+        }
+        
+        
+        
         updatePieChart();
         updateCalProgressBar();
         updateFatProgressBar();

@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /*
@@ -36,7 +37,6 @@ public class MainMenuScene {
         Parent root = loader.load();
         MenuController menuFXML = loader.getController();
      
-
         Scene newScene = new Scene(root);
         newScene.getStylesheets().add(getClass().getResource("/controllers/menu.css").toExternalForm());
         return newScene;

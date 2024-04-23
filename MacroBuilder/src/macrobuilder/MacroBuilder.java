@@ -32,18 +32,20 @@ public class MacroBuilder extends Application {
         Image favicon = new Image("favicon-16x16.png");
         
         Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        primaryStage.setX(bounds.getMinX());
-        primaryStage.setY(bounds.getMinY());
-        primaryStage.setWidth(bounds.getWidth());
-        primaryStage.setHeight(bounds.getHeight());
+       // Rectangle2D bounds = screen.getVisualBounds();
+       // primaryStage.setX(bounds.getMinX());
+      // primaryStage.setY(bounds.getMinY());
+        primaryStage.setWidth(1280);
+        primaryStage.setHeight(720);
         //First scene is loginUI
         SceneController sceneController = new SceneController(primaryStage);
         // Start with registerScene
         primaryStage.getIcons().add(favicon);
         primaryStage.setScene(sceneController.getRegisterScene());
+        //change later on to false if i feel like it
+        primaryStage.setResizable(true);
         primaryStage.setTitle("Macro Builder");
-        primaryStage.setMaximized(true);
+        //primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }

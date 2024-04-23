@@ -8,7 +8,8 @@
 #titleLabel{
     -fx-font-family: "impact";
     -fx-font-size: 50px;
-    -fx-text-fill: #F6EEE3; /* Text color */
+   /** -fx-text-fill: #F6EEE3; */
+   -fx-text-fill: #EE9F27;
 }
 
 .tab-pane {
@@ -22,20 +23,38 @@
     -fx-text-fill: black; /* i have the pi chart for now so i dont care about this*/
 }
 .chart-pie {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); /* Add drop shadow effect */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0.2, 0, 0); /* Add drop shadow effect */
 }
 
 .chart-pie-label {
-    -fx-font-size: 20px; /* Set label font size */
-    -fx-fill: white; /* Set label text color */
+    -fx-font-size: 20px; 
+    -fx-fill: black; 
+}
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: #8b4513;
+    -fx-font-size: 1em;
+} 
+.chart-pie-label-line {
+    -fx-stroke: #8b4513;
+    -fx-fill: #8b4513;
+}
+.chart-pie.data0 {
+    -fx-pie-color: #f04A00; 
+}
+.chart-pie.data1 {
+    -fx-pie-color: orange;
+}
+.chart-legend {
+   -fx-background-color:  #fafad2;
+   -fx-stroke: #daa520;
 }
 .tab {
  
-    -fx-text-fill: #333333; /* Set text color */
-    -fx-font-size: 16px; /* Set font size */
-    -fx-font-family: "Arial"; /* Set font family */
+    -fx-text-fill: #333333; 
+    -fx-font-size: 16px; 
+    -fx-font-family: "Arial"; 
     -fx-padding: 50px; 
-    -fx-border-width: 1px; /* Set border width */
+    -fx-border-width: 1px; 
 }
 
 .tab-pane .tab-content .tab-pane .anchor-pane {
@@ -71,16 +90,18 @@
     -fx-background-insets: 0;
     -fx-border-width: 5 0 0 0;
     -fx-border-color: #EE9F27;
-
-
-
 }
 
 .tab:focused
 {
   -fx-focus-color: transparent;
+}
 
-
+.tab-pane .tab-content-area {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-width: 0;
 }
 
 .tab-pane *.tab-header-background
@@ -103,7 +124,7 @@
 }
 
 .gradient-background {
-    -fx-background-color: linear-gradient(to top, orange, black);
+    -fx-background-color: linear-gradient(to top, orange, white);
 }
 
 .progress-bar .bar {
@@ -114,3 +135,15 @@
     -fx-cursor: hand; 
 }
 
+.radio-button:hover {
+    -fx-background-color: #f39c12; 
+}
+
+.axis-label {
+    -fx-text-fill: black;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #000000; 
+    -fx-border-color: #000000; 
+}
