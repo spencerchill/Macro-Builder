@@ -35,6 +35,7 @@ public class MacroBuilder extends Application {
        // Rectangle2D bounds = screen.getVisualBounds();
        // primaryStage.setX(bounds.getMinX());
       // primaryStage.setY(bounds.getMinY());
+        double maxWidth = primaryStage.getMaxWidth();
         primaryStage.setWidth(1280);
         primaryStage.setHeight(720);
         //First scene is loginUI
@@ -42,8 +43,12 @@ public class MacroBuilder extends Application {
         // Start with registerScene
         primaryStage.getIcons().add(favicon);
         primaryStage.setScene(sceneController.getRegisterScene());
-        //change later on to false if i feel like it
-        primaryStage.setResizable(true);
+        
+        //I dont want people with big monitors to resize
+        // Its gonna look so ugly.
+        if(maxWidth > 1440){
+            primaryStage.setResizable(false);
+        }
         primaryStage.setTitle("Macro Builder");
         //primaryStage.setMaximized(true);
         primaryStage.show();
