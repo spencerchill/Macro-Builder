@@ -60,7 +60,7 @@ public class LoginScene {
         Label titleLabel = new Label("Macro-Builder ");
         titleLabel.setEffect(dropShadow);
         titleLabel.setFont(titleFont);
-        titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
+        titleLabel.setStyle("-fx-text-fill: #EE9F27;");
 
         Label loginLabel = new Label("User Login");
         loginLabel.setFont(labelFont);
@@ -115,10 +115,9 @@ public class LoginScene {
 
         root.getChildren().addAll(titleBox, loginLabel, resultLabel, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #333333;");
+       
         root.setId("pane");
-  
-        
+        root.setStyle("-fx-background-color: linear-gradient(to right, orange, white);"); 
         Scene loginScene = new Scene(root);
         loginScene.getStylesheets().addAll(this.getClass().getResource("/controllers/registration.css").toExternalForm());
         // Transitions to detail scene if correct. sets text in result if not.
