@@ -52,6 +52,7 @@ public class MenuController implements Initializable {
     private ChartData chartData;
     private User user;
     private FoodCatalog catalog;
+    private double dontDeleteThis;
     
     // litterally have to make 4 rectangles because they cant have same id smh.
     @FXML
@@ -271,6 +272,16 @@ public class MenuController implements Initializable {
         private void updatePieChart2() {
         caloriesPieChart.setLegendVisible(false);
         //caloriesPieChart.setLabelLineLength(15);
+        // LITTERALLY NO ONE NEEDS TO KNOW WHAT THIS DOES
+        // grabbing the past pie chart data. this is an edge case that is too 
+        //hard to explain and if unchecked will destroy the universe
+        ObservableList<PieChart.Data> pieChartData = caloriesPieChart.getData();
+        for (PieChart.Data data : pieChartData){
+            if (data.getName().contains("Remaining")){
+               dontDeleteThis = data.getPieValue();
+            }
+        }
+     
         
         int consumedCalories = user.getDay().getCalories();
         
@@ -278,7 +289,6 @@ public class MenuController implements Initializable {
         int remainingCalories = user.getDay().getRemainingCalories();
         
         if(consumedCalories == 0){
-             ObservableList<PieChart.Data> pieChartData = caloriesPieChart.getData();
              for(PieChart.Data data : pieChartData){
                  if(data.getName().contains("Remaining")){
                      data.setName(remainingCalories + " Calories Remaining");
@@ -286,16 +296,17 @@ public class MenuController implements Initializable {
                  }
              }
         }
-        else if(remainingCalories == 0){
+        else if(remainingCalories == 0 && dontDeleteThis == 0){
             return;
         }
        
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+        pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data(remainingCalories + " Calories Remaining", remainingCalories),
                 new PieChart.Data(consumedCalories + " Calories Consumed", consumedCalories)
         );
         caloriesPieChart.setData(pieChartData);
     }
+        
    
 
    
