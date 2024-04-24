@@ -10,7 +10,7 @@
     -fx-font-size: 50px;
    /** -fx-text-fill: #F6EEE3; */
    -fx-text-fill: #EE9F27;
-   -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.5), 0.5, 0, 0, 1);
+   -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 1.0), 0.5, 0, 0, 1);
 }
 
 #mainImage{
