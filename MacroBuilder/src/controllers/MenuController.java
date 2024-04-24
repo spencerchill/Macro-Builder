@@ -187,8 +187,6 @@ public class MenuController implements Initializable {
     private ToggleButton cutButton;
     @FXML
     private ToggleButton bulkButton;
-    @FXML
-    private Button saveModeButton;
     /**
      * Initializes controller class. Retrieves user from database and updates
      * labels on screen.
@@ -199,6 +197,9 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            //trying to fix pie chart.
+      
+             
             databaseUtil = new DatabaseUtil();
             user = databaseUtil.getUserDetails();
             user.initializeCalendar();
@@ -211,7 +212,7 @@ public class MenuController implements Initializable {
                maintainButton.setToggleGroup(modeToggleGroup);
                cutButton.setToggleGroup(modeToggleGroup);
                bulkButton.setToggleGroup(modeToggleGroup);
-
+               updatePieChart();
                 updateScene();
                 createChart(6);
             }
@@ -238,7 +239,7 @@ public class MenuController implements Initializable {
          updateColors(mode);
         
         
-        updatePieChart();
+     //   updatePieChart();
         updateCalProgressBar();
         updateFatProgressBar();
         updateCarbsProgressBar();
@@ -251,18 +252,51 @@ public class MenuController implements Initializable {
      */
     private void updatePieChart() {
         caloriesPieChart.setLegendVisible(false);
-        caloriesPieChart.setLabelLineLength(15);
-
+        //caloriesPieChart.setLabelLineLength(15);
+        
         int consumedCalories = user.getDay().getCalories();
+        
         user.getDay().setRemainingCalories(consumedCalories);
         int remainingCalories = user.getDay().getRemainingCalories();
-
+        
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data(remainingCalories + " Calories Remaining", remainingCalories),
+                new PieChart.Data(consumedCalories + " Calories Consumed", consumedCalories)
+        );
+        caloriesPieChart.setData(pieChartData);
+   
+    }
+    
+    // dont ask, i need this because of a decade old java fx bug. Thank you jesus.
+        private void updatePieChart2() {
+        caloriesPieChart.setLegendVisible(false);
+        //caloriesPieChart.setLabelLineLength(15);
+        
+        int consumedCalories = user.getDay().getCalories();
+        
+        user.getDay().setRemainingCalories(consumedCalories);
+        int remainingCalories = user.getDay().getRemainingCalories();
+        
+        if(consumedCalories == 0){
+             ObservableList<PieChart.Data> pieChartData = caloriesPieChart.getData();
+             for(PieChart.Data data : pieChartData){
+                 if(data.getName().contains("Remaining")){
+                     data.setName(remainingCalories + " Calories Remaining");
+                     return;
+                 }
+             }
+        }
+        else if(remainingCalories == 0){
+            return;
+        }
+       
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data(remainingCalories + " Calories Remaining", remainingCalories),
                 new PieChart.Data(consumedCalories + " Calories Consumed", consumedCalories)
         );
         caloriesPieChart.setData(pieChartData);
     }
+   
 
    
     /**
@@ -319,6 +353,8 @@ public class MenuController implements Initializable {
      */
     @FXML
     void addFood(ActionEvent event) {
+       caloriesPieChart.setLabelLineLength(10); // Set a shorter label line length
+
         mealFoodHBox.setVisible(false);
         addFoodVBox.setVisible(true);
     }
@@ -369,7 +405,7 @@ public class MenuController implements Initializable {
             createChart(6);
             user.getDay().recalcMacros();
             updateScene();
-
+            updatePieChart2();
             weighInField.clear();
         } catch (SQLException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -389,6 +425,7 @@ public class MenuController implements Initializable {
         quickAddTextCarbs.clear();
         quickAddTextProtein.clear();
         setMacroLabels();
+        updatePieChart();
         updateScene();
     }
 
@@ -417,12 +454,13 @@ public class MenuController implements Initializable {
         ToggleButton selectedButton = (ToggleButton) modeToggleGroup.getSelectedToggle();
         // check if they selected and they didnt select same one otherwise they be spamming.
         if(newMode != null && newMode != user.getCurrentMode()) {
-            user.setCurrentMode(newMode);
             user.getDay().setCurrentMode(newMode);
-            user.getDay().recalcMacros();
+            user.setCurrentMode(newMode);
             
-            databaseUtil.changeMode(newMode, user.getCalendar().getDate());
+            user.getDay().recalcMacros();
             updateScene();
+            updatePieChart2();
+            databaseUtil.changeMode(newMode, user.getCalendar().getDate());
         }
         
     }

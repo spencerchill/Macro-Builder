@@ -32,7 +32,7 @@
 }
 
 .chart-pie-label {
-    -fx-font-size: 20px; 
+    -fx-font-size: 10px; 
     -fx-fill: black; 
 }
 .chart-pie-label { /*this is what you need for labels*/
@@ -40,6 +40,7 @@
     -fx-font-size: 1em;
 } 
 .chart-pie-label-line {
+    -fx-stroke-width: 2px;
     -fx-stroke: #8b4513;
     -fx-fill: #8b4513;
 }

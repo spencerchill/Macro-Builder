@@ -63,7 +63,7 @@ public class RegisterUserScene {
 
         Label titleLabel = new Label("Macro-Builder ");
         titleLabel.setFont(titleFont);
-        titleLabel.setStyle("-fx-text-fill: #F6EEE3;");
+        titleLabel.setStyle("-fx-text-fill: #EE9F27;");
         titleLabel.setEffect(dropShadow);
         
         Label welcomeLabel = new Label("We're happy you're here. Create an account.");
@@ -122,7 +122,6 @@ public class RegisterUserScene {
 
         root.getChildren().addAll(titleBox, welcomeLabel, emailBox, usernameBox, passwordBox, buttonsBox);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #333333; ");
         root.setId("pane");
         Scene registerScene = new Scene(root);
         registerScene.getStylesheets().addAll(this.getClass().getResource("/controllers/registration.css").toExternalForm());

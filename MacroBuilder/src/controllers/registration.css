@@ -1,6 +1,7 @@
 
 #pane{
     -fx-background-image: url("lightweightBaby2.jpg");
+    -fx-background-color: linear-gradient(to top, orange, white);
     -fx-background-size: cover;
 }
 .text-field {
@@ -18,20 +19,20 @@
 
 .buttons {
     -fx-background-color: white;
-    -fx-text-fill: black;
+    -fx-text-fill: #009dff;
     -fx-font-weight: bold;
     -fx-padding: 10px 20px;
     -fx-border-radius: 10px;
 }
 
 .buttons:hover {
-    -fx-background-color: #e68a00;
+    -fx-background-color: #000000;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 0);
 }
 
 #root{
-    -fx-background-image: url("dumbBELLS.jpg");
+    -fx-background-image: url("background.jpg");
     -fx-background-color: black;
-    -fx-background-size: contain;
+    -fx-background-size: cover;
      -fx-background-position: center center;
 }
