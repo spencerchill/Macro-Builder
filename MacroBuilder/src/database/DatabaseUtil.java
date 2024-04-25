@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import objects.Calendar;
 import objects.Day;
 import objects.Food;
+import objects.Meal;
 import objects.User;
 
 /**
@@ -339,6 +340,11 @@ public boolean loginUser(String username, String password) throws SQLException {
         return -1;
     }
     
+    /**
+     * Stores a food item into the database
+     * @param food
+     * @throws SQLException 
+     */
     public void storeFood(Food food) throws SQLException {
         String name = food.getName();
         int calories = food.getCalories();
@@ -360,6 +366,11 @@ public boolean loginUser(String username, String password) throws SQLException {
           }
     }
     
+    /**
+     * deletes a food item from the database
+     * @param food
+     * @throws SQLException 
+     */
     public void deleteFood(Food food) throws SQLException {
         int foodID = getFoodID(food);
         
@@ -373,6 +384,12 @@ public boolean loginUser(String username, String password) throws SQLException {
           }
     }
     
+    /**
+     * retrieves a food item's ID in from databse
+     * @param food
+     * @return
+     * @throws SQLException 
+     */
     public int getFoodID(Food food) throws SQLException {
         String name = food.getName();
         int calories = food.getCalories();
@@ -399,6 +416,11 @@ public boolean loginUser(String username, String password) throws SQLException {
         return -1;
     }
     
+    /**
+     * returns an array list of foods a user has from the database
+     * @return
+     * @throws SQLException 
+     */
     public ArrayList<Food> getFoods() throws SQLException {
         
         try(Connection connection = DriverManager.getConnection(url, username, password)) {
@@ -426,5 +448,215 @@ public boolean loginUser(String username, String password) throws SQLException {
                 return list;
             }
         }
+    }
+    
+    /**
+     * stroes a meal item into the database
+     * @param meal
+     * @throws SQLException 
+     */
+    public void storeMeal(Meal meal) throws SQLException {
+        String name = meal.getName();
+        int calories = meal.getTotalCalories();
+        float fat = meal.getTotalFat();
+        float carbs = meal.getTotalCarbs();
+        float protein = meal.getTotalProtein();
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "INSERT INTO meals (user_id, meal_name, calories, fat, carbs, protein) VALUES (?, ?, ?, ?, ?, ?)";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setString(2, name);
+              statement.setInt(3, calories);
+              statement.setFloat(4, fat);
+              statement.setFloat(5, carbs);
+              statement.setFloat(6, protein);
+              statement.executeUpdate();
+          }
+        
+        for (int i = 0; i < meal.getFoods().size(); i++) {
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              String query = "INSERT INTO meal_foods (meal_id, food_id) VALUES (?, ?)";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, getMealID(meal));
+              statement.setInt(2, getFoodID(meal.getFoods().get(i)));
+              statement.executeUpdate();
+          }
+        }
+    }
+    
+    /**
+     * returns a meal item's ID from the database
+     * @param meal
+     * @return
+     * @throws SQLException 
+     */
+    public int getMealID(Meal meal) throws SQLException {
+        String name = meal.getName();
+        int calories = meal.getTotalCalories();
+        float fat = meal.getTotalFat();
+        float carbs = meal.getTotalCarbs();
+        float protein = meal.getTotalProtein();
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "Select meal_id FROM meals where user_id = ? and meal_name = ? and calories = ? and fat = ? and carbs = ? and protein = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setString(2, name);
+              statement.setInt(3, calories);
+              statement.setFloat(4, fat);
+              statement.setFloat(5, carbs);
+              statement.setFloat(6, protein);
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    return resultSet.getInt("meal_id");
+                }
+          }
+        }
+        return -1;
+    }
+    
+    /**
+     * deletes a meal item from the database
+     * @param meal
+     * @throws SQLException 
+     */
+    public void deleteMeal(Meal meal) throws SQLException {
+        int mealID = getMealID(meal);
+        
+        ArrayList<Integer> mealFoodsIDs = getMealFoodsIDs(meal);
+        for (int i = 0; i < mealFoodsIDs.size(); i++) {
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              String query = "DELETE FROM meal_foods where meal_foods_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, mealFoodsIDs.get(i));
+              statement.executeUpdate();
+          }
+        }
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "DELETE FROM meals where user_id = ? and meal_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setInt(2, mealID);
+              statement.executeUpdate();
+          }
+    }
+    
+    /**
+     * returns an array list of mealFoodsIDs from the database
+     * @param meal
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<Integer> getMealFoodsIDs(Meal meal) throws SQLException {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        int mealID = getMealID(meal);
+        int foodID;
+        
+        for (int i = 0; i < meal.getFoods().size(); i++) {
+            foodID = getFoodID(meal.getFoods().get(i));
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              String query = "Select meal_foods_id FROM meal_foods where meal_id = ? and food_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, mealID);
+              statement.setInt(2, foodID);
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    ids.add(resultSet.getInt("meal_foods_id"));
+                }
+          }
+        }
+        }
+        return ids;
+    }
+    
+    /**
+     * returns an arraylist of meal items that a user has from the database
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<Meal> getMeals() throws SQLException{
+        ArrayList<Meal> meals = new ArrayList<Meal>();
+        
+        ArrayList<Integer> mealIDs = new ArrayList<Integer>();
+        
+        String name;
+        int calories;
+        float fat;
+        float carbs;
+        float protein;
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "Select meal_id from meals where user_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    mealIDs.add(resultSet.getInt("meal_id"));
+                }
+            }
+        }
+        
+        for (int i = 0; i < mealIDs.size(); i++) {
+            Meal meal = new Meal();
+            
+            try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "Select meal_name from meals where user_id = ? and meal_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setInt(2, mealIDs.get(i));
+              
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    meal.setName(resultSet.getString("meal_name"));
+                }
+            }
+        }
+            
+            
+            ArrayList<Integer> foodIDs = new ArrayList<Integer>();
+            
+            try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              String query = "Select food_id from meal_foods where meal_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, mealIDs.get(i));
+              
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    foodIDs.add(resultSet.getInt("food_id"));
+                }
+            }
+        }
+            for (int j = 0; j < foodIDs.size(); j++) {
+            try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "Select * from foods where user_id = ? and food_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setInt(2, foodIDs.get(j));
+              
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    name = resultSet.getString("food_name");
+                    calories = resultSet.getInt("calories");
+                    fat = resultSet.getFloat("fat");
+                    carbs = resultSet.getFloat("carbs");
+                    protein = resultSet.getFloat("protein");
+                    Food food = new Food(name, calories, fat, carbs, protein);
+                    meal.addFood(food);
+                }
+            }
+        }
+            }
+            meals.add(meal);
+        }
+        return meals;
     }
 }

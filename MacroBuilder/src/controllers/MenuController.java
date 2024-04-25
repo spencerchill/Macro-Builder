@@ -39,6 +39,8 @@ import objects.ChartData;
 import objects.Day;
 import objects.Food;
 import objects.FoodCatalog;
+import objects.Meal;
+import objects.MealCatalog;
 
 /**
  * FXML Controller class for Menu
@@ -53,6 +55,7 @@ public class MenuController implements Initializable {
     private ChartData chartData;
     private User user;
     private FoodCatalog catalog;
+    private MealCatalog mealCatalog;
     private double dontDeleteThis;
     
     // litterally have to make 4 rectangles because they cant have same id smh.
@@ -172,6 +175,24 @@ public class MenuController implements Initializable {
     public TextField quickAddTextCarbs;
     @FXML
     public TextField quickAddTextProtein;
+    
+    //Meals
+    @FXML
+    public TextField mealNameText;
+    
+    @FXML
+    public VBox foodMealVBox;
+    
+    @FXML
+    public VBox addMealVBox;
+    
+    @FXML
+    public Label mealNameDisplay;
+    
+    private ArrayList<Food> foods;
+    
+    private HBox displayMealFoods;
+    
     @FXML
     public TextField weighInField;
 
@@ -218,6 +239,7 @@ public class MenuController implements Initializable {
                 updateScene();
                 createChart(6);
             }
+            
             if (!databaseUtil.getFoods().isEmpty()) {
                 catalog = new FoodCatalog(databaseUtil.getFoods());
             } else {
@@ -226,6 +248,16 @@ public class MenuController implements Initializable {
             
             for (int i = 0; i < catalog.size(); i++) {
                 updateFood(catalog.getFood(i), false);
+            }
+            
+            if (!databaseUtil.getMeals().isEmpty()) {
+                mealCatalog = new MealCatalog(databaseUtil.getMeals());
+            } else {
+                mealCatalog = new MealCatalog();
+            }
+            
+            for (int i = 0; i < mealCatalog.size(); i++) {
+                updateMeal(mealCatalog.getMeal(i));
             }
 
         } catch (SQLException e) {
@@ -387,9 +419,16 @@ public class MenuController implements Initializable {
         foodCarbText.clear();
         foodProteinText.clear();
         
+        catalog.addFood(food);
+        
         updateFood(food, true);
     }
     
+    /**
+     * method that handle when a user presses the cancel button
+     * in the add food Menu
+     * @param event 
+     */
     @FXML
     void cancelFood(ActionEvent event) {
         foodNameText.clear();
@@ -471,9 +510,216 @@ public class MenuController implements Initializable {
     public void deleteFood(Food food, VBox vbox) throws SQLException {
         databaseUtil.deleteFood(food);
         
+        catalog.removeFood(food);
+        
         foodVBox.getChildren().remove(vbox);
        }
+    
+    /**
+     * method that handles when a user presses the add meal button
+     */
+    @FXML
+    void addMeal() {
+        mealFoodHBox.setVisible(false);
+        addMealVBox.setVisible(true);
+        
+        Meal meal = new Meal();
+        
+        for (int i = 0; i < catalog.size(); i++) {
+        Label name = new Label(catalog.getFood(i).getName());
+        name.setAlignment(Pos.CENTER);
+        name.setStyle("-fx-font: 16px Avenir;");
+        
+        Button addBtn = new Button("Add");
+        addBtn.setAlignment(Pos.CENTER);
+        addBtn.setPrefSize(60, 20);
+        
+        Button removeBtn = new Button("Remove");
+        removeBtn.setAlignment(Pos.CENTER);
+        removeBtn.setPrefSize(60, 20);
+        
+        HBox foodHBox = new HBox(name, addBtn, removeBtn);
+        foodHBox.setAlignment(Pos.CENTER);
+        foodHBox.setSpacing(10);
+        
+        Label foodCal = new Label("Cal" + Integer.toString(catalog.getFood(i).getCalories()));
+        Label foodF = new Label(" F" + Float.toString(catalog.getFood(i).getFat()));
+        Label foodC = new Label(" C" + Float.toString(catalog.getFood(i).getCarbs()));
+        Label foodP = new Label(" P" + Float.toString(catalog.getFood(i).getProtein()));
+        
+        HBox macroHBox = new HBox(foodCal, foodF, foodC, foodP);        
+        macroHBox.setAlignment(Pos.CENTER);
+        
+        VBox vbox = new VBox(foodHBox, macroHBox);
+        
+        vbox.setAlignment(Pos.CENTER);
+        
+        AddToMealMap addToMealMap = new AddToMealMap(catalog.getFood(i), addBtn, removeBtn, this);
+        
+        foodMealVBox.getChildren().add(vbox);
+        }
+        
+        displayMealFoods = new HBox();
+        addMealVBox.getChildren().add(displayMealFoods);
+        foods = new ArrayList<Food>();
+    }
+    
+    /**
+     * method that handles when a user presses the button to add a 
+     * food item to a meal
+     * @param food 
+     */
+    public void addToMeal(Food food) {
+        foods.add(food);
+        
+        displayMealFoods.getChildren().clear();
+        
+        for (int i = 0; i < foods.size(); i++) {
+            Label label = new Label(foods.get(i).getName() + " ");
+            displayMealFoods.getChildren().add(label);
+        }
+    }
+    
+    /**
+     * method that handles when a user presses the button to remove
+     * a food item from a meal
+     * @param food 
+     */
+    public void removeFromMeal(Food food) {
+        foods.remove(food);
+        
+        displayMealFoods.getChildren().clear();
+        
+        for (int i = 0; i < foods.size(); i++) {
+            Label label = new Label(foods.get(i).getName() + " ");
+            displayMealFoods.getChildren().add(label);
+        }
+    }
+    
+    /**
+     * method that handles when a user submits a meal and stores
+     * it in the database
+     * @throws SQLException 
+     */
+    @FXML
+    void submitMeal() throws SQLException {
+        Meal meal = new Meal();
+        
+        meal.setName(mealNameText.getText());
+        
+        for (int i = 0; i < foods.size(); i++) {
+            meal.addFood(foods.get(i));
+        }
+        
+        updateMeal(meal);
+        
+        databaseUtil.storeMeal(meal);
+        
+        mealNameText.clear();
+        mealNameDisplay.setText("");
+        foodMealVBox.getChildren().clear();
+        displayMealFoods.getChildren().clear();
+        foods.clear();
+        
+        mealFoodHBox.setVisible(true);
+        addMealVBox.setVisible(false);
+    }
+    
+    /**
+     * method that handles when a user presses the cancel button 
+     * to cancel a meal creation
+     */
+    @FXML
+    void cancelMeal() {
+        mealNameText.clear();
+        mealNameDisplay.setText("");
+        foodMealVBox.getChildren().clear();
+        displayMealFoods.getChildren().clear();
+        foods.clear();
+        
+        mealFoodHBox.setVisible(true);
+        addMealVBox.setVisible(false);
+    }
+    
+    /**
+     * method that updates the text display of a meal name 
+     * while a user enters the name of their meal
+     */
+    @FXML
+    void updateMealNameDisplay() {
+        mealNameDisplay.setText(mealNameText.getText());
+    }
 
+    /**
+     * method that updates the list of meals on the app
+     * @param meal 
+     */
+    @FXML
+    void updateMeal(Meal meal) {
+        Label name = new Label(meal.getName());
+        name.setAlignment(Pos.CENTER);
+        name.setStyle("-fx-font: 16px Avenir;");
+        
+        Button eatBtn = new Button("Eat");
+        eatBtn.setAlignment(Pos.CENTER);
+        eatBtn.setPrefSize(60, 20);
+        
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.setAlignment(Pos.CENTER);
+        deleteBtn.setPrefSize(60, 20);
+        
+        HBox mealHBox = new HBox(name, eatBtn, deleteBtn);
+        mealHBox.setAlignment(Pos.CENTER);
+        mealHBox.setSpacing(10);
+        
+        Label mealCal = new Label("Cal" + Integer.toString(meal.getTotalCalories()));
+        Label mealF = new Label(" F" + Float.toString(meal.getTotalFat()));
+        Label mealC = new Label(" C" + Float.toString(meal.getTotalCarbs()));
+        Label mealP = new Label(" P" + Float.toString(meal.getTotalProtein()));
+        
+        HBox macroHBox = new HBox(mealCal, mealF, mealC, mealP);        
+        macroHBox.setAlignment(Pos.CENTER);
+        
+        VBox vbox = new VBox(mealHBox, macroHBox);
+        
+        vbox.setAlignment(Pos.CENTER);
+        
+        MealMap mealMap = new MealMap(meal, eatBtn, deleteBtn, vbox, this);
+        
+        mealVBox.getChildren().add(vbox);
+        mealVBox.setSpacing(16);
+        
+        mealFoodHBox.setVisible(true);
+        addMealVBox.setVisible(false);
+    }
+    
+    /**
+     * method that handles when a user presses the eat button 
+     * on a given meal
+     * @param meal 
+     */
+    public void eatMeal(Meal meal) {
+        user.getDay().intake(meal.getTotalCalories(), meal.getTotalFat(), meal.getTotalCarbs(), meal.getTotalProtein(), user.getCalendar().getDate());
+        setMacroLabels();
+        updatePieChart();
+        updateScene();
+    }
+    
+    /**
+     * method that handles when a user presses the delete button on a given meal
+     * and removes it from the database
+     * @param meal
+     * @param vbox
+     * @throws SQLException 
+     */
+    public void deleteMeal(Meal meal, VBox vbox) throws SQLException {
+        databaseUtil.deleteMeal(meal);
+        
+        mealCatalog.removeMeal(meal);
+        
+        mealVBox.getChildren().remove(vbox);
+    }
+    
     @FXML
     void quickAdd() {
         quickAddVBox.setVisible(!quickAddVBox.isVisible());
