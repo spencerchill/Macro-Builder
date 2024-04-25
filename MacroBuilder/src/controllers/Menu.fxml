@@ -482,6 +482,11 @@
                                  </padding>
                               </HBox>
                               <Button fx:id="submitFoodButton" mnemonicParsing="false" onAction="#submitFood" text="Submit" />
+                              <Button fx:id="foodCancel" mnemonicParsing="false" onAction="#cancelFood" text="Cancel">
+                                 <VBox.margin>
+                                    <Insets top="6.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                         </VBox>
                      </children>
