@@ -360,6 +360,45 @@ public boolean loginUser(String username, String password) throws SQLException {
           }
     }
     
+    public void deleteFood(Food food) throws SQLException {
+        int foodID = getFoodID(food);
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "DELETE FROM foods where user_id = ? and food_id = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setInt(2, foodID);
+              statement.executeUpdate();
+          }
+    }
+    
+    public int getFoodID(Food food) throws SQLException {
+        String name = food.getName();
+        int calories = food.getCalories();
+        float fat = food.getFat();
+        float carbs = food.getCarbs();
+        float protein = food.getProtein();
+        
+        try(Connection connection = DriverManager.getConnection(url, username, password)) {
+              UserManager userManager = UserManager.getInstance();
+              String query = "Select food_id FROM foods where user_id = ? and food_name = ? and calories = ? and fat = ? and carbs = ? and protein = ?";
+              PreparedStatement statement = connection.prepareStatement(query);
+              statement.setInt(1, userManager.getUserId());
+              statement.setString(2, name);
+              statement.setInt(3, calories);
+              statement.setFloat(4, fat);
+              statement.setFloat(5, carbs);
+              statement.setFloat(6, protein);
+              try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()) {
+                    return resultSet.getInt("food_id");
+                }
+          }
+        }
+        return -1;
+    }
+    
     public ArrayList<Food> getFoods() throws SQLException {
         
         try(Connection connection = DriverManager.getConnection(url, username, password)) {

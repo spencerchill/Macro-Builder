@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -365,7 +366,7 @@ public class MenuController implements Initializable {
     @FXML
     void addFood(ActionEvent event) {
        caloriesPieChart.setLabelLineLength(10); // Set a shorter label line length
-
+       
         mealFoodHBox.setVisible(false);
         addFoodVBox.setVisible(true);
     }
@@ -379,7 +380,26 @@ public class MenuController implements Initializable {
     void submitFood(ActionEvent event) throws SQLException {
         Food food = new Food(foodNameText.getText(), Integer.parseInt(foodCalText.getText()), Float.parseFloat(foodFatText.getText()),
                 Float.parseFloat(foodCarbText.getText()), Float.parseFloat(foodProteinText.getText()));
+        
+        foodNameText.clear();
+        foodCalText.clear();
+        foodFatText.clear();
+        foodCarbText.clear();
+        foodProteinText.clear();
+        
         updateFood(food, true);
+    }
+    
+    @FXML
+    void cancelFood(ActionEvent event) {
+        foodNameText.clear();
+        foodCalText.clear();
+        foodFatText.clear();
+        foodCarbText.clear();
+        foodProteinText.clear();
+        
+        mealFoodHBox.setVisible(true);
+        addFoodVBox.setVisible(false);
     }
 
     /**
@@ -390,14 +410,69 @@ public class MenuController implements Initializable {
     @FXML
     void updateFood(Food food, boolean store) throws SQLException {
         Label name = new Label(food.getName());
-        VBox vbox = new VBox(name);
+        name.setAlignment(Pos.CENTER);
+        name.setStyle("-fx-font: 16px Avenir;");
+        
+        Button eatBtn = new Button("Eat");
+        eatBtn.setAlignment(Pos.CENTER);
+        eatBtn.setPrefSize(60, 20);
+        
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.setAlignment(Pos.CENTER);
+        deleteBtn.setPrefSize(60, 20);
+        
+        HBox foodHBox = new HBox(name, eatBtn, deleteBtn);
+        foodHBox.setAlignment(Pos.CENTER);
+        foodHBox.setSpacing(10);
+        
+        Label foodCal = new Label("Cal" + Integer.toString(food.getCalories()));
+        Label foodF = new Label(" F" + Float.toString(food.getFat()));
+        Label foodC = new Label(" C" + Float.toString(food.getCarbs()));
+        Label foodP = new Label(" P" + Float.toString(food.getProtein()));
+        
+        HBox macroHBox = new HBox(foodCal, foodF, foodC, foodP);        
+        macroHBox.setAlignment(Pos.CENTER);
+        
+        VBox vbox = new VBox(foodHBox, macroHBox);
+        
+        vbox.setAlignment(Pos.CENTER);
+        
+        FoodMap foodMap = new FoodMap(food, eatBtn, deleteBtn, vbox, this);
+        
         foodVBox.getChildren().add(vbox);
+        foodVBox.setSpacing(16);
         mealFoodHBox.setVisible(true);
         addFoodVBox.setVisible(false);
+        
         if (store) {
             databaseUtil.storeFood(food);
         }
     }
+    
+    /**
+     * Method to eat a food from the meal and food menu
+     * 
+     * @param food 
+     */
+    public void eatFood(Food food) {
+        user.getDay().intake(food.getCalories(), food.getFat(), food.getCarbs(), food.getProtein(), user.getCalendar().getDate());
+        setMacroLabels();
+        updatePieChart();
+        updateScene();
+    }
+    
+    /**
+     * Method that deletes a food from the meal and food menu, updates 
+     * the food VBox, and deletes the food in the database;
+     * 
+     * @param food
+     * @throws SQLException 
+     */
+    public void deleteFood(Food food, VBox vbox) throws SQLException {
+        databaseUtil.deleteFood(food);
+        
+        foodVBox.getChildren().remove(vbox);
+       }
 
     @FXML
     void quickAdd() {
