@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Meal {
     //Fields
     private ArrayList<Food> foods; // List of food items in the meal
+    private String name;        //name of Meal
     private int totalCalories; //Total calories in the meal
     private float totalFat; //Total fat content in the meal
     private float totalCarbs; //Total carbs content in the meal
@@ -27,10 +28,27 @@ public class Meal {
      */
     public Meal() {
         this.foods = new ArrayList<>();
+        this.name = "";
         this.totalCalories = 0;
         this.totalFat = 0.0f;
         this.totalCarbs = 0.0f;
         this.totalProtein = 0.0f;
+    }
+    
+    /**
+     * method that sets the name of a meal
+     * @param name 
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    /**
+     * Method that returns the name of the meal as a string
+     * @return 
+     */
+    public String getName() {
+        return this.name;
     }
     /**
      * Adds a food item to the meal and updates the total nutritional information
@@ -38,10 +56,7 @@ public class Meal {
      */
     public void addFood(Food food) {
         foods.add(food);
-        totalCalories += food.getCalories();
-        totalFat += food.getFat();
-        totalCarbs += food.getCarbs();
-        totalProtein += food.getProtein();
+        calc();
     }
     /**
      * Removes a food item from the meal and updates the total nutritional information.
@@ -49,11 +64,7 @@ public class Meal {
      */
     public void removeFood(Food food) {
         foods.remove(food); //Removes the food item from the list.
-        //Update the total nutritional information
-        totalCalories -= food.getCalories();
-        totalFat -= food.getFat();
-        totalCarbs -= food.getCarbs();
-        totalProtein -= food.getProtein();
+        calc();
     }
     /**
      * Retrieves the list of food items in the meal
@@ -61,6 +72,23 @@ public class Meal {
      */
     public ArrayList<Food> getFoods() {
         return foods;
+    }
+    
+    /**
+     * calculates the calorie and macros in a meal
+     */
+    public void calc() {
+        totalCalories = 0;
+        totalFat = 0;
+        totalCarbs = 0;
+        totalProtein = 0;
+        
+        for (int i = 0; i < foods.size(); i++) {
+            totalCalories += foods.get(i).getCalories();
+            totalFat += foods.get(i).getFat();
+            totalCarbs += foods.get(i).getCarbs();
+            totalProtein += foods.get(i).getProtein();
+        }
     }
     /**
      * Retrieves the total calorie content of the meal

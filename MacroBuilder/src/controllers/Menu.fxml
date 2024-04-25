@@ -370,7 +370,7 @@
                                           <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="addMealButton" mnemonicParsing="false" text="Add Meal">
+                                    <Button fx:id="addMealButton" mnemonicParsing="false" onAction="#addMeal" text="Add Meal">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -487,6 +487,44 @@
                                     <Insets top="6.0" />
                                  </VBox.margin>
                               </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="addMealVBox" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="420.0" prefWidth="319.0" visible="false">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
+                                 <children>
+                                    <Label graphicTextGap="5.0" text="Name">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="mealNameText" onKeyTyped="#updateMealNameDisplay" />
+                                 </children>
+                                 <padding>
+                                    <Insets right="6.0" />
+                                 </padding>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                              <VBox fx:id="foodMealVBox" prefHeight="200.0" prefWidth="100.0" />
+                              <Button fx:id="submitMealButton" mnemonicParsing="false" onAction="#submitMeal" text="Submit" />
+                              <Button fx:id="mealCancel" mnemonicParsing="false" onAction="#cancelMeal" text="Cancel">
+                                 <VBox.margin>
+                                    <Insets top="6.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Label fx:id="mealNameDisplay" graphicTextGap="5.0">
+                                 <font>
+                                    <Font name="Avenir Roman" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
