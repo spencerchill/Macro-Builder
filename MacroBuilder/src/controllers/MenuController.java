@@ -4,8 +4,10 @@
  */
 package controllers;
 
+import database.ApiClient;
 import database.DatabaseUtil;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -51,14 +53,19 @@ import objects.MealCatalog;
  */
 public class MenuController implements Initializable {
 
+    
     private DatabaseUtil databaseUtil;
     private ChartData chartData;
     private User user;
     private FoodCatalog catalog;
     private MealCatalog mealCatalog;
     private double dontDeleteThis;
-    
+    private ApiClient api;
     // litterally have to make 4 rectangles because they cant have same id smh.
+    @FXML
+    private Button apiButton;
+    @FXML
+    private TextField apiNameField;
     @FXML
     private Rectangle rectangle; 
     @FXML
@@ -496,7 +503,7 @@ public class MenuController implements Initializable {
     public void eatFood(Food food) {
         user.getDay().intake(food.getCalories(), food.getFat(), food.getCarbs(), food.getProtein(), user.getCalendar().getDate());
         setMacroLabels();
-        updatePieChart();
+        updatePieChart2();
         updateScene();
     }
     
@@ -701,7 +708,7 @@ public class MenuController implements Initializable {
     public void eatMeal(Meal meal) {
         user.getDay().intake(meal.getTotalCalories(), meal.getTotalFat(), meal.getTotalCarbs(), meal.getTotalProtein(), user.getCalendar().getDate());
         setMacroLabels();
-        updatePieChart();
+        updatePieChart2();
         updateScene();
     }
     
@@ -897,5 +904,29 @@ public class MenuController implements Initializable {
             rectangle4.getStyleClass().clear(); 
             rectangle4.getStyleClass().add("red-style"); 
         }
+    }
+    @FXML
+    private void addFoodByApi(){
+        try {
+            
+            String foodText = apiNameField.getText();
+            api = new ApiClient(foodText);
+            Food newFood = api.getFood();
+            try {
+                if(!newFood.getName().equals("null")){
+                    catalog.addFood(newFood);
+                    updateFood(newFood, false);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            apiNameField.clear();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void changeActivityLevel(){
     }
 }

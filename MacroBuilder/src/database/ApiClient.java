@@ -14,22 +14,83 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import objects.Food;
 
 /**
  *
  * @author KingJ
  */
 public class ApiClient {
-  private URL url;
-  
+  private static URL url;
+  private float fat;
+  private int calories;
+  private float carbs;
+  private float protein;
+  private String nutrientName;
+  private static String apiUrl;
+  private String foodText;
+  private String apiKey;
 // pass the text as parameter later
-    public ApiClient() {
-        // this is where ill concatenate url
+    public ApiClient(String foodText) {
+      try {
+          ConfigReader configReader = new ConfigReader("config.properties");
+          apiKey = configReader.getApiKey();
+          this.foodText = foodText;
+          apiUrl = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + apiKey + "&query=" + foodText;
+      } catch (IOException ex) {
+          Logger.getLogger(ApiClient.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
     
-    public void getFood() throws MalformedURLException{
-      try {
-          this.url = new URL("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=APIKEY&query=Apple");
+    public Food getFood() throws MalformedURLException{
+                   // we have no list to display for autocomplete. so i just return the exact representation of the query.
+                  JSONObject food = searchForFood(foodText);
+                  // lmao just return food with null name then check if food has name = null
+                  if(food== null){
+                      return new Food("null", 0, 0.0f, 0.0f, 0.0f);
+                  }
+                  // Name of food
+                  String description = food.getString("description");
+                  System.out.println(description);
+                  
+                  JSONArray nutrients = food.getJSONArray("foodNutrients");
+                  //loop through nutrients array to find the ones we want (sucks).
+                  for(int i = 0; i < nutrients.length(); i++){
+                      
+                      JSONObject nutrient = nutrients.getJSONObject(i);
+                      nutrientName = nutrient.getString("nutrientName");
+                       
+                  switch (nutrientName) {
+                      case "Energy" -> {
+                          calories = nutrient.getInt("value");
+                          System.out.println("Calories: " + calories);
+                          }
+                      case "Total fat (NLEA)" -> {
+                          fat = nutrient.getInt("value");
+                          System.out.println("Fat: " + fat);
+                          }
+                      case "Carbohydrate, by difference" -> {
+                          carbs = nutrient.getInt("value");
+                          System.out.println("Carbs: " + carbs);
+                          }
+                      case "Protein" -> {
+                          protein = nutrient.getInt("value");
+                          System.out.println("Protein: " + protein);
+                          }
+                      default -> {
+                          }
+                  }
+                  }
+                  Food apiFood = new Food(foodText, calories, fat, carbs, protein);
+                  return apiFood;
+          }
+    
+    // searches for the exact match to the query.
+    // had to do this because i dont have  a list to be able to show
+    // so if user enters yello i retriev corn im like brother.
+    public static JSONObject searchForFood(String query){
+        try {
+          ApiClient.url = new URL(apiUrl);
           
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setRequestMethod("GET");
@@ -46,16 +107,20 @@ public class ApiClient {
                   informationString.append(scanner.nextLine());
               }
               conn.disconnect();
-              JSONObject json = new JSONObject(informationString.toString());
-              JSONArray arr = json.getJSONArray("food");
-              
-              for(int i = 0; i < arr.length(); i++){
-                  System.out.println("TBC");
-              }
+             JSONObject json = new JSONObject(informationString.toString());
+             JSONArray foodArray = json.getJSONArray("foods");
+             for(int i = 0; i < foodArray.length(); i++){
+                 JSONObject food = foodArray.getJSONObject(i);
+                 if(food.getString("description").equalsIgnoreCase(query)){
+                     return food;
+                 }
+             }
+             return null;
+                  }
+          }catch (IOException | RuntimeException  ex) {
+              Logger.getLogger(ApiClient.class.getName()).log(Level.SEVERE, null, ex);
+              return null;
           }
           
-      }catch (Exception  ex) {
-              Logger.getLogger(ApiClient.class.getName()).log(Level.SEVERE, null, ex);
-          }
+      }
     }
-}

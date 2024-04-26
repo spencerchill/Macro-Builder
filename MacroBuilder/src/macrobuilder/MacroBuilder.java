@@ -4,6 +4,7 @@
  */
 package macrobuilder;
 
+import database.ApiClient;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import objects.Food;
 
 /**
  *
@@ -22,7 +24,7 @@ import javafx.stage.Stage;
  * @author ibrah
  */
 public class MacroBuilder extends Application {
-
+    private ApiClient api;
     public static void main(String[] args) {
         launch(args);
     }
@@ -30,7 +32,6 @@ public class MacroBuilder extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException, SQLException {
         Image favicon = new Image("favicon-16x16.png");
-        
         Screen screen = Screen.getPrimary();
        // Rectangle2D bounds = screen.getVisualBounds();
        // primaryStage.setX(bounds.getMinX());

@@ -361,7 +361,27 @@
                               </LinearGradient>
                            </fill>
                         </Rectangle>
-                        <HBox fx:id="mealFoodHBox" layoutY="-8.0" prefHeight="900.0" prefWidth="1983.0" styleClass="rectangleMenu">
+                        <AnchorPane layoutX="668.0" layoutY="10.0" prefHeight="126.0" prefWidth="1139.0">
+                           <children>
+                              <Label layoutX="-87.0" layoutY="32.0" prefHeight="50.0" prefWidth="360.0" text="Search for Food by Name:">
+                                 <font>
+                                    <Font name="Roboto" size="28.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="apiNameField" layoutX="246.0" layoutY="38.0" prefHeight="39.0" prefWidth="236.0">
+                                 <font>
+                                    <Font name="Roboto Light" size="12.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="apiButton" layoutX="507.0" layoutY="45.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="25.0" prefWidth="28.0" />
+                              <ImageView fitHeight="26.0" fitWidth="30.0" layoutX="505.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@magGlass.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <HBox fx:id="mealFoodHBox" layoutY="-8.0" prefHeight="902.0" prefWidth="655.0" styleClass="rectangleMenu">
                            <children>
                               <VBox fx:id="mealVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
                                  <children>
