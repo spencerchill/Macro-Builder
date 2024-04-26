@@ -341,7 +341,11 @@ public class MenuController implements Initializable {
         }
 
         if (remainingCalories == 0 && dontDeleteThis <= 0) {
-            return;
+           for (PieChart.Data data : pieChartData) {
+            if (data.getName().contains("Consumed")) {
+                data.setName(consumedCalories + " Consumed");
+            }
+        }
         }
         else{
         pieChartData = FXCollections.observableArrayList(
@@ -517,7 +521,7 @@ public class MenuController implements Initializable {
     public void eatFood(Food food) {
         user.getDay().intake(food.getCalories(), food.getFat(), food.getCarbs(), food.getProtein(), user.getCalendar().getDate());
         setMacroLabels();
-        updatePieChart();
+        updatePieChart2();
         updateScene();
     }
     
@@ -704,6 +708,7 @@ public class MenuController implements Initializable {
         mealNameDisplay.setText("");
         foodMealVBox.getChildren().clear();
         displayMealFoods.getChildren().clear();
+        displayMealMacros.getChildren().clear();
         foods.clear();
         
         mealFoodHBox.setVisible(true);
@@ -720,6 +725,7 @@ public class MenuController implements Initializable {
         mealNameDisplay.setText("");
         foodMealVBox.getChildren().clear();
         displayMealFoods.getChildren().clear();
+        displayMealMacros.getChildren().clear();
         foods.clear();
         
         mealFoodHBox.setVisible(true);
@@ -795,7 +801,7 @@ public class MenuController implements Initializable {
     public void eatMeal(Meal meal) {
         user.getDay().intake(meal.getTotalCalories(), meal.getTotalFat(), meal.getTotalCarbs(), meal.getTotalProtein(), user.getCalendar().getDate());
         setMacroLabels();
-        updatePieChart();
+        updatePieChart2();
         updateScene();
     }
     
