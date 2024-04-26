@@ -915,7 +915,7 @@ public class MenuController implements Initializable {
             try {
                 if(!newFood.getName().equals("null")){
                     catalog.addFood(newFood);
-                    updateFood(newFood, false);
+                    updateFood(newFood, true);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -925,8 +925,5 @@ public class MenuController implements Initializable {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    @FXML
-    private void changeActivityLevel(){
-    }
+   
 }

@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,8 +36,10 @@ public class ApiClient {
       try {
           ConfigReader configReader = new ConfigReader("config.properties");
           apiKey = configReader.getApiKey();
+          // handles spaces
+         String encodedFoodText = URLEncoder.encode(foodText, "UTF-8");
           this.foodText = foodText;
-          apiUrl = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + apiKey + "&query=" + foodText;
+          apiUrl = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + apiKey + "&query=" + encodedFoodText;
       } catch (IOException ex) {
           Logger.getLogger(ApiClient.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -65,7 +68,7 @@ public class ApiClient {
                           calories = nutrient.getInt("value");
                           System.out.println("Calories: " + calories);
                           }
-                      case "Total fat (NLEA)" -> {
+                      case "Total lipid (fat)" -> {
                           fat = nutrient.getInt("value");
                           System.out.println("Fat: " + fat);
                           }
