@@ -4,8 +4,10 @@
  */
 package controllers;
 
+import database.ApiClient;
 import database.DatabaseUtil;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -59,8 +61,12 @@ public class MenuController implements Initializable {
     private MealCatalog mealCatalog;
     private double dontDeleteThis;
     private int remaining;
-    
+    private ApiClient api;
     // litterally have to make 4 rectangles because they cant have same id smh.
+    @FXML
+    private Button apiButton;
+    @FXML
+    private TextField apiNameField;
     @FXML
     private Rectangle rectangle; 
     @FXML
@@ -986,4 +992,25 @@ public class MenuController implements Initializable {
             rectangle4.getStyleClass().add("red-style"); 
         }
     }
+    @FXML
+    private void addFoodByApi(){
+        try {
+            
+            String foodText = apiNameField.getText();
+            api = new ApiClient(foodText);
+            Food newFood = api.getFood();
+            try {
+                if(!newFood.getName().equals("null")){
+                    catalog.addFood(newFood);
+                    updateFood(newFood, true);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            apiNameField.clear();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
 }

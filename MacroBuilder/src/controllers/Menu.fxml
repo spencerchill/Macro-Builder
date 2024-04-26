@@ -361,7 +361,25 @@
                               </LinearGradient>
                            </fill>
                         </Rectangle>
-                        <HBox fx:id="mealFoodHBox" layoutY="-8.0" prefHeight="900.0" prefWidth="1983.0" styleClass="rectangleMenu">
+                        <AnchorPane layoutX="607.0" prefHeight="74.0" prefWidth="483.0">
+                           <children>
+                              <Label layoutX="-15.0" prefHeight="74.0" prefWidth="190.0" text="Add Food by Name">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="apiNameField" layoutX="175.0" layoutY="25.0" />
+                              <Button layoutX="334.0" layoutY="24.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="1.0" prefWidth="5.0" style="-fx-background-color: #FFFFFF;" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/zoomer.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                           </children>
+                        </AnchorPane>
+                        <HBox fx:id="mealFoodHBox" layoutY="-8.0" prefHeight="900.0" prefWidth="667.0" styleClass="rectangleMenu">
                            <children>
                               <VBox fx:id="mealVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
                                  <children>
@@ -377,7 +395,7 @@
                                     </Button>
                                  </children>
                               </VBox>
-                              <VBox fx:id="foodVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0">
+                              <VBox fx:id="foodVBox" alignment="TOP_CENTER" prefHeight="890.0" prefWidth="348.0">
                                  <children>
                                     <Label text="Food">
                                        <font>
