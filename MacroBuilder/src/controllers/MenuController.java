@@ -35,6 +35,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import objects.ChartData;
 import objects.Day;
 import objects.Food;
@@ -135,11 +136,14 @@ public class MenuController implements Initializable {
     @FXML
     private Label nullDayLabel;
     //Meals and Food Tab
+   
+    private Font Avenir = new Font("Avenir", 16);
+    
     @FXML
     public Button addFoodButton;
     @FXML
     public Button addMealButton;
-     @FXML
+    @FXML
     public Button submitFoodButton;
     @FXML
     public Button quickAddButton;
@@ -192,6 +196,8 @@ public class MenuController implements Initializable {
     private ArrayList<Food> foods;
     
     private HBox displayMealFoods;
+    
+    private HBox displayMealMacros;
     
     @FXML
     public TextField weighInField;
@@ -450,15 +456,19 @@ public class MenuController implements Initializable {
     void updateFood(Food food, boolean store) throws SQLException {
         Label name = new Label(food.getName());
         name.setAlignment(Pos.CENTER);
-        name.setStyle("-fx-font: 16px Avenir;");
+        name.setFont(Avenir);
         
         Button eatBtn = new Button("Eat");
         eatBtn.setAlignment(Pos.CENTER);
-        eatBtn.setPrefSize(60, 20);
+        eatBtn.setPrefSize(65, 25);
+        eatBtn.setFont(Avenir);
+        eatBtn.setStyle("-fx-text-fill: #00b7ff;");
         
         Button deleteBtn = new Button("Delete");
         deleteBtn.setAlignment(Pos.CENTER);
-        deleteBtn.setPrefSize(60, 20);
+        deleteBtn.setPrefSize(65, 25);
+        deleteBtn.setFont(Avenir);
+        deleteBtn.setStyle("-fx-text-fill: #00b7ff;");
         
         HBox foodHBox = new HBox(name, eatBtn, deleteBtn);
         foodHBox.setAlignment(Pos.CENTER);
@@ -468,6 +478,11 @@ public class MenuController implements Initializable {
         Label foodF = new Label(" F" + Float.toString(food.getFat()));
         Label foodC = new Label(" C" + Float.toString(food.getCarbs()));
         Label foodP = new Label(" P" + Float.toString(food.getProtein()));
+        
+        foodCal.setFont(new Font("Avenir", 12));
+        foodF.setFont(new Font("Avenir", 12));
+        foodC.setFont(new Font("Avenir", 12));
+        foodP.setFont(new Font("Avenir", 12));
         
         HBox macroHBox = new HBox(foodCal, foodF, foodC, foodP);        
         macroHBox.setAlignment(Pos.CENTER);
@@ -525,18 +540,24 @@ public class MenuController implements Initializable {
         
         Meal meal = new Meal();
         
+        foodMealVBox.setSpacing(16);
+        
         for (int i = 0; i < catalog.size(); i++) {
         Label name = new Label(catalog.getFood(i).getName());
         name.setAlignment(Pos.CENTER);
-        name.setStyle("-fx-font: 16px Avenir;");
+        name.setFont(Avenir);  
         
         Button addBtn = new Button("Add");
         addBtn.setAlignment(Pos.CENTER);
-        addBtn.setPrefSize(60, 20);
+        addBtn.setPrefSize(65, 25);
+        addBtn.setFont(new Font("Avenir", 12));
+        addBtn.setStyle("-fx-text-fill: #00b7ff;");
         
         Button removeBtn = new Button("Remove");
         removeBtn.setAlignment(Pos.CENTER);
-        removeBtn.setPrefSize(60, 20);
+        removeBtn.setPrefSize(65, 25);
+        removeBtn.setFont(new Font("Avenir", 12));
+        removeBtn.setStyle("-fx-text-fill: #00b7ff;");
         
         HBox foodHBox = new HBox(name, addBtn, removeBtn);
         foodHBox.setAlignment(Pos.CENTER);
@@ -546,6 +567,11 @@ public class MenuController implements Initializable {
         Label foodF = new Label(" F" + Float.toString(catalog.getFood(i).getFat()));
         Label foodC = new Label(" C" + Float.toString(catalog.getFood(i).getCarbs()));
         Label foodP = new Label(" P" + Float.toString(catalog.getFood(i).getProtein()));
+        
+        foodCal.setFont(new Font("Avenir", 12));
+        foodF.setFont(new Font("Avenir", 12));
+        foodC.setFont(new Font("Avenir", 12));
+        foodP.setFont(new Font("Avenir", 12));
         
         HBox macroHBox = new HBox(foodCal, foodF, foodC, foodP);        
         macroHBox.setAlignment(Pos.CENTER);
@@ -560,7 +586,11 @@ public class MenuController implements Initializable {
         }
         
         displayMealFoods = new HBox();
+        displayMealMacros = new HBox();
+        displayMealFoods.setAlignment(Pos.CENTER);
+        displayMealMacros.setAlignment(Pos.CENTER);
         addMealVBox.getChildren().add(displayMealFoods);
+        addMealVBox.getChildren().add(displayMealMacros);
         foods = new ArrayList<Food>();
     }
     
@@ -573,11 +603,36 @@ public class MenuController implements Initializable {
         foods.add(food);
         
         displayMealFoods.getChildren().clear();
+        displayMealMacros.getChildren().clear();
+        
+        int cal = 0;
+        float fat = 0.0f;
+        float carbs = 0.0f;
+        float protein = 0.0f;
         
         for (int i = 0; i < foods.size(); i++) {
             Label label = new Label(foods.get(i).getName() + " ");
+            label.setFont(new Font("Avenir", 12));
+            
             displayMealFoods.getChildren().add(label);
+            
+            cal += foods.get(i).getCalories();
+            fat += foods.get(i).getFat();
+            carbs += foods.get(i).getCarbs();
+            protein += foods.get(i).getProtein();
         }
+        
+            Label mealCal = new Label("Cal" + Integer.toString(cal));
+            Label mealF = new Label(" F" + Float.toString(fat));
+            Label mealC = new Label(" C" + Float.toString(carbs));
+            Label mealP = new Label(" P" + Float.toString(protein));
+            
+            mealCal.setFont(new Font("Avenir", 10));
+            mealF.setFont(new Font("Avenir", 10));
+            mealC.setFont(new Font("Avenir", 10));
+            mealP.setFont(new Font("Avenir", 10));
+            
+            displayMealMacros.getChildren().addAll(mealCal, mealF, mealC, mealP);
     }
     
     /**
@@ -589,11 +644,35 @@ public class MenuController implements Initializable {
         foods.remove(food);
         
         displayMealFoods.getChildren().clear();
+        displayMealMacros.getChildren().clear();
+        
+        int cal = 0;
+        float fat = 0.0f;
+        float carbs = 0.0f;
+        float protein = 0.0f;
         
         for (int i = 0; i < foods.size(); i++) {
             Label label = new Label(foods.get(i).getName() + " ");
+            label.setFont(new Font("Avenir", 12));
             displayMealFoods.getChildren().add(label);
+            
+            cal += foods.get(i).getCalories();
+            fat += foods.get(i).getFat();
+            carbs += foods.get(i).getCarbs();
+            protein += foods.get(i).getProtein();
         }
+        
+            Label mealCal = new Label("Cal" + Integer.toString(cal));
+            Label mealF = new Label(" F" + Float.toString(fat));
+            Label mealC = new Label(" C" + Float.toString(carbs));
+            Label mealP = new Label(" P" + Float.toString(protein));
+            
+            mealCal.setFont(new Font("Avenir", 10));
+            mealF.setFont(new Font("Avenir", 10));
+            mealC.setFont(new Font("Avenir", 10));
+            mealP.setFont(new Font("Avenir", 10));
+            
+            displayMealMacros.getChildren().addAll(mealCal, mealF, mealC, mealP);
     }
     
     /**
@@ -658,15 +737,19 @@ public class MenuController implements Initializable {
     void updateMeal(Meal meal) {
         Label name = new Label(meal.getName());
         name.setAlignment(Pos.CENTER);
-        name.setStyle("-fx-font: 16px Avenir;");
+        name.setFont(Avenir);
         
         Button eatBtn = new Button("Eat");
         eatBtn.setAlignment(Pos.CENTER);
-        eatBtn.setPrefSize(60, 20);
+        eatBtn.setPrefSize(65, 25);
+        eatBtn.setFont(Avenir);
+        eatBtn.setStyle("-fx-text-fill: #00b7ff;");
         
         Button deleteBtn = new Button("Delete");
         deleteBtn.setAlignment(Pos.CENTER);
-        deleteBtn.setPrefSize(60, 20);
+        deleteBtn.setPrefSize(65, 25);
+        deleteBtn.setFont(Avenir);
+        deleteBtn.setStyle("-fx-text-fill: #00b7ff;");
         
         HBox mealHBox = new HBox(name, eatBtn, deleteBtn);
         mealHBox.setAlignment(Pos.CENTER);
@@ -676,6 +759,11 @@ public class MenuController implements Initializable {
         Label mealF = new Label(" F" + Float.toString(meal.getTotalFat()));
         Label mealC = new Label(" C" + Float.toString(meal.getTotalCarbs()));
         Label mealP = new Label(" P" + Float.toString(meal.getTotalProtein()));
+        
+        mealCal.setFont(new Font("Avenir", 12));
+        mealF.setFont(new Font("Avenir", 12));
+        mealC.setFont(new Font("Avenir", 12));
+        mealP.setFont(new Font("Avenir", 12));
         
         HBox macroHBox = new HBox(mealCal, mealF, mealC, mealP);        
         macroHBox.setAlignment(Pos.CENTER);

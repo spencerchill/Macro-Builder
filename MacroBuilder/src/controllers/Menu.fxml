@@ -370,9 +370,9 @@
                                           <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="addMealButton" mnemonicParsing="false" onAction="#addMeal" text="Add Meal">
+                                    <Button fx:id="addMealButton" mnemonicParsing="false" onAction="#addMeal" text="Add Meal" textFill="#00b7ff">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font name="Avenir Roman" size="20.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -384,9 +384,9 @@
                                           <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="addFoodButton" mnemonicParsing="false" onAction="#addFood" text="Add Food">
+                                    <Button fx:id="addFoodButton" mnemonicParsing="false" onAction="#addFood" text="Add Food" textFill="#00b7ff">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font name="Avenir Roman" size="20.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -427,7 +427,10 @@
                                           <Insets right="5.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="foodCalText" />
+                                    <TextField fx:id="foodCalText">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font></TextField>
                                  </children>
                                  <padding>
                                     <Insets right="15.0" />
@@ -459,7 +462,10 @@
                                           <Insets right="5.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="foodCarbText" />
+                                    <TextField fx:id="foodCarbText">
+                                       <font>
+                                          <Font name="Avenir Roman" size="13.0" />
+                                       </font></TextField>
                                  </children>
                                  <padding>
                                     <Insets right="5.0" />
@@ -481,11 +487,17 @@
                                     <Insets right="12.0" />
                                  </padding>
                               </HBox>
-                              <Button fx:id="submitFoodButton" mnemonicParsing="false" onAction="#submitFood" text="Submit" />
-                              <Button fx:id="foodCancel" mnemonicParsing="false" onAction="#cancelFood" text="Cancel">
+                              <Button fx:id="submitFoodButton" mnemonicParsing="false" onAction="#submitFood" text="Submit" textFill="#00b7ff">
+                                 <font>
+                                    <Font name="Avenir Roman" size="13.0" />
+                                 </font></Button>
+                              <Button fx:id="foodCancel" mnemonicParsing="false" onAction="#cancelFood" text="Cancel" textFill="#00b7ff">
                                  <VBox.margin>
                                     <Insets top="6.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font name="Avenir Roman" size="13.0" />
+                                 </font>
                               </Button>
                            </children>
                         </VBox>
@@ -511,11 +523,17 @@
                                  </opaqueInsets>
                               </HBox>
                               <VBox fx:id="foodMealVBox" prefHeight="200.0" prefWidth="100.0" />
-                              <Button fx:id="submitMealButton" mnemonicParsing="false" onAction="#submitMeal" text="Submit" />
-                              <Button fx:id="mealCancel" mnemonicParsing="false" onAction="#cancelMeal" text="Cancel">
+                              <Button fx:id="submitMealButton" mnemonicParsing="false" onAction="#submitMeal" text="Submit" textFill="#00b7ff">
+                                 <font>
+                                    <Font name="Avenir Roman" size="13.0" />
+                                 </font></Button>
+                              <Button fx:id="mealCancel" mnemonicParsing="false" onAction="#cancelMeal" text="Cancel" textFill="#00b7ff">
                                  <VBox.margin>
                                     <Insets top="6.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font name="Avenir Roman" size="13.0" />
+                                 </font>
                               </Button>
                               <Label fx:id="mealNameDisplay" graphicTextGap="5.0">
                                  <font>
