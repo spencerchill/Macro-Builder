@@ -66,6 +66,8 @@ public class MenuController implements Initializable {
     private ApiClient api;
     // litterally have to make 4 rectangles because they cant have same id smh.
     @FXML
+    private Label todayWeightLabel;
+    @FXML
     private Button saveButton;
     @FXML
     private Button searchButton;
@@ -275,6 +277,7 @@ public class MenuController implements Initializable {
                updatePieChart();
                 updateScene();
                 setActivityLabel();
+                setWeightLabel();
                 createChart(6);
             }
             
@@ -890,6 +893,7 @@ public class MenuController implements Initializable {
             createChart(6);
             user.getDay().recalcMacros();
             updateScene();
+            setWeightLabel();
             updatePieChart2();
             weighInField.clear();
         } catch (SQLException ex) {
@@ -1109,5 +1113,8 @@ private void setActivityLabel(){
     else{
         activityLabel.setText("Currently Moderately Active");
     }
+}
+private void setWeightLabel(){
+    todayWeightLabel.setText("Today's weight: " + user.getWeight() + " lbs");
 }
 }

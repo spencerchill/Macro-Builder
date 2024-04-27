@@ -540,27 +540,28 @@
                                     </LinearGradient>
                                  </fill>
                               </Rectangle>
-                              <Label fx:id="activityLabel" layoutX="578.0" layoutY="60.0" prefHeight="47.0" prefWidth="830.0" text="Currently ">
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="62.0" layoutX="-64.0" layoutY="-42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20px; -fx-arc-width: 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" width="1185.0" />
+                              <Label fx:id="activityLabel" layoutX="570.0" layoutY="-32.0" prefHeight="47.0" prefWidth="830.0" text="Currently ">
                                  <font>
                                     <Font size="32.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="weighInField" layoutX="304.0" layoutY="65.0" onKeyPressed="#saveButtonPress" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);">
+                              <TextField fx:id="weighInField" layoutX="314.0" layoutY="46.0" onKeyPressed="#saveButtonPress" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);">
                                  <font>
                                     <Font name="Roboto" size="12.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="14.0" layoutY="29.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="#433a2d">
+                              <Label layoutY="11.0" prefHeight="109.0" prefWidth="320.0" text="Update Today's Weight:" textFill="#433a2d">
                                  <font>
                                     <Font name="Impact" size="32.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="saveButton" layoutX="402.0" layoutY="65.0" mnemonicParsing="false" onAction="#weighIn" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
+                              <Button fx:id="saveButton" layoutX="400.0" layoutY="48.0" mnemonicParsing="false" onAction="#weighIn" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
                                  <font>
                                     <Font name="Roboto" size="19.0" />
                                  </font>
                               </Button>
-                              <ToggleButton fx:id="notActiveBut" graphicTextGap="0.0" layoutX="911.0" layoutY="139.0" mnemonicParsing="false" onAction="#notActiveChange" prefHeight="43.0" prefWidth="208.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Not active">
+                              <ToggleButton fx:id="notActiveBut" graphicTextGap="0.0" layoutX="911.0" layoutY="48.0" mnemonicParsing="false" onAction="#notActiveChange" prefHeight="43.0" prefWidth="208.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Not active">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="modeToggleGroup1" />
                                  </toggleGroup>
@@ -568,7 +569,7 @@
                                     <Font name="Roboto Medium" size="21.0" />
                                  </font>
                               </ToggleButton>
-                              <ToggleButton fx:id="modActiveBut" graphicTextGap="0.0" layoutX="911.0" layoutY="199.0" mnemonicParsing="false" onAction="#modActiveChange" prefHeight="43.0" prefWidth="208.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Moderately active">
+                              <ToggleButton fx:id="modActiveBut" graphicTextGap="0.0" layoutX="911.0" layoutY="106.0" mnemonicParsing="false" onAction="#modActiveChange" prefHeight="43.0" prefWidth="208.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Moderately active">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="modeToggleGroup2" />
                                  </toggleGroup>
@@ -576,7 +577,7 @@
                                     <Font name="Roboto Medium" size="21.0" />
                                  </font>
                               </ToggleButton>
-                              <ToggleButton fx:id="activeBut" graphicTextGap="0.0" layoutX="912.0" layoutY="254.0" mnemonicParsing="false" onAction="#activeChange" prefHeight="43.0" prefWidth="207.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Active">
+                              <ToggleButton fx:id="activeBut" graphicTextGap="0.0" layoutX="912.0" layoutY="166.0" mnemonicParsing="false" onAction="#activeChange" prefHeight="43.0" prefWidth="207.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Active">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="modeToggleGroup3" />
                                  </toggleGroup>
@@ -584,16 +585,21 @@
                                     <Font name="Roboto Medium" size="21.0" />
                                  </font>
                               </ToggleButton>
-                              <Label layoutX="578.0" layoutY="140.0" text="Changed activity levels?">
+                              <Label layoutX="570.0" layoutY="46.0" text="Changed activity levels?">
                                  <font>
                                     <Font name="Impact" size="32.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="saveButtonActivity" layoutX="954.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleActivityLevelChange" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
+                              <Button fx:id="saveButtonActivity" layoutX="954.0" layoutY="227.0" mnemonicParsing="false" onAction="#handleActivityLevelChange" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
                                  <font>
                                     <Font name="Roboto" size="19.0" />
                                  </font>
                               </Button>
+                              <Label fx:id="todayWeightLabel" layoutY="-32.0" prefHeight="47.0" prefWidth="830.0" text="Today's weight: ">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
@@ -635,7 +641,7 @@
                               <Font name="Impact" size="35.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="calendarAnchor" layoutX="282.0" layoutY="24.0" prefHeight="307.0" prefWidth="377.0">
+                        <AnchorPane fx:id="calendarAnchor" layoutX="282.0" layoutY="24.0" prefHeight="307.0" prefWidth="377.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="273.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-arc-height: 20px; -fx-arc-width: 20px;" width="314.0" />
                               <Label fx:id="calendarWeight" layoutX="14.0" layoutY="106.0" prefHeight="35.0" prefWidth="363.0" text="Weight: ">
