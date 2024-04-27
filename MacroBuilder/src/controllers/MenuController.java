@@ -33,6 +33,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -63,6 +65,8 @@ public class MenuController implements Initializable {
     private int remaining;
     private ApiClient api;
     // litterally have to make 4 rectangles because they cant have same id smh.
+    @FXML
+    private Button searchButton;
     @FXML
     private Button apiButton;
     @FXML
@@ -1018,5 +1022,17 @@ public class MenuController implements Initializable {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    void onEnterPressed(KeyEvent event) {
+    if (event.getCode() == KeyCode.ENTER) {
+        handleEnter();
+    }
+}
+
+@FXML
+private void handleEnter() {
+searchButton.fire();
+}
    
 }

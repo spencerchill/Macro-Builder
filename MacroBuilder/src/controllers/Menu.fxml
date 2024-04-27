@@ -368,8 +368,8 @@
                                     <Font size="21.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="apiNameField" layoutX="175.0" layoutY="25.0" />
-                              <Button layoutX="334.0" layoutY="24.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="1.0" prefWidth="5.0" style="-fx-background-color: #FFFFFF;" textFill="WHITE">
+                              <TextField fx:id="apiNameField" layoutX="175.0" layoutY="25.0" onKeyPressed="#onEnterPressed" />
+                              <Button fx:id="searchButton" layoutX="334.0" layoutY="24.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="1.0" prefWidth="5.0" style="-fx-background-color: #FFFFFF;" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
