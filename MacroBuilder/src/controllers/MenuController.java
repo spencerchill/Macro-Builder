@@ -119,7 +119,8 @@ public class MenuController implements Initializable {
 
     @FXML
     private ProgressBar proteinProgressBar;
-    
+    @FXML
+    private Rectangle quickAddRectangle;
     private User.CurrentMode newMode;
     private double calProgress;
     private double fatProgress;
@@ -828,6 +829,7 @@ public class MenuController implements Initializable {
     
     @FXML
     void quickAdd() {
+        quickAddRectangle.setVisible(!quickAddRectangle.isVisible());
         quickAddVBox.setVisible(!quickAddVBox.isVisible());
     }
 
