@@ -1013,7 +1013,7 @@ public class MenuController implements Initializable {
      */
     private void updateMacroLabels() {
         caloriesLabel.setText("Calorie Goal: " + (int) user.getDay().getCalorieGoal());
-        fatLabel.setText("Fat Goal:" + Integer.toString((int) user.getDay().getFatGoal()));
+        fatLabel.setText("Fat Goal: " + Integer.toString((int) user.getDay().getFatGoal()));
         carbLabel.setText("Carb Goal: " + Integer.toString((int) user.getDay().getCarbGoal()));
         proteinLabel.setText("Protein Goal: " + Integer.toString((int) user.getDay().getProteinGoal()));
         calLabel.setText("Calorie Goal: " + Integer.toString((int) user.getDay().getCalorieGoal()));
