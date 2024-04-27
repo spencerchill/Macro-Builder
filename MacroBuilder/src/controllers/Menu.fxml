@@ -147,7 +147,8 @@
                                           <TextField fx:id="quickAddTextCalories" prefHeight="25.0" prefWidth="125.0">
                                              <opaqueInsets>
                                                 <Insets />
-                                             </opaqueInsets></TextField>
+                                             </opaqueInsets>
+                                          </TextField>
                                        </children>
                                        <padding>
                                           <Insets right="15.0" />
@@ -268,7 +269,8 @@
                                           <Image url="@../images/zoomer.png" />
                                        </image>
                                     </ImageView>
-                                 </graphic></Button>
+                                 </graphic>
+                              </Button>
                            </children>
                         </AnchorPane>
                         <HBox fx:id="mealFoodHBox" layoutY="-8.0" prefHeight="900.0" prefWidth="667.0" styleClass="rectangleMenu">
@@ -340,7 +342,8 @@
                                     <TextField fx:id="foodCalText">
                                        <font>
                                           <Font name="Avenir Roman" size="13.0" />
-                                       </font></TextField>
+                                       </font>
+                                    </TextField>
                                  </children>
                                  <padding>
                                     <Insets right="15.0" />
@@ -375,7 +378,8 @@
                                     <TextField fx:id="foodCarbText">
                                        <font>
                                           <Font name="Avenir Roman" size="13.0" />
-                                       </font></TextField>
+                                       </font>
+                                    </TextField>
                                  </children>
                                  <padding>
                                     <Insets right="5.0" />
@@ -400,7 +404,8 @@
                               <Button fx:id="submitFoodButton" mnemonicParsing="false" onAction="#submitFood" text="Submit" textFill="#00b7ff">
                                  <font>
                                     <Font name="Avenir Roman" size="13.0" />
-                                 </font></Button>
+                                 </font>
+                              </Button>
                               <Button fx:id="foodCancel" mnemonicParsing="false" onAction="#cancelFood" text="Cancel" textFill="#00b7ff">
                                  <VBox.margin>
                                     <Insets top="6.0" />
@@ -436,7 +441,8 @@
                               <Button fx:id="submitMealButton" mnemonicParsing="false" onAction="#submitMeal" text="Submit" textFill="#00b7ff">
                                  <font>
                                     <Font name="Avenir Roman" size="13.0" />
-                                 </font></Button>
+                                 </font>
+                              </Button>
                               <Button fx:id="mealCancel" mnemonicParsing="false" onAction="#cancelMeal" text="Cancel" textFill="#00b7ff">
                                  <VBox.margin>
                                     <Insets top="6.0" />
@@ -534,17 +540,56 @@
                                     </LinearGradient>
                                  </fill>
                               </Rectangle>
+                              <Label fx:id="activityLabel" layoutX="578.0" layoutY="60.0" prefHeight="47.0" prefWidth="830.0" text="Currently ">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
                               <TextField fx:id="weighInField" layoutX="304.0" layoutY="65.0" onKeyPressed="#saveButtonPress" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);">
                                  <font>
                                     <Font name="Roboto" size="12.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="52.0" layoutY="30.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="#433a2d">
+                              <Label layoutX="14.0" layoutY="29.0" prefHeight="109.0" prefWidth="278.0" text="Enter Todays Weight:" textFill="#433a2d">
                                  <font>
-                                    <Font name="Impact" size="26.0" />
+                                    <Font name="Impact" size="32.0" />
                                  </font>
                               </Label>
                               <Button fx:id="saveButton" layoutX="402.0" layoutY="65.0" mnemonicParsing="false" onAction="#weighIn" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
+                                 <font>
+                                    <Font name="Roboto" size="19.0" />
+                                 </font>
+                              </Button>
+                              <ToggleButton fx:id="notActiveBut" graphicTextGap="0.0" layoutX="911.0" layoutY="139.0" mnemonicParsing="false" onAction="#notActiveChange" prefHeight="43.0" prefWidth="208.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Not active">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="modeToggleGroup1" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font name="Roboto Medium" size="21.0" />
+                                 </font>
+                              </ToggleButton>
+                              <ToggleButton fx:id="modActiveBut" graphicTextGap="0.0" layoutX="911.0" layoutY="199.0" mnemonicParsing="false" onAction="#modActiveChange" prefHeight="43.0" prefWidth="208.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Moderately active">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="modeToggleGroup2" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font name="Roboto Medium" size="21.0" />
+                                 </font>
+                              </ToggleButton>
+                              <ToggleButton fx:id="activeBut" graphicTextGap="0.0" layoutX="912.0" layoutY="254.0" mnemonicParsing="false" onAction="#activeChange" prefHeight="43.0" prefWidth="207.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" text="Active">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="modeToggleGroup3" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font name="Roboto Medium" size="21.0" />
+                                 </font>
+                              </ToggleButton>
+                              <Label layoutX="578.0" layoutY="140.0" text="Changed activity levels?">
+                                 <font>
+                                    <Font name="Impact" size="32.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="saveButtonActivity" layoutX="954.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleActivityLevelChange" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
                                  <font>
                                     <Font name="Roboto" size="19.0" />
                                  </font>
