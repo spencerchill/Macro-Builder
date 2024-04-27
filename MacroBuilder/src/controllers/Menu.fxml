@@ -24,7 +24,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
@@ -66,124 +65,14 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="917.0" prefWidth="2592.0" style="-fx-background-color: #FFFFFF;" stylesheets="@menu.css">
                      <children>
-                        <AnchorPane layoutX="1332.0" layoutY="-3.0" prefHeight="934.0" prefWidth="1232.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, white);" />
+                        <AnchorPane layoutX="1328.0" layoutY="-8.0" prefHeight="934.0" prefWidth="1232.0" style="-fx-border-color: black; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: linear-gradient(to top, orange, white);" />
                         <AnchorPane prefHeight="967.0" prefWidth="649.0" style="-fx-background-color: linear-gradient(to top, orange, white); -fx-border-width: 0px; -fx-border-color: black; -fx-border-radius: 3px;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" height="226.0" layoutX="14.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="623.0">
-                                 <fill>
-                                    <RadialGradient centerX="0.3342541436464088" centerY="0.5" focusAngle="-122.62" focusDistance="0.5287356321839081" radius="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="0.006711409395973154">
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </RadialGradient>
-                                 </fill>
-                              </Rectangle>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" height="40.0" layoutX="16.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="622.0">
-                                 <fill>
-                                    <RadialGradient centerX="0.3342541436464088" centerY="0.5" focusAngle="-122.62" focusDistance="0.5287356321839081" radius="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="0.006711409395973154">
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </RadialGradient>
-                                 </fill>
-                              </Rectangle>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" height="34.0" layoutX="16.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="622.0">
-                                 <fill>
-                                    <RadialGradient centerX="0.3342541436464088" centerY="0.5" focusAngle="-122.62" focusDistance="0.5287356321839081" radius="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="0.006711409395973154">
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </RadialGradient>
-                                 </fill>
-                              </Rectangle>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" height="40.0" layoutX="16.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="622.0">
-                                 <fill>
-                                    <RadialGradient centerX="0.3342541436464088" centerY="0.5" focusAngle="-122.62" focusDistance="0.5287356321839081" radius="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="0.006711409395973154">
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </RadialGradient>
-                                 </fill>
-                              </Rectangle>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" height="40.0" layoutX="16.0" layoutY="161.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="622.0">
-                                 <fill>
-                                    <RadialGradient centerX="0.3342541436464088" centerY="0.5" focusAngle="-122.62" focusDistance="0.5287356321839081" radius="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="0.006711409395973154">
-                                             <color>
-                                                <Color red="0.40789473056793213" green="0.31042173504829407" blue="0.10008528083562851" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </RadialGradient>
-                                 </fill>
-                              </Rectangle>
+                              <Rectangle fx:id="quickAddRectangle" arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="237.0" layoutX="16.0" layoutY="269.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-arc-width: 20px; -fx-arc-height: 20px;" visible="false" width="623.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="34.0" layoutX="16.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-arc-height: 20px; -fx-arc-width: 20px;" width="622.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="34.0" layoutX="15.0" layoutY="160.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20px; -fx-arc-width: 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" width="622.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="34.0" layoutX="16.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20px; -fx-arc-width: 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" width="622.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="34.0" layoutX="16.0" layoutY="217.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20px; -fx-arc-width: 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" width="622.0" />
                               <Label layoutX="14.0" layoutY="8.0" text="Macros">
                                  <font>
                                     <Font name="Impact" size="29.0" />
@@ -200,35 +89,35 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="carbLabel" layoutX="417.0" layoutY="83.0" prefHeight="35.0" prefWidth="194.0" text="Label" textFill="#ee9f27">
+                              <Label fx:id="carbLabel" layoutX="418.0" layoutY="101.0" prefHeight="35.0" prefWidth="213.0" text="Label" textFill="#ee9f27">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <ProgressBar fx:id="carbsProgressBar" layoutX="158.0" layoutY="88.0" prefHeight="24.0" prefWidth="228.0" progress="0.0" />
-                              <ProgressBar fx:id="proteinProgressBar" layoutX="158.0" layoutY="129.0" prefHeight="22.0" prefWidth="230.0" progress="0.0" />
-                              <Label fx:id="proteinLabel" layoutX="417.0" layoutY="123.0" prefHeight="35.0" prefWidth="207.0" text="Label" textFill="#ee9f27">
+                              <ProgressBar fx:id="carbsProgressBar" layoutX="158.0" layoutY="106.0" prefHeight="24.0" prefWidth="228.0" progress="0.0" />
+                              <ProgressBar fx:id="proteinProgressBar" layoutX="158.0" layoutY="166.0" prefHeight="22.0" prefWidth="230.0" progress="0.0" />
+                              <Label fx:id="proteinLabel" layoutX="420.0" layoutY="159.0" prefHeight="35.0" prefWidth="207.0" text="Label" textFill="#ee9f27">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <ProgressBar fx:id="calProgressBar" layoutX="158.0" layoutY="170.0" prefHeight="21.0" prefWidth="230.0" progress="0.0" />
-                              <Label fx:id="calLabel" layoutX="416.0" layoutY="163.0" prefHeight="35.0" prefWidth="210.0" text="Label" textFill="#ee9f27">
+                              <ProgressBar fx:id="calProgressBar" layoutX="158.0" layoutY="223.0" prefHeight="21.0" prefWidth="230.0" progress="0.0" />
+                              <Label fx:id="calLabel" layoutX="419.0" layoutY="216.0" prefHeight="35.0" prefWidth="210.0" text="Label" textFill="#ee9f27">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="calLabelStart" layoutX="27.0" layoutY="163.0" prefHeight="35.0" prefWidth="126.0" text="Label" textFill="#ee9f27">
+                              <Label fx:id="calLabelStart" layoutX="27.0" layoutY="216.0" prefHeight="35.0" prefWidth="126.0" text="Label" textFill="#ee9f27">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="carbLabelStart" layoutX="27.0" layoutY="83.0" prefHeight="35.0" prefWidth="125.0" text="Label" textFill="#ee9f27">
+                              <Label fx:id="carbLabelStart" layoutX="25.0" layoutY="101.0" prefHeight="35.0" prefWidth="125.0" text="Label" textFill="#ee9f27">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="proteinLabelStart" layoutX="27.0" layoutY="123.0" prefHeight="35.0" prefWidth="124.0" text="Label" textFill="#ee9f27">
+                              <Label fx:id="proteinLabelStart" layoutX="25.0" layoutY="159.0" prefHeight="35.0" prefWidth="124.0" text="Label" textFill="#ee9f27">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -238,16 +127,16 @@
                                     <Font name="Impact" size="29.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="quickAddButton" layoutX="26.0" layoutY="222.0" mnemonicParsing="false" onAction="#quickAdd" prefHeight="43.0" prefWidth="201.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 30px; -fx-background-radius: 30px; -fx-background-insets: 5px;" stylesheets="@menu.css" text="Quick Add Macros" textFill="#009dff" underline="true">
+                              <Button fx:id="quickAddButton" layoutX="27.0" layoutY="274.0" mnemonicParsing="false" onAction="#quickAdd" prefHeight="43.0" prefWidth="201.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-background-insets: 5px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" stylesheets="@menu.css" text="Quick Add " textFill="#009dff">
                                  <font>
-                                    <Font name="Impact" size="21.0" />
+                                    <Font size="21.0" />
                                  </font>
                               </Button>
-                              <VBox fx:id="quickAddVBox" alignment="TOP_CENTER" layoutX="275.0" layoutY="210.0" prefHeight="236.0" prefWidth="351.0" visible="false">
+                              <VBox fx:id="quickAddVBox" alignment="TOP_CENTER" layoutX="268.0" layoutY="274.0" prefHeight="236.0" prefWidth="351.0" visible="false">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="48.0" prefWidth="287.0">
                                        <children>
-                                          <Label graphicTextGap="5.0" text="Calories" textFill="#ee9f27">
+                                          <Label graphicTextGap="5.0" prefHeight="27.0" prefWidth="75.0" text="Calories">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -255,7 +144,10 @@
                                                 <Insets right="5.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="quickAddTextCalories" />
+                                          <TextField fx:id="quickAddTextCalories" prefHeight="25.0" prefWidth="125.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets></TextField>
                                        </children>
                                        <padding>
                                           <Insets right="15.0" />
@@ -263,7 +155,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
                                        <children>
-                                          <Label graphicTextGap="5.0" text="Fat" textFill="#ee9f27">
+                                          <Label graphicTextGap="5.0" prefHeight="27.0" prefWidth="41.0" text="Fat">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -271,7 +163,7 @@
                                                 <Insets right="5.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="quickAddTextFat" />
+                                          <TextField fx:id="quickAddTextFat" prefHeight="25.0" prefWidth="130.0" />
                                        </children>
                                        <padding>
                                           <Insets left="10.0" />
@@ -279,7 +171,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
                                        <children>
-                                          <Label graphicTextGap="5.0" text="Carbs" textFill="#ee9f27">
+                                          <Label graphicTextGap="5.0" prefHeight="27.0" prefWidth="57.0" text="Carbs">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -287,15 +179,15 @@
                                                 <Insets right="5.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="quickAddTextCarbs" prefHeight="25.0" prefWidth="128.0" />
+                                          <TextField fx:id="quickAddTextCarbs" prefHeight="25.0" prefWidth="129.0" />
                                        </children>
                                        <padding>
                                           <Insets right="5.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="48.0" prefWidth="319.0">
+                                    <HBox alignment="CENTER" prefHeight="48.0" prefWidth="307.0">
                                        <children>
-                                          <Label graphicTextGap="5.0" text="Protein" textFill="#ee9f27">
+                                          <Label graphicTextGap="5.0" text="Protein">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -303,13 +195,13 @@
                                                 <Insets right="5.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="quickAddTextProtein" prefHeight="25.0" prefWidth="139.0" />
+                                          <TextField fx:id="quickAddTextProtein" prefHeight="25.0" prefWidth="130.0" />
                                        </children>
                                        <padding>
                                           <Insets right="12.0" />
                                        </padding>
                                     </HBox>
-                                    <Button fx:id="submitQuickAddButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitQuickAdd" text="Submit">
+                                    <Button fx:id="submitQuickAddButton" alignment="CENTER" mnemonicParsing="false" onAction="#submitQuickAdd" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Submit" textFill="#009dff">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -368,7 +260,7 @@
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="apiNameField" layoutX="206.0" layoutY="14.0" onKeyPressed="#onEnterPressed" />
+                              <TextField fx:id="apiNameField" layoutX="206.0" layoutY="14.0" onKeyPressed="#onEnterPressed" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" />
                               <Button fx:id="searchButton" layoutX="366.0" layoutY="14.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="1.0" prefWidth="5.0" style="-fx-background-color: #FFFFFF;" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -388,7 +280,7 @@
                                           <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="addMealButton" mnemonicParsing="false" onAction="#addMeal" text="Add Meal" textFill="#00b7ff">
+                                    <Button fx:id="addMealButton" mnemonicParsing="false" onAction="#addMeal" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Add Meal" textFill="#00b7ff">
                                        <font>
                                           <Font name="Avenir Roman" size="20.0" />
                                        </font>
@@ -402,7 +294,7 @@
                                           <Font name="Impact" size="40.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="addFoodButton" mnemonicParsing="false" onAction="#addFood" text="Add Food" textFill="#00b7ff">
+                                    <Button fx:id="addFoodButton" mnemonicParsing="false" onAction="#addFood" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Add Food" textFill="#00b7ff">
                                        <font>
                                           <Font name="Avenir Roman" size="20.0" />
                                        </font>
@@ -698,16 +590,17 @@
                               <Font name="Impact" size="35.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="calendarAnchor" layoutX="282.0" layoutY="24.0" prefHeight="399.0" prefWidth="366.0" visible="false">
+                        <AnchorPane fx:id="calendarAnchor" layoutX="282.0" layoutY="24.0" prefHeight="307.0" prefWidth="377.0">
                            <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="273.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-arc-height: 20px; -fx-arc-width: 20px;" width="314.0" />
                               <Label fx:id="calendarWeight" layoutX="14.0" layoutY="106.0" prefHeight="35.0" prefWidth="363.0" text="Weight: ">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Calibri" size="24.0" />
                                  </font>
                               </Label>
                               <Label fx:id="calendarCalGoal" layoutX="11.0" layoutY="173.0" prefHeight="35.0" prefWidth="356.0" text="Calorie Goal: ">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Calibri" size="24.0" />
                                  </font>
                               </Label>
                               <Label fx:id="calendarCalAte" layoutX="10.0" layoutY="242.0" prefHeight="35.0" prefWidth="362.0" text="Calories Ate: ">
@@ -717,12 +610,12 @@
                               </Label>
                               <Label layoutX="-38.0" layoutY="224.0" prefHeight="35.0" prefWidth="136.0">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Calibri" size="24.0" />
                                  </font>
                               </Label>
                               <Label fx:id="calendarMode" layoutX="14.0" layoutY="49.0" prefHeight="35.0" prefWidth="354.0" text="Mode: ">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Calibri" size="24.0" />
                                  </font>
                               </Label>
                            </children>
@@ -732,7 +625,7 @@
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <LineChart fx:id="weightChart" createSymbols="false" horizontalZeroLineVisible="false" layoutX="595.0" layoutY="72.0" legendVisible="false" prefHeight="443.0" prefWidth="647.0" stylesheets="@menu.css">
+                        <LineChart fx:id="weightChart" createSymbols="false" horizontalZeroLineVisible="false" layoutX="595.0" layoutY="36.0" legendVisible="false" prefHeight="443.0" prefWidth="647.0" stylesheets="@menu.css">
                           <xAxis>
                             <CategoryAxis label="Day" side="BOTTOM" style="-fx-tick-label-font-size: 15px;" stylesheets="@menu.css" />
                           </xAxis>
@@ -743,7 +636,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </LineChart>
-                        <RadioButton layoutX="696.0" layoutY="47.0" mnemonicParsing="false" onAction="#switchTo7Days" prefHeight="30.0" prefWidth="231.0" selected="true" stylesheets="@menu.css" text="7 Day Summary">
+                        <RadioButton layoutX="696.0" layoutY="9.0" mnemonicParsing="false" onAction="#switchTo7Days" prefHeight="30.0" prefWidth="231.0" selected="true" stylesheets="@menu.css" text="7 Day Summary">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -751,7 +644,7 @@
                               <ToggleGroup fx:id="chartToggleGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="927.0" layoutY="47.0" mnemonicParsing="false" onAction="#switchTo30Days" prefHeight="30.0" prefWidth="257.0" stylesheets="@menu.css" text="Month Summary" toggleGroup="$chartToggleGroup">
+                        <RadioButton layoutX="927.0" layoutY="9.0" mnemonicParsing="false" onAction="#switchTo30Days" prefHeight="30.0" prefWidth="257.0" stylesheets="@menu.css" text="Month Summary" toggleGroup="$chartToggleGroup">
                            <font>
                               <Font size="17.0" />
                            </font>
