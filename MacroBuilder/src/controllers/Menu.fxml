@@ -363,13 +363,13 @@
                         </Rectangle>
                         <AnchorPane layoutX="607.0" prefHeight="74.0" prefWidth="483.0">
                            <children>
-                              <Label layoutX="-15.0" prefHeight="74.0" prefWidth="190.0" text="Add Food by Name">
+                              <Label layoutX="-15.0" layoutY="-11.0" prefHeight="71.0" prefWidth="221.0" text="Add Food by Name">
                                  <font>
-                                    <Font size="21.0" />
+                                    <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="apiNameField" layoutX="175.0" layoutY="25.0" onKeyPressed="#onEnterPressed" />
-                              <Button fx:id="searchButton" layoutX="334.0" layoutY="24.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="1.0" prefWidth="5.0" style="-fx-background-color: #FFFFFF;" textFill="WHITE">
+                              <TextField fx:id="apiNameField" layoutX="206.0" layoutY="14.0" onKeyPressed="#onEnterPressed" />
+                              <Button fx:id="searchButton" layoutX="366.0" layoutY="14.0" mnemonicParsing="false" onAction="#addFoodByApi" prefHeight="1.0" prefWidth="5.0" style="-fx-background-color: #FFFFFF;" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -579,12 +579,12 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="811.0" prefWidth="1916.0" style="-fx-background-color: grey;" stylesheets="@menu.css">
                      <children>
                         <Rectangle id="rectangle" fx:id="rectangle3" arcHeight="2.0" arcWidth="2.0" height="918.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangleMenu" width="2560.0" />
-                        <Label layoutX="384.0" layoutY="14.0" text="Want to change your goal?" textFill="#111010">
+                        <Label layoutX="384.0" layoutY="36.0" text="Want to change your goal?">
                            <font>
                               <Font name="Impact" size="47.0" />
                            </font>
                         </Label>
-                        <ToggleButton fx:id="cutButton" layoutX="292.0" layoutY="119.0" mnemonicParsing="false" onAction="#cutButtonAction" prefHeight="40.0" prefWidth="183.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #1dc41a 100.0%);;" stylesheets="@menu.css" text="CUT">
+                        <ToggleButton fx:id="cutButton" layoutX="292.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="183.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #1dc41a 100.0%);;" stylesheets="@menu.css" text="CUT">
                            <toggleGroup>
                               <ToggleGroup fx:id="modeToggleGroup" />
                            </toggleGroup>
@@ -592,21 +592,16 @@
                               <Font name="Roboto Medium" size="21.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="maintainButton" layoutX="538.0" layoutY="119.0" mnemonicParsing="false" onAction="#maintainButtonAction" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #ffffff 0.0%, #19c6c6 100.0%);;" stylesheets="@menu.css" text="MAINTAIN" toggleGroup="$modeToggleGroup">
+                        <ToggleButton fx:id="maintainButton" layoutX="538.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #ffffff 0.0%, #19c6c6 100.0%);;" stylesheets="@menu.css" text="MAINTAIN" toggleGroup="$modeToggleGroup">
                            <font>
                               <Font name="Roboto Medium" size="20.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="bulkButton" layoutX="794.0" layoutY="119.0" mnemonicParsing="false" onAction="#bulkButtonAction" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #f21414 100.0%);;" stylesheets="@menu.css" text="BULK" toggleGroup="$modeToggleGroup">
+                        <ToggleButton fx:id="bulkButton" layoutX="794.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #f21414 100.0%);;" stylesheets="@menu.css" text="BULK" toggleGroup="$modeToggleGroup">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </ToggleButton>
-                        <Button layoutX="558.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="24.0" prefWidth="164.0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: #FFFFFF;" text="SAVE" textFill="#009dff">
-                           <font>
-                              <Font name="Roboto" size="12.0" />
-                           </font>
-                        </Button>
                      </children>
                   </AnchorPane>
                </content>
@@ -647,7 +642,7 @@
                                     </LinearGradient>
                                  </fill>
                               </Rectangle>
-                              <TextField fx:id="weighInField" layoutX="304.0" layoutY="65.0" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);">
+                              <TextField fx:id="weighInField" layoutX="304.0" layoutY="65.0" onKeyPressed="#saveButtonPress" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);">
                                  <font>
                                     <Font name="Roboto" size="12.0" />
                                  </font>
@@ -657,7 +652,7 @@
                                     <Font name="Impact" size="26.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="402.0" layoutY="65.0" mnemonicParsing="false" onAction="#weighIn" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
+                              <Button fx:id="saveButton" layoutX="402.0" layoutY="65.0" mnemonicParsing="false" onAction="#weighIn" prefHeight="30.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);" text="Save" textAlignment="CENTER" textFill="#00b6ff">
                                  <font>
                                     <Font name="Roboto" size="19.0" />
                                  </font>

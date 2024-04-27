@@ -19,7 +19,8 @@ import objects.Food;
 
 
 /**
- *
+ * Class to manage reading and parsing JSON files. 
+ * Uses the FDC api
  * @author KingJ
  */
 public class ApiClient {
@@ -32,7 +33,11 @@ public class ApiClient {
   private static String apiUrl;
   private String foodText;
   private String apiKey;
-// pass the text as parameter later
+    
+    /**
+     * Takes in users query and creates url from it
+     * @param foodText 
+     */
     public ApiClient(String foodText) {
       try {
           ConfigReader configReader = new ConfigReader("config.properties");
@@ -46,6 +51,11 @@ public class ApiClient {
       }
     }
     
+    /**
+     * Grabs name and selected macro information from food name
+     * @return Food object.
+     * @throws MalformedURLException 
+     */
     public Food getFood() throws MalformedURLException{
                    // we have no list to display for autocomplete. so i just return the exact representation of the query.
                   JSONObject food = searchForFood(foodText);
@@ -86,9 +96,11 @@ public class ApiClient {
                   return apiFood;
           }
     
-    // searches for the exact match to the query.
-    // had to do this because i dont have  a list to be able to show
-    // so if user enters yello i retriev corn im like brother.
+    /**
+     *  Sets up Http connection, uses string builder and loops to find food object that matches our query.
+     * @param query string for food name
+     * @return JSON object representing the searched food
+     */
     public static JSONObject searchForFood(String query){
         try {
           ApiClient.url = new URL(apiUrl);

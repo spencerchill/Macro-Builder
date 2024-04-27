@@ -97,7 +97,14 @@ public class DatabaseUtil {
         return Base64.getEncoder().encodeToString(salt);
     }
     
-public boolean loginUser(String username, String password) throws SQLException {
+    /**
+     *  Checks if stored password equals entered password.
+     * @param username
+     * @param password
+     * @return boolean representing succesful login.
+     * @throws SQLException 
+     */
+    public boolean loginUser(String username, String password) throws SQLException {
         try ( Connection connection =  DriverManager.getConnection(url, this.username, this.password)) {
             String query = "SELECT password, salt FROM users WHERE username = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -260,6 +267,11 @@ public boolean loginUser(String username, String password) throws SQLException {
         return calendar;
     }
     
+    /**
+     *  Updates day and user_details table with the new mode selected
+     * @param newMode
+     * @param date 
+     */
     public void changeMode(User.CurrentMode newMode, Date date){
           try(Connection connection = DriverManager.getConnection(url, username, password)){
               UserManager userManager = UserManager.getInstance();
@@ -281,6 +293,12 @@ public boolean loginUser(String username, String password) throws SQLException {
             }
     }
 
+    /**
+     *  Enters weight into day and user_details table
+     * @param weight
+     * @param date
+     * @throws SQLException 
+     */
     public void checkIn(float weight, Date date) throws SQLException{
          try(Connection connection = DriverManager.getConnection(url, username, password)) {
              UserManager userManager = UserManager.getInstance();
@@ -302,6 +320,12 @@ public boolean loginUser(String username, String password) throws SQLException {
             }
     }
     
+    /**
+     * Creation of day object. Used when user logs in first time of day.
+     * @param user
+     * @param date
+     * @throws SQLException 
+     */
     public void addDay(User user, Date date) throws SQLException {
         try(Connection connection = DriverManager.getConnection(url, username, password)){
             System.out.println(date);

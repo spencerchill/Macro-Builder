@@ -66,6 +66,8 @@ public class MenuController implements Initializable {
     private ApiClient api;
     // litterally have to make 4 rectangles because they cant have same id smh.
     @FXML
+    private Button saveButton;
+    @FXML
     private Button searchButton;
     @FXML
     private Button apiButton;
@@ -885,11 +887,27 @@ public class MenuController implements Initializable {
         }
     }
     
+    /**
+     *  Checks selected mode from group and saves it to user and database.
+     */
     @FXML
     private void handleModeChange(){
         ToggleButton selectedButton = (ToggleButton) modeToggleGroup.getSelectedToggle();
         // check if they selected and they didnt select same one otherwise they be spamming.
-        if(newMode != null && newMode != user.getCurrentMode()) {
+        if(selectedButton != null){
+            
+        
+        if(selectedButton == cutButton){
+            newMode = objects.User.CurrentMode.CUT;
+        }
+        else if(selectedButton == maintainButton){
+            newMode = objects.User.CurrentMode.MAINTAIN;
+        }
+        else{
+            newMode = objects.User.CurrentMode.BULK;
+        }
+        if(newMode != user.getCurrentMode()) {
+            
             user.getDay().setCurrentMode(newMode);
             user.setCurrentMode(newMode);
             
@@ -898,23 +916,13 @@ public class MenuController implements Initializable {
             updatePieChart2();
             databaseUtil.changeMode(newMode, user.getCalendar().getDate());
         }
+        }
+    }
         
-    }
-        @FXML
-    private void maintainButtonAction() {
-        newMode = objects.User.CurrentMode.MAINTAIN;
-    }
-
-    @FXML
-    private void cutButtonAction() {
-        newMode = objects.User.CurrentMode.CUT;
-    }
-
-    @FXML
-    private void bulkButtonAction() {
-        newMode = objects.User.CurrentMode.BULK;
-    }
-
+    /**
+     * Creates chart with num days representing how many days to show
+     * @param numDays 
+     */
     private void createChart(int numDays) {
         chartData.populateChartArray(numDays);
         weightChart.getData().clear();
@@ -1029,7 +1037,15 @@ public class MenuController implements Initializable {
         handleEnter();
     }
 }
-
+@FXML
+void saveButtonPress(KeyEvent event) {
+     if (event.getCode() == KeyCode.ENTER) {
+        handleSaveEnter();
+    }
+}
+private void handleSaveEnter(){
+    saveButton.fire();
+}
 @FXML
 private void handleEnter() {
 searchButton.fire();

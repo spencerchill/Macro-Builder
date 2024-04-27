@@ -46,6 +46,10 @@ public class ConfigReader {
     public String getPassword() {
         return prop.getProperty("db.password");
     }
+    /**
+     * returns api key.
+     * @return 
+     */
       public String getApiKey(){
         return prop.getProperty("api.key");
     }
