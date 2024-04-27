@@ -859,7 +859,7 @@ public class MenuController implements Initializable {
                 Float.parseFloat(quickAddTextProtein.getText()), user.getCalendar().getDate());
 
         quickAddVBox.setVisible(!quickAddVBox.isVisible());
-
+        quickAddRectangle.setVisible(!quickAddRectangle.isVisible());
         quickAddTextCalories.clear();
         quickAddTextFat.clear();
         quickAddTextCarbs.clear();
