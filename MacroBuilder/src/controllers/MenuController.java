@@ -83,7 +83,8 @@ public class MenuController implements Initializable {
     private Rectangle rectangle4;
     @FXML
     private Label userLabel;
-
+    @FXML
+    private Label activityLabel;
     @FXML
     private Label calendarMode;
     @FXML
@@ -122,6 +123,7 @@ public class MenuController implements Initializable {
     @FXML
     private Rectangle quickAddRectangle;
     private User.CurrentMode newMode;
+    private User.ActivityLevel newActivity;
     private double calProgress;
     private double fatProgress;
     private double carbsProgress;
@@ -214,6 +216,16 @@ public class MenuController implements Initializable {
     private HBox displayMealMacros;
     
     @FXML
+    private ToggleButton notActiveBut;
+    @FXML
+    private ToggleButton modActiveBut;
+    @FXML
+    private ToggleButton activeBut;
+    @FXML
+    private Button saveButtonActivity;
+    
+    private ToggleGroup activityGroup;
+    @FXML
     public TextField weighInField;
 
     @FXML
@@ -250,13 +262,19 @@ public class MenuController implements Initializable {
             if (user != null) {
                 updateUser();
                 setMacroLabels();
-                
+                activityGroup = new ToggleGroup();
                 modeToggleGroup = new ToggleGroup();
+               
+                notActiveBut.setToggleGroup(activityGroup);
+                modActiveBut.setToggleGroup(activityGroup);
+                activeBut.setToggleGroup(activityGroup);
+                
                maintainButton.setToggleGroup(modeToggleGroup);
                cutButton.setToggleGroup(modeToggleGroup);
                bulkButton.setToggleGroup(modeToggleGroup);
                updatePieChart();
                 updateScene();
+                setActivityLabel();
                 createChart(6);
             }
             
@@ -363,8 +381,35 @@ public class MenuController implements Initializable {
         }
     }
         
-   
+   @FXML
+   public void notActiveChange(){
+       this.newActivity = User.ActivityLevel.NOT_ACTIVE;
+   }
+    @FXML
+   public void activeChange(){
+       this.newActivity = User.ActivityLevel.ACTIVE;
+   }
+    @FXML
+   public void modActiveChange(){
+       this.newActivity = User.ActivityLevel.MODERATELY_ACTIVE;
+   }
 
+   
+   public void handleActivityLevelChange(){
+        ToggleButton selectedButton = (ToggleButton) activityGroup.getSelectedToggle();
+        activityGroup.selectToggle(null);
+        if(newActivity != null && newActivity != user.getActivityLevel()){
+            user.getDay().setActivityLevekl(newActivity);
+            user.setActivityLevel(newActivity);
+            
+            user.getDay().recalcMacros();
+            updateScene();
+            updatePieChart2();
+            setActivityLabel();
+            databaseUtil.changeActivityLevel(newActivity, user.getCalendar().getDate());
+        }
+        
+   }
    
     /**
      * Updates progress bar with current remaining and consumed calories.
@@ -1053,4 +1098,16 @@ private void handleEnter() {
 searchButton.fire();
 }
    
+private void setActivityLabel(){
+    User.ActivityLevel currentLevel= user.getActivityLevel();
+    if(currentLevel == User.ActivityLevel.NOT_ACTIVE){
+        activityLabel.setText("Currently Not Active");
+    }
+    else if(currentLevel == User.ActivityLevel.ACTIVE){
+        activityLabel.setText("Currently Active");
+    }
+    else{
+        activityLabel.setText("Currently Moderately Active");
+    }
+}
 }

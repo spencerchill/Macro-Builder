@@ -267,6 +267,27 @@ public class DatabaseUtil {
         return calendar;
     }
     
+    
+    public void changeActivityLevel(User.ActivityLevel newLevel, Date date){
+        try(Connection connection = DriverManager.getConnection(url, username, password)){
+              UserManager userManager = UserManager.getInstance();
+              //inserting into user details table
+              String updateMode = "UPDATE user_details SET activity_level  = ? WHERE user_id = ?";
+              try(PreparedStatement statement = connection.prepareStatement(updateMode)){
+                  statement.setString(1, newLevel.name());
+                  statement.setInt(2, userManager.getUserId());
+                  statement.executeUpdate();
+              }
+              String updateDayMode = "UPDATE days SET activity_level = ? WHERE date_day = ?";
+              try(PreparedStatement statement = connection.prepareStatement(updateDayMode)){
+                  statement.setString(1, newLevel.name());
+                  statement.setDate(2, date);
+                  statement.executeUpdate();
+              }
+          }catch (SQLException ex) {
+                Logger.getLogger(Calendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     /**
      *  Updates day and user_details table with the new mode selected
      * @param newMode
