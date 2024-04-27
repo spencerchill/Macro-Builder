@@ -482,7 +482,7 @@
                               <Font name="Impact" size="47.0" />
                            </font>
                         </Label>
-                        <ToggleButton fx:id="cutButton" layoutX="292.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="183.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #1dc41a 100.0%);;" stylesheets="@menu.css" text="CUT">
+                        <ToggleButton fx:id="cutButton" layoutX="292.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="183.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" stylesheets="@menu.css" text="CUT" textFill="#1dc41a">
                            <toggleGroup>
                               <ToggleGroup fx:id="modeToggleGroup" />
                            </toggleGroup>
@@ -490,12 +490,12 @@
                               <Font name="Roboto Medium" size="21.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="maintainButton" layoutX="538.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #ffffff 0.0%, #19c6c6 100.0%);;" stylesheets="@menu.css" text="MAINTAIN" toggleGroup="$modeToggleGroup">
+                        <ToggleButton fx:id="maintainButton" layoutX="538.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" stylesheets="@menu.css" text="MAINTAIN" textFill="#19c6c6" toggleGroup="$modeToggleGroup">
                            <font>
                               <Font name="Roboto Medium" size="20.0" />
                            </font>
                         </ToggleButton>
-                        <ToggleButton fx:id="bulkButton" layoutX="794.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: linear-gradient(from 100.0% 0.0% to 100.0% 100.0%, #FFFFFF 0.0%, #f21414 100.0%);;" stylesheets="@menu.css" text="BULK" toggleGroup="$modeToggleGroup">
+                        <ToggleButton fx:id="bulkButton" layoutX="794.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleModeChange" prefHeight="40.0" prefWidth="204.0" style="-fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1); -fx-background-color: white;" stylesheets="@menu.css" text="BULK" textFill="#f21414" toggleGroup="$modeToggleGroup">
                            <font>
                               <Font size="18.0" />
                            </font>
