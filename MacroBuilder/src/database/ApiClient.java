@@ -63,10 +63,6 @@ public class ApiClient {
                   if(food== null){
                       return new Food("null", 0, 0.0f, 0.0f, 0.0f);
                   }
-                  // Name of food
-                  String description = food.getString("description");
-                  System.out.println(description);
-                  
                   JSONArray nutrients = food.getJSONArray("foodNutrients");
                   //loop through nutrients array to find the ones we want (sucks).
                   for(int i = 0; i < nutrients.length(); i++){
