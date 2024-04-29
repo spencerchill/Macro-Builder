@@ -261,6 +261,9 @@ public class Day {
         this.weight = weight;
     }
             
+    public void setActivityLevel(User.ActivityLevel newLevel){
+        this.activityLevel = newLevel;
+    }
     public void setRemainingCalories(int calories){
        this.remainingCalories -= calories;
     }

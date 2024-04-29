@@ -402,7 +402,7 @@ public class MenuController implements Initializable {
         ToggleButton selectedButton = (ToggleButton) activityGroup.getSelectedToggle();
         activityGroup.selectToggle(null);
         if(newActivity != null && newActivity != user.getActivityLevel()){
-            user.getDay().setActivityLevekl(newActivity);
+            user.getDay().setActivityLevel(newActivity);
             user.setActivityLevel(newActivity);
             
             user.getDay().recalcMacros();
